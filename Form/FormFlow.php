@@ -1140,6 +1140,20 @@ abstract class FormFlow implements FormFlowInterface
 		return count($this->getStepsRemaining());
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	public function getStepData(int $stepNumber)
+	{
+		$stepData = $this->retrieveStepData();
+
+		if (!array_key_exists($stepNumber, $stepData)) {
+			throw new \OutOfBoundsException(sprintf('The step "%d" does not exist or has no data.', $stepNumber));
+		}
+
+		return $stepData[$stepNumber];
+	}
+
 	// methods for BC with third-party templates (e.g. MopaBootstrapBundle)
 
 	public function getCurrentStep()

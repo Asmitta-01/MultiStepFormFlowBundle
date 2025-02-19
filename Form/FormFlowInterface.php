@@ -198,4 +198,11 @@ interface FormFlowInterface
 	 * @return int Count of steps remaining.
 	 */
 	function getStepsRemainingCount();
+
+	/**
+	 * @param int $stepNumber 
+	 * @return mixed Data of the indicated step.
+	 * @throws \OutOfBoundsException If step <code>$stepNumber</code> doesn't exist.
+	 */
+	function getStepData(int $stepNumber);
 }

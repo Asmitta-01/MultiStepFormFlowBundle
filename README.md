@@ -256,6 +256,31 @@ Example:
 
 You can also remove the reset button by setting `asmitta_formflow_button_render_reset` to `false`.
 
+## Handle Unmapped Fields
+
+If you have unmapped fields in your form, you can handle them at the end of the form fill.
+In our [previous example](#usage), assuming the `first_name` is unmapped we'll need to handle it ourself.
+
+```php
+// In our controller
+...
+        if ($this->flow->isValid($form)) {
+            $this->flow->saveCurrentStepData($form);
+
+            if ($this->flow->nextStep()) {
+                $form = $this->flow->createForm();
+            } else {
+                $stepNumber = 1; // It is the step where 'first_name' field is displayed
+                $user->setFirstName($this->flow->getStepData($stepNumber)['first_name']);
+
+                // Persist data here
+                $this->flow->reset(); 
+                return $this->redirectToRoute('some_route'); // redirect when done
+            }
+        }
+...
+```
+
 ## Symfony UX Turbo
 
 Working with [Symfony Turbo](https://ux.symfony.com/turbo) the flow in the view might not work correctly. You should __disable it__ on that view or __send a specific code with the controller__.
