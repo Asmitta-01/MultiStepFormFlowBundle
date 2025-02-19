@@ -75,10 +75,5 @@
 			"symfony/flex": true
 		},
 		"sort-packages": true
-	},
-	"extra": {
-		"branch-alias": {
-			"dev-master": "3.7.x-dev"
-		}
 	}
 }
