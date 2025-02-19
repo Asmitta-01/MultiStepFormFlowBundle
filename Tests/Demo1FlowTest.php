@@ -1,8 +1,8 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests;
+namespace Asmitta\FormFlowBundle\Tests;
 
-use Craue\FormFlowBundle\Tests\IntegrationTestBundle\Form\Demo1Flow;
+use Asmitta\FormFlowBundle\Tests\IntegrationTestBundle\Form\Demo1Flow;
 
 /**
  * @group integration
@@ -12,9 +12,11 @@ use Craue\FormFlowBundle\Tests\IntegrationTestBundle\Form\Demo1Flow;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class Demo1FlowTest extends IntegrationTestCase {
+class Demo1FlowTest extends IntegrationTestCase
+{
 
-	public function testDemo1_events() {
+	public function testDemo1_events()
+	{
 		$crawler = static::$client->request('GET', $this->url('_FormFlow_demo1'));
 		$this->assertSame(200, static::$client->getResponse()->getStatusCode());
 		$this->assertCurrentStepNumber(2, $crawler);
@@ -61,11 +63,11 @@ class Demo1FlowTest extends IntegrationTestCase {
 		$this->assertJsonResponse('{}');
 	}
 
-	private function getCalledEvents() {
+	private function getCalledEvents()
+	{
 		$container = static::$kernel->getContainer();
 		$flow = $container->get(Demo1Flow::class);
 
 		return $flow->getLoggedEventCalls();
 	}
-
 }

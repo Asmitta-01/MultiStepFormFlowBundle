@@ -1,8 +1,8 @@
 <?php
 
-namespace Craue\FormFlowBundle\Event;
+namespace Asmitta\FormFlowBundle\Event;
 
-use Craue\FormFlowBundle\Form\FormFlowInterface;
+use Asmitta\FormFlowBundle\Form\FormFlowInterface;
 
 /**
  * Is called once for the current step after binding the request.
@@ -12,7 +12,8 @@ use Craue\FormFlowBundle\Form\FormFlowInterface;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class PostBindRequestEvent extends FormFlowEvent {
+class PostBindRequestEvent extends FormFlowEvent
+{
 
 	/**
 	 * @var mixed
@@ -29,7 +30,8 @@ class PostBindRequestEvent extends FormFlowEvent {
 	 * @param mixed $formData
 	 * @param int $stepNumber
 	 */
-	public function __construct(FormFlowInterface $flow, $formData, $stepNumber) {
+	public function __construct(FormFlowInterface $flow, $formData, $stepNumber)
+	{
 		parent::__construct($flow);
 		$this->formData = $formData;
 		$this->stepNumber = $stepNumber;
@@ -38,15 +40,16 @@ class PostBindRequestEvent extends FormFlowEvent {
 	/**
 	 * @return mixed
 	 */
-	public function getFormData() {
+	public function getFormData()
+	{
 		return $this->formData;
 	}
 
 	/**
 	 * @return int
 	 */
-	public function getStepNumber() {
+	public function getStepNumber()
+	{
 		return $this->stepNumber;
 	}
-
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Craue\FormFlowBundle\Event;
+namespace Asmitta\FormFlowBundle\Event;
 
 /**
  * Is called once prior to binding any (neither saved nor request) data.
@@ -12,5 +12,4 @@ namespace Craue\FormFlowBundle\Event;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class PreBindEvent extends FormFlowEvent {
-}
+class PreBindEvent extends FormFlowEvent {}

@@ -1,6 +1,6 @@
 <?php
 
-namespace Craue\FormFlowBundle\Storage;
+namespace Asmitta\FormFlowBundle\Storage;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Schema\AbstractSchemaManager;
@@ -16,7 +16,8 @@ use Doctrine\DBAL\Types\Types;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class DoctrineStorage implements StorageInterface {
+class DoctrineStorage implements StorageInterface
+{
 
 	const TABLE = 'craue_form_flow_storage';
 	const KEY_COLUMN = 'key';
@@ -47,7 +48,8 @@ class DoctrineStorage implements StorageInterface {
 	 */
 	private $valueColumn;
 
-	public function __construct(Connection $conn, StorageKeyGeneratorInterface $storageKeyGenerator) {
+	public function __construct(Connection $conn, StorageKeyGeneratorInterface $storageKeyGenerator)
+	{
 		$this->conn = $conn;
 		$this->storageKeyGenerator = $storageKeyGenerator;
 		// TODO just call `createSchemaManager()` as soon as DBAL >= 3.1 is required
@@ -59,7 +61,8 @@ class DoctrineStorage implements StorageInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function set($key, $value) {
+	public function set($key, $value)
+	{
 		if (!$this->tableExists()) {
 			$this->createTable();
 		}
@@ -83,7 +86,8 @@ class DoctrineStorage implements StorageInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function get($key, $default = null) {
+	public function get($key, $default = null)
+	{
 		if (!$this->tableExists()) {
 			return $default;
 		}
@@ -100,7 +104,8 @@ class DoctrineStorage implements StorageInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function has($key) {
+	public function has($key)
+	{
 		if (!$this->tableExists()) {
 			return false;
 		}
@@ -111,7 +116,8 @@ class DoctrineStorage implements StorageInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function remove($key) {
+	public function remove($key)
+	{
 		if (!$this->tableExists()) {
 			return;
 		}
@@ -126,13 +132,13 @@ class DoctrineStorage implements StorageInterface {
 	 * @param string $key
 	 * @return string|false Raw data or false, if no data is available.
 	 */
-	private function getRawValueForKey($key) {
+	private function getRawValueForKey($key)
+	{
 		$qb = $this->conn->createQueryBuilder()
 			->select($this->valueColumn)
 			->from(self::TABLE)
 			->where($this->keyColumn . ' = :key')
-			->setParameter('key', $this->generateKey($key))
-		;
+			->setParameter('key', $this->generateKey($key));
 
 		// TODO just call `executeQuery()` as soon as DBAL >= 2.13.1 is required
 		$result = \method_exists($qb, 'executeQuery') ? $qb->executeQuery() : $qb->execute();
@@ -145,11 +151,13 @@ class DoctrineStorage implements StorageInterface {
 		return $result->fetchOne();
 	}
 
-	private function tableExists() {
+	private function tableExists()
+	{
 		return $this->schemaManager->tablesExist([self::TABLE]);
 	}
 
-	private function createTable() {
+	private function createTable()
+	{
 		$table = new Table(self::TABLE, [
 			new Column($this->keyColumn, Type::getType(Types::STRING), ['length' => 255]),
 			new Column($this->valueColumn, Type::getType(Types::TEXT)),
@@ -159,8 +167,8 @@ class DoctrineStorage implements StorageInterface {
 		$this->schemaManager->createTable($table);
 	}
 
-	private function generateKey($key) {
+	private function generateKey($key)
+	{
 		return $this->storageKeyGenerator->generate($key);
 	}
-
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests\IntegrationTestBundle\Form;
+namespace Asmitta\FormFlowBundle\Tests\IntegrationTestBundle\Form;
 
-use Craue\FormFlowBundle\Tests\IntegrationTestBundle\Entity\Topic;
+use Asmitta\FormFlowBundle\Tests\IntegrationTestBundle\Entity\Topic;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -14,12 +14,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class CreateTopicForm extends AbstractType {
+class CreateTopicForm extends AbstractType
+{
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function buildForm(FormBuilderInterface $builder, array $options) : void {
+	public function buildForm(FormBuilderInterface $builder, array $options): void
+	{
 		$isBugReport = $options['isBugReport'];
 
 		switch ($options['flow_step']) {
@@ -50,7 +52,8 @@ class CreateTopicForm extends AbstractType {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function configureOptions(OptionsResolver $resolver) : void {
+	public function configureOptions(OptionsResolver $resolver): void
+	{
 		$resolver->setDefaults([
 			'isBugReport' => false,
 		]);
@@ -59,8 +62,8 @@ class CreateTopicForm extends AbstractType {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getBlockPrefix() : string {
+	public function getBlockPrefix(): string
+	{
 		return 'createTopic';
 	}
-
 }

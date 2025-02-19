@@ -1,13 +1,14 @@
 <?php
 
-namespace Craue\FormFlowBundle\Storage;
+namespace Asmitta\FormFlowBundle\Storage;
 
 /**
  * @author Christian Raue <christian.raue@gmail.com>
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-interface StorageKeyGeneratorInterface {
+interface StorageKeyGeneratorInterface
+{
 
 	/**
 	 * Generates a complete storage key based on the key the storage received.
@@ -16,5 +17,4 @@ interface StorageKeyGeneratorInterface {
 	 * @return string
 	 */
 	function generate($key);
-
 }

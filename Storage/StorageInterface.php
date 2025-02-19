@@ -1,13 +1,14 @@
 <?php
 
-namespace Craue\FormFlowBundle\Storage;
+namespace Asmitta\FormFlowBundle\Storage;
 
 /**
  * @author Toni Uebernickel <tuebernickel@gmail.com>
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-interface StorageInterface {
+interface StorageInterface
+{
 
 	/**
 	 * Store the given value under the given key.
@@ -36,5 +37,4 @@ interface StorageInterface {
 	 * @param string $key
 	 */
 	function remove($key);
-
 }

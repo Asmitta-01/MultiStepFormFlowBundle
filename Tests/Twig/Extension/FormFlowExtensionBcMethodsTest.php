@@ -1,9 +1,9 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests\Twig\Extension;
+namespace Asmitta\FormFlowBundle\Tests\Twig\Extension;
 
-use Craue\FormFlowBundle\Tests\UnitTestCase;
-use Craue\FormFlowBundle\Twig\Extension\FormFlowExtension;
+use Asmitta\FormFlowBundle\Tests\UnitTestCase;
+use Asmitta\FormFlowBundle\Twig\Extension\FormFlowExtension;
 
 /**
  * Tests for BC.

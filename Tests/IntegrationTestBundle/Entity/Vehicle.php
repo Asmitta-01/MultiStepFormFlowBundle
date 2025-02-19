@@ -1,6 +1,6 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests\IntegrationTestBundle\Entity;
+namespace Asmitta\FormFlowBundle\Tests\IntegrationTestBundle\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
@@ -10,7 +10,8 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class Vehicle {
+class Vehicle
+{
 
 	/**
 	 * @var int
@@ -22,13 +23,14 @@ class Vehicle {
 	 */
 	public $engine;
 
-	public function canHaveEngine() {
+	public function canHaveEngine()
+	{
 		return $this->numberOfWheels === 4;
 	}
 
-	public static function loadValidatorMetadata(ClassMetadata $metadata) : void {
+	public static function loadValidatorMetadata(ClassMetadata $metadata): void
+	{
 		$metadata->addPropertyConstraint('numberOfWheels', new Assert\NotBlank(['groups' => 'flow_createVehicle_step1']));
 		$metadata->addPropertyConstraint('engine', new Assert\NotBlank(['groups' => 'flow_createVehicle_step2']));
 	}
-
 }

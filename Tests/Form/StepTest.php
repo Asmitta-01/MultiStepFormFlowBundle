@@ -1,12 +1,12 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests\Form;
+namespace Asmitta\FormFlowBundle\Tests\Form;
 
-use Craue\FormFlowBundle\Exception\InvalidTypeException;
-use Craue\FormFlowBundle\Form\FormFlowInterface;
-use Craue\FormFlowBundle\Form\Step;
-use Craue\FormFlowBundle\Form\StepLabel;
-use Craue\FormFlowBundle\Tests\UnitTestCase;
+use Asmitta\FormFlowBundle\Exception\InvalidTypeException;
+use Asmitta\FormFlowBundle\Form\FormFlowInterface;
+use Asmitta\FormFlowBundle\Form\Step;
+use Asmitta\FormFlowBundle\Form\StepLabel;
+use Asmitta\FormFlowBundle\Tests\UnitTestCase;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\Form\Test\FormInterface;
 
@@ -17,9 +17,11 @@ use Symfony\Component\Form\Test\FormInterface;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class StepTest extends UnitTestCase {
+class StepTest extends UnitTestCase
+{
 
-	public function testCreateFromConfig() {
+	public function testCreateFromConfig()
+	{
 		$flow = $this->getMockedFlowInterface();
 
 		$step = Step::createFromConfig(1, []);
@@ -37,7 +39,7 @@ class StepTest extends UnitTestCase {
 		$this->assertEquals('country', $step->getLabel());
 
 		$step = Step::createFromConfig(1, [
-			'label' => StepLabel::createCallableLabel(function() {
+			'label' => StepLabel::createCallableLabel(function () {
 				return 'country';
 			}),
 		]);
@@ -51,7 +53,7 @@ class StepTest extends UnitTestCase {
 		$this->assertTrue($step->isSkipped());
 
 		$step = Step::createFromConfig(1, [
-			'skip' => function($estimatedCurrentStepNumber, FormFlowInterface $flow) {
+			'skip' => function ($estimatedCurrentStepNumber, FormFlowInterface $flow) {
 				return true;
 			},
 		]);
@@ -66,7 +68,7 @@ class StepTest extends UnitTestCase {
 			->will($this->returnValue(['blah' => true]))
 		;
 		$step = Step::createFromConfig(1, [
-			'skip' => function($estimatedCurrentStepNumber, FormFlowInterface $flow) {
+			'skip' => function ($estimatedCurrentStepNumber, FormFlowInterface $flow) {
 				$formData = $flow->getFormData();
 				return $estimatedCurrentStepNumber > 1 && $formData['blah'] === true;
 			},
@@ -75,13 +77,14 @@ class StepTest extends UnitTestCase {
 		$this->assertTrue($step->isSkipped());
 
 		$form_options = ['foo' => 'bar'];
-		$step = Step::createFromConfig(1,[
+		$step = Step::createFromConfig(1, [
 			'form_options' => $form_options,
 		]);
 		$this->assertEquals($form_options, $step->getFormOptions());
 	}
 
-	public function testCreateFromConfig_invalidOptions() {
+	public function testCreateFromConfig_invalidOptions()
+	{
 		$this->expectException(\InvalidArgumentException::class);
 		$this->expectExceptionMessage('Invalid step config option "lable" given.');
 
@@ -93,13 +96,15 @@ class StepTest extends UnitTestCase {
 	/**
 	 * @dataProvider dataSetGetNumber
 	 */
-	public function testSetGetNumber($number) {
+	public function testSetGetNumber($number)
+	{
 		$step = new Step();
 		$step->setNumber($number);
 		$this->assertSame($number, $step->getNumber());
 	}
 
-	public function dataSetGetNumber() {
+	public function dataSetGetNumber()
+	{
 		return [
 			[1],
 		];
@@ -108,14 +113,16 @@ class StepTest extends UnitTestCase {
 	/**
 	 * @dataProvider dataSetGetNumber_invalidArguments
 	 */
-	public function testSetGetNumber_invalidArguments($number) {
+	public function testSetGetNumber_invalidArguments($number)
+	{
 		$this->expectException(InvalidTypeException::class);
 
 		$step = new Step();
 		$step->setNumber($number);
 	}
 
-	public function dataSetGetNumber_invalidArguments() {
+	public function dataSetGetNumber_invalidArguments()
+	{
 		return [
 			[null],
 			['1'],
@@ -126,13 +133,15 @@ class StepTest extends UnitTestCase {
 	/**
 	 * @dataProvider dataSetGetLabel
 	 */
-	public function testSetGetLabel($label) {
+	public function testSetGetLabel($label)
+	{
 		$step = new Step();
 		$step->setLabel($label);
 		$this->assertSame($label, $step->getLabel());
 	}
 
-	public function dataSetGetLabel() {
+	public function dataSetGetLabel()
+	{
 		return [
 			['label'],
 			['date'],
@@ -140,7 +149,8 @@ class StepTest extends UnitTestCase {
 		];
 	}
 
-	public function testSetGetLabel_callableReturnValueDependsOnFlowData() {
+	public function testSetGetLabel_callableReturnValueDependsOnFlowData()
+	{
 		$flow = $this->getFlowWithMockedMethods(['getFormData']);
 
 		$flow
@@ -150,7 +160,7 @@ class StepTest extends UnitTestCase {
 		;
 
 		$step = Step::createFromConfig(1, [
-			'label' => StepLabel::createCallableLabel(function() use ($flow) {
+			'label' => StepLabel::createCallableLabel(function () use ($flow) {
 				return $flow->getFormData() === 'special' ? 'special label' : 'default label';
 			}),
 		]);
@@ -162,12 +172,14 @@ class StepTest extends UnitTestCase {
 	/**
 	 * @dataProvider dataSetGetLabel_validReturnValueFromCallable
 	 */
-	public function testSetGetLabel_validReturnValueFromCallable($returnValue) {
+	public function testSetGetLabel_validReturnValueFromCallable($returnValue)
+	{
 		$step = $this->createStepWithLabelCallable(1, $returnValue);
 		$this->assertSame($returnValue, $step->getLabel());
 	}
 
-	public function dataSetGetLabel_validReturnValueFromCallable() {
+	public function dataSetGetLabel_validReturnValueFromCallable()
+	{
 		return [
 			['label'],
 			[null],
@@ -177,7 +189,8 @@ class StepTest extends UnitTestCase {
 	/**
 	 * @dataProvider dataSetGetLabel_invalidReturnValueFromCallable
 	 */
-	public function testSetGetLabel_invalidReturnValueFromCallable($returnValue) {
+	public function testSetGetLabel_invalidReturnValueFromCallable($returnValue)
+	{
 		$this->expectException(\RuntimeException::class);
 		$this->expectExceptionMessage('The label callable for step 1 did not return a string or null value.');
 
@@ -185,7 +198,8 @@ class StepTest extends UnitTestCase {
 		$step->getLabel();
 	}
 
-	public function dataSetGetLabel_invalidReturnValueFromCallable() {
+	public function dataSetGetLabel_invalidReturnValueFromCallable()
+	{
 		return [
 			[true],
 			[false],
@@ -196,31 +210,37 @@ class StepTest extends UnitTestCase {
 	/**
 	 * @dataProvider dataSetGetLabel_invalidArguments
 	 */
-	public function testSetGetLabel_invalidArguments($label) {
+	public function testSetGetLabel_invalidArguments($label)
+	{
 		$this->expectException(InvalidTypeException::class);
 
 		$step = new Step();
 		$step->setLabel($label);
 	}
 
-	public function dataSetGetLabel_invalidArguments() {
+	public function dataSetGetLabel_invalidArguments()
+	{
 		return [
 			[true],
 			[1.1],
-			[function() { return 'label'; }],
+			[function () {
+				return 'label';
+			}],
 		];
 	}
 
 	/**
 	 * @dataProvider dataSetGetFormType
 	 */
-	public function testSetGetFormType($formType) {
+	public function testSetGetFormType($formType)
+	{
 		$step = new Step();
 		$step->setFormType($formType);
 		$this->assertSame($formType, $step->getFormType());
 	}
 
-	public function dataSetGetFormType() {
+	public function dataSetGetFormType()
+	{
 		return [
 			[null],
 			['myFormType'],
@@ -231,14 +251,16 @@ class StepTest extends UnitTestCase {
 	/**
 	 * @dataProvider dataSetGetFormType_invalidArguments
 	 */
-	public function testSetGetFormType_invalidArguments($formType) {
+	public function testSetGetFormType_invalidArguments($formType)
+	{
 		$this->expectException(InvalidTypeException::class);
 
 		$step = new Step();
 		$step->setFormType($formType);
 	}
 
-	public function dataSetGetFormType_invalidArguments() {
+	public function dataSetGetFormType_invalidArguments()
+	{
 		return [
 			[123],
 			[$this->createMock(FormInterface::class)],
@@ -248,13 +270,15 @@ class StepTest extends UnitTestCase {
 	/**
 	 * @dataProvider dataSetGetFormOptions
 	 */
-	public function testSetGetFormOptions($formOptions) {
+	public function testSetGetFormOptions($formOptions)
+	{
 		$step = new Step();
 		$step->setFormOptions($formOptions);
 		$this->assertEquals($formOptions, $step->getFormOptions());
 	}
 
-	public function dataSetGetFormOptions() {
+	public function dataSetGetFormOptions()
+	{
 		return [
 			[[]],
 			[[
@@ -266,14 +290,16 @@ class StepTest extends UnitTestCase {
 	/**
 	 * @dataProvider dataSetGetFormOptions_invalidArguments
 	 */
-	public function testSetGetFormOptions_invalidArguments($formOptions) {
+	public function testSetGetFormOptions_invalidArguments($formOptions)
+	{
 		$this->expectException(InvalidTypeException::class);
 
 		$step = new Step();
 		$step->setFormOptions($formOptions);
 	}
 
-	public function dataSetGetFormOptions_invalidArguments() {
+	public function dataSetGetFormOptions_invalidArguments()
+	{
 		return [
 			[null],
 			[true],
@@ -286,14 +312,16 @@ class StepTest extends UnitTestCase {
 	/**
 	 * @dataProvider dataSetSkip_invalidArguments
 	 */
-	public function testSetSkip_invalidArguments($skip) {
+	public function testSetSkip_invalidArguments($skip)
+	{
 		$this->expectException(InvalidTypeException::class);
 
 		$step = new Step();
 		$step->setSkip($skip);
 	}
 
-	public function dataSetSkip_invalidArguments() {
+	public function dataSetSkip_invalidArguments()
+	{
 		return [
 			[null],
 			[1],
@@ -303,13 +331,15 @@ class StepTest extends UnitTestCase {
 	/**
 	 * @dataProvider dataEvaluateSkipping_validReturnValueFromCallable
 	 */
-	public function testEvaluateSkipping_validReturnValueFromCallable($returnValue) {
+	public function testEvaluateSkipping_validReturnValueFromCallable($returnValue)
+	{
 		$step = $this->createStepWithSkipCallable(1, $returnValue);
 		$step->evaluateSkipping(1, $this->getMockedFlowInterface());
 		$this->assertSame($returnValue, $step->isSkipped());
 	}
 
-	public function dataEvaluateSkipping_validReturnValueFromCallable() {
+	public function dataEvaluateSkipping_validReturnValueFromCallable()
+	{
 		return [
 			[true],
 			[false],
@@ -319,7 +349,8 @@ class StepTest extends UnitTestCase {
 	/**
 	 * @dataProvider dataEvaluateSkipping_invalidReturnValueFromCallable
 	 */
-	public function testEvaluateSkipping_invalidReturnValueFromCallable($returnValue) {
+	public function testEvaluateSkipping_invalidReturnValueFromCallable($returnValue)
+	{
 		$this->expectException(\RuntimeException::class);
 		$this->expectExceptionMessage('The skip callable for step 1 did not return a boolean value.');
 
@@ -327,7 +358,8 @@ class StepTest extends UnitTestCase {
 		$step->evaluateSkipping(1, $this->getMockedFlowInterface());
 	}
 
-	public function dataEvaluateSkipping_invalidReturnValueFromCallable() {
+	public function dataEvaluateSkipping_invalidReturnValueFromCallable()
+	{
 		return [
 			[null],
 			[0],
@@ -335,20 +367,21 @@ class StepTest extends UnitTestCase {
 		];
 	}
 
-	protected function createStepWithLabelCallable($number, $returnValue) {
+	protected function createStepWithLabelCallable($number, $returnValue)
+	{
 		return Step::createFromConfig($number, [
-			'label' => StepLabel::createCallableLabel(function() use ($returnValue) {
+			'label' => StepLabel::createCallableLabel(function () use ($returnValue) {
 				return $returnValue;
 			}),
 		]);
 	}
 
-	protected function createStepWithSkipCallable($number, $returnValue) {
+	protected function createStepWithSkipCallable($number, $returnValue)
+	{
 		return Step::createFromConfig($number, [
-			'skip' => function($estimatedCurrentStepNumber, FormFlowInterface $flow) use ($returnValue) {
+			'skip' => function ($estimatedCurrentStepNumber, FormFlowInterface $flow) use ($returnValue) {
 				return $returnValue;
 			},
 		]);
 	}
-
 }

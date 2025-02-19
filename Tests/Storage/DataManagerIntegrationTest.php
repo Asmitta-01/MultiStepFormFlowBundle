@@ -1,11 +1,11 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests\Storage;
+namespace Asmitta\FormFlowBundle\Tests\Storage;
 
-use Craue\FormFlowBundle\Form\FormFlow;
-use Craue\FormFlowBundle\Storage\DataManager;
-use Craue\FormFlowBundle\Storage\SerializableFile;
-use Craue\FormFlowBundle\Tests\IntegrationTestCase;
+use Asmitta\FormFlowBundle\Form\FormFlow;
+use Asmitta\FormFlowBundle\Storage\DataManager;
+use Asmitta\FormFlowBundle\Storage\SerializableFile;
+use Asmitta\FormFlowBundle\Tests\IntegrationTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;

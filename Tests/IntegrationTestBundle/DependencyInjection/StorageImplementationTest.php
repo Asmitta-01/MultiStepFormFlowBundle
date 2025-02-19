@@ -1,10 +1,10 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests\IntegrationTestBundle\DependencyInjection;
+namespace Asmitta\FormFlowBundle\Tests\IntegrationTestBundle\DependencyInjection;
 
-use Craue\FormFlowBundle\Storage\DoctrineStorage;
-use Craue\FormFlowBundle\Storage\SessionStorage;
-use Craue\FormFlowBundle\Tests\IntegrationTestCase;
+use Asmitta\FormFlowBundle\Storage\DoctrineStorage;
+use Asmitta\FormFlowBundle\Storage\SessionStorage;
+use Asmitta\FormFlowBundle\Tests\IntegrationTestCase;
 
 /**
  * @group integration

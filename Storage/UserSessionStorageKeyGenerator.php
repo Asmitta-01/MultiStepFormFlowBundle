@@ -1,8 +1,8 @@
 <?php
 
-namespace Craue\FormFlowBundle\Storage;
+namespace Asmitta\FormFlowBundle\Storage;
 
-use Craue\FormFlowBundle\Exception\InvalidTypeException;
+use Asmitta\FormFlowBundle\Exception\InvalidTypeException;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
@@ -16,7 +16,8 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class UserSessionStorageKeyGenerator implements StorageKeyGeneratorInterface {
+class UserSessionStorageKeyGenerator implements StorageKeyGeneratorInterface
+{
 
 	use SessionProviderTrait;
 
@@ -30,7 +31,8 @@ class UserSessionStorageKeyGenerator implements StorageKeyGeneratorInterface {
 	 * @param RequestStack|SessionInterface $requestStackOrSession
 	 * @throws InvalidTypeException
 	 */
-	public function __construct(TokenStorageInterface $tokenStorage, $requestStackOrSession) {
+	public function __construct(TokenStorageInterface $tokenStorage, $requestStackOrSession)
+	{
 		$this->tokenStorage = $tokenStorage;
 		$this->setRequestStackOrSession($requestStackOrSession);
 	}
@@ -38,7 +40,8 @@ class UserSessionStorageKeyGenerator implements StorageKeyGeneratorInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function generate($key) {
+	public function generate($key)
+	{
 		if (!is_string($key)) {
 			throw new InvalidTypeException($key, 'string');
 		}
@@ -67,5 +70,4 @@ class UserSessionStorageKeyGenerator implements StorageKeyGeneratorInterface {
 
 		return sprintf('session_%s_%s', $session->getId(), $key);
 	}
-
 }

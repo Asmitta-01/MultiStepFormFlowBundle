@@ -1,6 +1,6 @@
 <?php
 
-namespace Craue\FormFlowBundle\Util;
+namespace Asmitta\FormFlowBundle\Util;
 
 /**
  * Keeps track of temporary files to be able to remove them when no longer needed.
@@ -9,7 +9,8 @@ namespace Craue\FormFlowBundle\Util;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-abstract class TempFileUtil {
+abstract class TempFileUtil
+{
 
 	private static $tempFiles = [];
 
@@ -18,14 +19,16 @@ abstract class TempFileUtil {
 	/**
 	 * @param string $tempFile Path to a file.
 	 */
-	public static function addTempFile($tempFile) {
+	public static function addTempFile($tempFile)
+	{
 		self::$tempFiles[] = $tempFile;
 	}
 
 	/**
 	 * Removes all previously added files from disk.
 	 */
-	public static function removeTempFiles() {
+	public static function removeTempFiles()
+	{
 		foreach (self::$tempFiles as $tempFile) {
 			if (is_file($tempFile)) {
 				@unlink($tempFile);
@@ -34,5 +37,4 @@ abstract class TempFileUtil {
 
 		self::$tempFiles = [];
 	}
-
 }

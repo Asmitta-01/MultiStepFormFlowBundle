@@ -1,23 +1,25 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests\IntegrationTestBundle\Form;
+namespace Asmitta\FormFlowBundle\Tests\IntegrationTestBundle\Form;
 
-use Craue\FormFlowBundle\Form\FormFlow;
-use Craue\FormFlowBundle\Form\FormFlowInterface;
+use Asmitta\FormFlowBundle\Form\FormFlow;
+use Asmitta\FormFlowBundle\Form\FormFlowInterface;
 
 /**
  * @author Christian Raue <christian.raue@gmail.com>
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class CreateTopicFlow extends FormFlow {
+class CreateTopicFlow extends FormFlow
+{
 
 	protected $allowDynamicStepNavigation = true;
 
 	/**
 	 * {@inheritDoc}
 	 */
-	protected function loadStepsConfig() {
+	protected function loadStepsConfig()
+	{
 		$formType = CreateTopicForm::class;
 
 		return [
@@ -32,7 +34,7 @@ class CreateTopicFlow extends FormFlow {
 			[
 				'label' => 'bug_details',
 				'form_type' => $formType,
-				'skip' => function($estimatedCurrentStepNumber, FormFlowInterface $flow) {
+				'skip' => function ($estimatedCurrentStepNumber, FormFlowInterface $flow) {
 					return $estimatedCurrentStepNumber > 1 && !$flow->getFormData()->isBugReport();
 				},
 			],
@@ -45,7 +47,8 @@ class CreateTopicFlow extends FormFlow {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getFormOptions($step, array $options = []) {
+	public function getFormOptions($step, array $options = [])
+	{
 		$options = parent::getFormOptions($step, $options);
 
 		if ($step === 3) {
@@ -54,5 +57,4 @@ class CreateTopicFlow extends FormFlow {
 
 		return $options;
 	}
-
 }

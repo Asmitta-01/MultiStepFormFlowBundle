@@ -1,8 +1,8 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests\Storage;
+namespace Asmitta\FormFlowBundle\Tests\Storage;
 
-use Craue\FormFlowBundle\Storage\StorageInterface;
+use Asmitta\FormFlowBundle\Storage\StorageInterface;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -12,7 +12,8 @@ use PHPUnit\Framework\TestCase;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-abstract class AbstractStorageTest extends TestCase {
+abstract class AbstractStorageTest extends TestCase
+{
 
 	/**
 	 * @var StorageInterface
@@ -22,7 +23,8 @@ abstract class AbstractStorageTest extends TestCase {
 	/**
 	 * {@inheritDoc}
 	 */
-	protected function setUp() : void {
+	protected function setUp(): void
+	{
 		$this->storage = $this->getStorageImplementation();
 	}
 
@@ -31,48 +33,56 @@ abstract class AbstractStorageTest extends TestCase {
 	 */
 	abstract protected function getStorageImplementation();
 
-	public function testSetGet() {
+	public function testSetGet()
+	{
 		$this->storage->set('foo', 'bar');
 		$this->assertSame('bar', $this->storage->get('foo'));
 	}
 
-	public function testSetGet_overwrite() {
+	public function testSetGet_overwrite()
+	{
 		$this->storage->set('foo', 'bar');
 		$this->storage->set('foo', 'blah');
 		$this->assertSame('blah', $this->storage->get('foo'));
 	}
 
-	public function testGet_empty() {
+	public function testGet_empty()
+	{
 		$this->assertNull($this->storage->get('foo'));
 	}
 
-	public function testGet_default() {
+	public function testGet_default()
+	{
 		$this->assertSame('bar', $this->storage->get('foo', 'bar'));
 	}
 
-	public function testGet_defaultWithOtherKeyPresent() {
+	public function testGet_defaultWithOtherKeyPresent()
+	{
 		$this->storage->set('foo1', 'bar1');
 		$this->assertSame('bar2', $this->storage->get('foo2', 'bar2'));
 	}
 
-	public function testHas() {
+	public function testHas()
+	{
 		$this->storage->set('foo', 'bar');
 		$this->assertTrue($this->storage->has('foo'));
 	}
 
-	public function testHas_empty() {
+	public function testHas_empty()
+	{
 		$this->assertFalse($this->storage->has('foo'));
 	}
 
-	public function testRemove() {
+	public function testRemove()
+	{
 		$this->storage->set('foo', 'bar');
 		$this->storage->remove('foo');
 		$this->assertFalse($this->storage->has('foo'));
 	}
 
-	public function testRemove_empty() {
+	public function testRemove_empty()
+	{
 		$this->storage->remove('foo');
 		$this->assertFalse($this->storage->has('foo'));
 	}
-
 }

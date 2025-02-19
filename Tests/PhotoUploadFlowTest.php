@@ -1,8 +1,8 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests;
+namespace Asmitta\FormFlowBundle\Tests;
 
-use Craue\FormFlowBundle\Util\TempFileUtil;
+use Asmitta\FormFlowBundle\Util\TempFileUtil;
 
 /**
  * @group integration
@@ -12,11 +12,13 @@ use Craue\FormFlowBundle\Util\TempFileUtil;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class PhotoUploadFlowTest extends IntegrationTestCase {
+class PhotoUploadFlowTest extends IntegrationTestCase
+{
 
 	const IMAGE = '/Fixtures/blue-pixel.png';
 
-	protected function setUp() : void {
+	protected function setUp(): void
+	{
 		if (\version_compare(\PHP_VERSION, '7.4', '<') && ($_ENV['DB_FLAVOR'] ?? '') === 'postgresql') {
 			$this->markTestSkipped('Would fail because SerializableFile::__serialize is only supported as of PHP 7.4.');
 		}
@@ -24,7 +26,8 @@ class PhotoUploadFlowTest extends IntegrationTestCase {
 		parent::setUp();
 	}
 
-	public function testPhotoUpload() {
+	public function testPhotoUpload()
+	{
 		$image = __DIR__ . self::IMAGE;
 
 		$crawler = static::$client->request('GET', $this->url('_FormFlow_photoUpload'));
@@ -55,7 +58,8 @@ class PhotoUploadFlowTest extends IntegrationTestCase {
 		$this->assertRenderedImageUrl(sprintf('data:image/png;base64,%s', base64_encode(file_get_contents($image))), $crawler);
 	}
 
-	public function testPhotoInsideCollectionUpload() {
+	public function testPhotoInsideCollectionUpload()
+	{
 		$image = __DIR__ . self::IMAGE;
 
 		$crawler = static::$client->request('GET', $this->url('_FormFlow_photoCollectionUpload'));
@@ -86,5 +90,4 @@ class PhotoUploadFlowTest extends IntegrationTestCase {
 		$this->assertCurrentFormData('{"photos":{},"comment":"blah"}', $crawler);
 		$this->assertRenderedImageCollectionCount(1, $crawler);
 	}
-
 }

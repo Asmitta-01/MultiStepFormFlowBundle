@@ -1,6 +1,6 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests;
+namespace Asmitta\FormFlowBundle\Tests;
 
 /**
  * @group integration

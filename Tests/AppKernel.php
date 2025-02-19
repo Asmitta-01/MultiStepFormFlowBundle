@@ -1,6 +1,6 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests;
+namespace Asmitta\FormFlowBundle\Tests;
 
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -34,8 +34,8 @@ class AppKernel extends Kernel
 			new \Symfony\Bundle\SecurityBundle\SecurityBundle(),
 			new \Symfony\Bundle\TwigBundle\TwigBundle(),
 			new \Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
-			new \Craue\FormFlowBundle\AsmittaFormFlowBundle(),
-			new \Craue\FormFlowBundle\Tests\IntegrationTestBundle\IntegrationTestBundle(),
+			new \Asmitta\FormFlowBundle\AsmittaFormFlowBundle(),
+			new \Asmitta\FormFlowBundle\Tests\IntegrationTestBundle\IntegrationTestBundle(),
 		];
 	}
 

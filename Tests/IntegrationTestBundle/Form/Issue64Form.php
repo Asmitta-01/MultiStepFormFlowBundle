@@ -1,8 +1,8 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests\IntegrationTestBundle\Form;
+namespace Asmitta\FormFlowBundle\Tests\IntegrationTestBundle\Form;
 
-use Craue\FormFlowBundle\Tests\IntegrationTestBundle\Entity\Issue64SubData;
+use Asmitta\FormFlowBundle\Tests\IntegrationTestBundle\Entity\Issue64SubData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -13,12 +13,14 @@ use Symfony\Component\Form\FormBuilderInterface;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class Issue64Form extends AbstractType {
+class Issue64Form extends AbstractType
+{
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function buildForm(FormBuilderInterface $builder, array $options) : void {
+	public function buildForm(FormBuilderInterface $builder, array $options): void
+	{
 		switch ($options['flow_step']) {
 			case 1:
 				$subForm = $builder->create('sub', FormType::class, [
@@ -45,8 +47,8 @@ class Issue64Form extends AbstractType {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getBlockPrefix() : string {
+	public function getBlockPrefix(): string
+	{
 		return 'issue64';
 	}
-
 }

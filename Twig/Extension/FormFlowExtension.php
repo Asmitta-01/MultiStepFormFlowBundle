@@ -1,9 +1,9 @@
 <?php
 
-namespace Craue\FormFlowBundle\Twig\Extension;
+namespace Asmitta\FormFlowBundle\Twig\Extension;
 
-use Craue\FormFlowBundle\Form\FormFlow;
-use Craue\FormFlowBundle\Util\FormFlowUtil;
+use Asmitta\FormFlowBundle\Form\FormFlow;
+use Asmitta\FormFlowBundle\Util\FormFlowUtil;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;

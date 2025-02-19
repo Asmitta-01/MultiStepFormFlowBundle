@@ -1,6 +1,6 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests\Resources;
+namespace Asmitta\FormFlowBundle\Tests\Resources;
 
 use Craue\TranslationsTests\YamlTranslationsTest;
 
@@ -11,10 +11,11 @@ use Craue\TranslationsTests\YamlTranslationsTest;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class TranslationsTest extends YamlTranslationsTest {
+class TranslationsTest extends YamlTranslationsTest
+{
 
-	protected function defineTranslationFiles() {
+	protected function defineTranslationFiles()
+	{
 		return glob(__DIR__ . '/../../Resources/translations/*.yml');
 	}
-
 }

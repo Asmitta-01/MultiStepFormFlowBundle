@@ -1,8 +1,8 @@
 <?php
 
-namespace Craue\FormFlowBundle\EventListener;
+namespace Asmitta\FormFlowBundle\EventListener;
 
-use Craue\FormFlowBundle\Event\PreviousStepInvalidEvent;
+use Asmitta\FormFlowBundle\Event\PreviousStepInvalidEvent;
 use Symfony\Component\Form\FormError;
 
 /**
@@ -12,11 +12,13 @@ use Symfony\Component\Form\FormError;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class PreviousStepInvalidEventListener {
+class PreviousStepInvalidEventListener
+{
 
 	use EventListenerWithTranslatorTrait;
 
-	public function onPreviousStepInvalid(PreviousStepInvalidEvent $event) {
+	public function onPreviousStepInvalid(PreviousStepInvalidEvent $event)
+	{
 		$event->getCurrentStepForm()->addError($this->getPreviousStepInvalidFormError($event->getInvalidStepNumber()));
 	}
 
@@ -24,11 +26,11 @@ class PreviousStepInvalidEventListener {
 	 * @param int $stepNumber
 	 * @return FormError
 	 */
-	protected function getPreviousStepInvalidFormError($stepNumber) {
+	protected function getPreviousStepInvalidFormError($stepNumber)
+	{
 		$messageId = 'craueFormFlow.previousStepInvalid';
 		$messageParameters = ['%stepNumber%' => $stepNumber];
 
 		return new FormError($this->translator->trans($messageId, $messageParameters, 'validators'), $messageId, $messageParameters);
 	}
-
 }

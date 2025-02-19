@@ -1,6 +1,6 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests;
+namespace Asmitta\FormFlowBundle\Tests;
 
 /**
  * @group integration
@@ -11,12 +11,14 @@ namespace Craue\FormFlowBundle\Tests;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class Issue149Test extends IntegrationTestCase {
+class Issue149Test extends IntegrationTestCase
+{
 
 	/**
 	 * The issue is caused by existence of a file field, regardless of actually uploading a file.
 	 */
-	public function testIssue149() {
+	public function testIssue149()
+	{
 		$crawler = static::$client->request('GET', $this->url('_FormFlow_issue149'));
 		$this->assertSame(200, static::$client->getResponse()->getStatusCode());
 		$this->assertCurrentStepNumber(1, $crawler);
@@ -37,5 +39,4 @@ class Issue149Test extends IntegrationTestCase {
 		// ensure that the title is preserved
 		$this->assertCurrentFormData('{"photo":{"image":null,"title":"blue pixel"}}', $crawler);
 	}
-
 }

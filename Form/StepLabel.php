@@ -1,16 +1,17 @@
 <?php
 
-namespace Craue\FormFlowBundle\Form;
+namespace Asmitta\FormFlowBundle\Form;
 
-use Craue\FormFlowBundle\Exception\InvalidTypeException;
-use Craue\FormFlowBundle\Exception\StepLabelCallableInvalidReturnValueException;
+use Asmitta\FormFlowBundle\Exception\InvalidTypeException;
+use Asmitta\FormFlowBundle\Exception\StepLabelCallableInvalidReturnValueException;
 
 /**
  * @author Christian Raue <christian.raue@gmail.com>
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class StepLabel {
+class StepLabel
+{
 
 	/**
 	 * @var bool If <code>$value</code> is callable.
@@ -25,21 +26,24 @@ class StepLabel {
 	/**
 	 * @param string|null $value
 	 */
-	public static function createStringLabel($value) {
+	public static function createStringLabel($value)
+	{
 		return new static($value);
 	}
 
 	/**
 	 * @param callable $value
 	 */
-	public static function createCallableLabel($value) {
+	public static function createCallableLabel($value)
+	{
 		return new static($value, true);
 	}
 
 	/**
 	 * @return string|null
 	 */
-	public function getText() {
+	public function getText()
+	{
 		if ($this->callable) {
 			$returnValue = call_user_func($this->value);
 
@@ -57,7 +61,8 @@ class StepLabel {
 	 * @param string|callable|null $value
 	 * @param bool $callable
 	 */
-	private final function __construct($value, $callable = false) {
+	private final function __construct($value, $callable = false)
+	{
 		$this->setValue($value, $callable);
 	}
 
@@ -65,7 +70,8 @@ class StepLabel {
 	 * @param string|callable|null $value
 	 * @param bool $callable
 	 */
-	private function setValue($value, $callable = false) {
+	private function setValue($value, $callable = false)
+	{
 		if ($callable) {
 			if (!is_callable($value)) {
 				throw new InvalidTypeException($value, ['callable']);
@@ -79,5 +85,4 @@ class StepLabel {
 		$this->callable = $callable;
 		$this->value = $value;
 	}
-
 }

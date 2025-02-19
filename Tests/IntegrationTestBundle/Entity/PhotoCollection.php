@@ -1,6 +1,6 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests\IntegrationTestBundle\Entity;
+namespace Asmitta\FormFlowBundle\Tests\IntegrationTestBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -9,7 +9,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class PhotoCollection {
+class PhotoCollection
+{
 
 	/**
 	 * @var ArrayCollection
@@ -21,8 +22,8 @@ class PhotoCollection {
 	 */
 	public $comment;
 
-	public function __construct() {
+	public function __construct()
+	{
 		$this->photos = new ArrayCollection([['photo' => null, 'comment' => null]]);
 	}
-
 }

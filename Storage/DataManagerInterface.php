@@ -1,15 +1,16 @@
 <?php
 
-namespace Craue\FormFlowBundle\Storage;
+namespace Asmitta\FormFlowBundle\Storage;
 
-use Craue\FormFlowBundle\Form\FormFlowInterface;
+use Asmitta\FormFlowBundle\Form\FormFlowInterface;
 
 /**
  * @author Christian Raue <christian.raue@gmail.com>
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-interface DataManagerInterface {
+interface DataManagerInterface
+{
 
 	/**
 	 * @var string Key for storing data of all flows.
@@ -47,5 +48,4 @@ interface DataManagerInterface {
 	 * @param FormFlowInterface $flow
 	 */
 	function drop(FormFlowInterface $flow);
-
 }

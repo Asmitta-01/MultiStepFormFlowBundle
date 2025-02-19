@@ -1,9 +1,9 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests\EventListener;
+namespace Asmitta\FormFlowBundle\Tests\EventListener;
 
-use Craue\FormFlowBundle\EventListener\FlowExpiredEventListener;
-use Craue\FormFlowBundle\Tests\UnitTestCase;
+use Asmitta\FormFlowBundle\EventListener\FlowExpiredEventListener;
+use Asmitta\FormFlowBundle\Tests\UnitTestCase;
 
 /**
  * @group unit
@@ -12,12 +12,13 @@ use Craue\FormFlowBundle\Tests\UnitTestCase;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class FlowExpiredEventListenerTest extends UnitTestCase {
+class FlowExpiredEventListenerTest extends UnitTestCase
+{
 
 	use EventListenerWithTranslatorTestTrait;
 
-	protected function getListener() {
+	protected function getListener()
+	{
 		return new FlowExpiredEventListener();
 	}
-
 }

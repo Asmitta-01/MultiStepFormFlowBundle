@@ -1,15 +1,17 @@
 <?php
 
-namespace Craue\FormFlowBundle\Exception;
+namespace Asmitta\FormFlowBundle\Exception;
 
 /**
  * @author Christian Raue <christian.raue@gmail.com>
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class InvalidTypeException extends \InvalidArgumentException {
+class InvalidTypeException extends \InvalidArgumentException
+{
 
-	public function __construct($value, $expectedType) {
+	public function __construct($value, $expectedType)
+	{
 		$givenType = is_object($value) ? get_class($value) : gettype($value);
 
 		if (is_array($expectedType)) {
@@ -21,7 +23,8 @@ class InvalidTypeException extends \InvalidArgumentException {
 		parent::__construct($message);
 	}
 
-	protected function conjunctTypes(array $expectedTypes) {
+	protected function conjunctTypes(array $expectedTypes)
+	{
 		$expectedTypes = array_values($expectedTypes);
 
 		$len = count($expectedTypes);
@@ -46,5 +49,4 @@ class InvalidTypeException extends \InvalidArgumentException {
 
 		return $text;
 	}
-
 }

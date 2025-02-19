@@ -1,10 +1,10 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests\Storage;
+namespace Asmitta\FormFlowBundle\Tests\Storage;
 
-use Craue\FormFlowBundle\Exception\InvalidTypeException;
-use Craue\FormFlowBundle\Storage\StorageKeyGeneratorInterface;
-use Craue\FormFlowBundle\Storage\UserSessionStorageKeyGenerator;
+use Asmitta\FormFlowBundle\Exception\InvalidTypeException;
+use Asmitta\FormFlowBundle\Storage\StorageKeyGeneratorInterface;
+use Asmitta\FormFlowBundle\Storage\UserSessionStorageKeyGenerator;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -28,7 +28,8 @@ use Symfony\Component\Security\Core\User\User;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class UserSessionStorageKeyGeneratorTest extends TestCase {
+class UserSessionStorageKeyGeneratorTest extends TestCase
+{
 
 	/**
 	 * @var StorageKeyGeneratorInterface
@@ -43,14 +44,16 @@ class UserSessionStorageKeyGeneratorTest extends TestCase {
 	/**
 	 * {@inheritDoc}
 	 */
-	protected function setUp() : void {
+	protected function setUp(): void
+	{
 		$session = new Session(new MockArraySessionStorage());
 		$session->setId('12345');
 		$this->tokenStorage = new TokenStorage();
 		$this->generator = $this->createGenerator($session);
 	}
 
-	private function createGenerator(SessionInterface $session) : UserSessionStorageKeyGenerator {
+	private function createGenerator(SessionInterface $session): UserSessionStorageKeyGenerator
+	{
 		// TODO remove as soon as Symfony >= 5.3 is required
 		if (!\method_exists(RequestStack::class, 'getSession')) {
 			return new UserSessionStorageKeyGenerator($this->tokenStorage, $session);
@@ -69,7 +72,8 @@ class UserSessionStorageKeyGeneratorTest extends TestCase {
 	/**
 	 * @dataProvider dataGenerate_mockedTokens
 	 */
-	public function testGenerate_mockedTokens($expectedKey, $username) {
+	public function testGenerate_mockedTokens($expectedKey, $username)
+	{
 		// TODO just use 'getUserIdentifier' as soon as Symfony >= 5.3 is required
 		$methodName = \method_exists(AbstractToken::class, 'getUserIdentifier') ? 'getUserIdentifier' : 'getUsername';
 
@@ -85,7 +89,8 @@ class UserSessionStorageKeyGeneratorTest extends TestCase {
 		$this->assertSame($expectedKey, $this->generator->generate('key'));
 	}
 
-	public function dataGenerate_mockedTokens() {
+	public function dataGenerate_mockedTokens()
+	{
 		// TODO remove as soon as Symfony >= 5.3 is required
 		if (!\method_exists(AbstractToken::class, 'getUserIdentifier')) {
 			yield ['session_12345_key', null];
@@ -98,12 +103,14 @@ class UserSessionStorageKeyGeneratorTest extends TestCase {
 	/**
 	 * @dataProvider dataGenerate_realTokens
 	 */
-	public function testGenerate_realTokens($expectedKey, $token) {
+	public function testGenerate_realTokens($expectedKey, $token)
+	{
 		$this->tokenStorage->setToken($token);
 		$this->assertSame($expectedKey, $this->generator->generate('key'));
 	}
 
-	public function dataGenerate_realTokens() : iterable {
+	public function dataGenerate_realTokens(): iterable
+	{
 		// TODO just use `InMemoryUser` as soon as Symfony >= 5.3 is required
 		$userClass = \class_exists(InMemoryUser::class) ? InMemoryUser::class : User::class;
 
@@ -135,18 +142,19 @@ class UserSessionStorageKeyGeneratorTest extends TestCase {
 		}
 	}
 
-	public function testGenerate_invalidArgument() {
+	public function testGenerate_invalidArgument()
+	{
 		$this->expectException(InvalidTypeException::class);
 		$this->expectExceptionMessage('Expected argument of type "string", but "NULL" given.');
 
 		$this->generator->generate(null);
 	}
 
-	public function testGenerate_emptyArgument() {
+	public function testGenerate_emptyArgument()
+	{
 		$this->expectException(\InvalidArgumentException::class);
 		$this->expectExceptionMessage('Argument must not be empty.');
 
 		$this->generator->generate('');
 	}
-
 }

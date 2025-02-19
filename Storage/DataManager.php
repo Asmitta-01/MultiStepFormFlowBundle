@@ -1,8 +1,8 @@
 <?php
 
-namespace Craue\FormFlowBundle\Storage;
+namespace Asmitta\FormFlowBundle\Storage;
 
-use Craue\FormFlowBundle\Form\FormFlowInterface;
+use Asmitta\FormFlowBundle\Form\FormFlowInterface;
 
 /**
  * Manages data of flows and their steps.
@@ -22,7 +22,8 @@ use Craue\FormFlowBundle\Form\FormFlowInterface;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class DataManager implements ExtendedDataManagerInterface {
+class DataManager implements ExtendedDataManagerInterface
+{
 
 	/**
 	 * @var string Key for the actual step data.
@@ -37,24 +38,27 @@ class DataManager implements ExtendedDataManagerInterface {
 	/**
 	 * @param StorageInterface $storage
 	 */
-	public function __construct(StorageInterface $storage) {
+	public function __construct(StorageInterface $storage)
+	{
 		$this->storage = $storage;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getStorage() {
+	public function getStorage()
+	{
 		return $this->storage;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function save(FormFlowInterface $flow, array $data) {
+	public function save(FormFlowInterface $flow, array $data)
+	{
 		// handle file uploads
 		if ($flow->isHandleFileUploads()) {
-			array_walk_recursive($data, function(&$value, $key) {
+			array_walk_recursive($data, function (&$value, $key) {
 				if (SerializableFile::isSupported($value)) {
 					$value = new SerializableFile($value);
 				}
@@ -81,7 +85,8 @@ class DataManager implements ExtendedDataManagerInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function load(FormFlowInterface $flow) {
+	public function load(FormFlowInterface $flow)
+	{
 		$data = [];
 
 		// try to find data for the given flow
@@ -93,7 +98,7 @@ class DataManager implements ExtendedDataManagerInterface {
 		// handle file uploads
 		if ($flow->isHandleFileUploads()) {
 			$tempDir = $flow->getHandleFileUploadsTempDir();
-			array_walk_recursive($data, function(&$value, $key) use ($tempDir) {
+			array_walk_recursive($data, function (&$value, $key) use ($tempDir) {
 				if ($value instanceof SerializableFile) {
 					$value = $value->getAsFile($tempDir);
 				}
@@ -106,7 +111,8 @@ class DataManager implements ExtendedDataManagerInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function exists(FormFlowInterface $flow) {
+	public function exists(FormFlowInterface $flow)
+	{
 		$savedFlows = $this->storage->get(DataManagerInterface::STORAGE_ROOT, []);
 		return isset($savedFlows[$flow->getName()][$flow->getInstanceId()][self::DATA_KEY]);
 	}
@@ -114,7 +120,8 @@ class DataManager implements ExtendedDataManagerInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function drop(FormFlowInterface $flow) {
+	public function drop(FormFlowInterface $flow)
+	{
 		$savedFlows = $this->storage->get(DataManagerInterface::STORAGE_ROOT, []);
 
 		// remove data for only this flow instance
@@ -126,14 +133,16 @@ class DataManager implements ExtendedDataManagerInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function listFlows() {
+	public function listFlows()
+	{
 		return array_keys($this->storage->get(DataManagerInterface::STORAGE_ROOT, []));
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function listInstances($name) {
+	public function listInstances($name)
+	{
 		$savedFlows = $this->storage->get(DataManagerInterface::STORAGE_ROOT, []);
 
 		if (array_key_exists($name, $savedFlows)) {
@@ -146,8 +155,8 @@ class DataManager implements ExtendedDataManagerInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function dropAll() {
+	public function dropAll()
+	{
 		$this->storage->remove(DataManagerInterface::STORAGE_ROOT);
 	}
-
 }

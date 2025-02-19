@@ -1,8 +1,8 @@
 <?php
 
-namespace Craue\FormFlowBundle\Storage;
+namespace Asmitta\FormFlowBundle\Storage;
 
-use Craue\FormFlowBundle\Exception\InvalidTypeException;
+use Asmitta\FormFlowBundle\Exception\InvalidTypeException;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -13,7 +13,8 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class SessionStorage implements StorageInterface {
+class SessionStorage implements StorageInterface
+{
 
 	use SessionProviderTrait;
 
@@ -21,36 +22,40 @@ class SessionStorage implements StorageInterface {
 	 * @param RequestStack|SessionInterface $requestStackOrSession
 	 * @throws InvalidTypeException
 	 */
-	public function __construct($requestStackOrSession) {
+	public function __construct($requestStackOrSession)
+	{
 		$this->setRequestStackOrSession($requestStackOrSession);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function set($key, $value) {
+	public function set($key, $value)
+	{
 		$this->getSession()->set($key, $value);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function get($key, $default = null) {
+	public function get($key, $default = null)
+	{
 		return $this->getSession()->get($key, $default);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function has($key) {
+	public function has($key)
+	{
 		return $this->getSession()->has($key);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function remove($key) {
+	public function remove($key)
+	{
 		$this->getSession()->remove($key);
 	}
-
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Craue\FormFlowBundle\DependencyInjection\Compiler;
+namespace Asmitta\FormFlowBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

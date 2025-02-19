@@ -1,9 +1,9 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests\EventListener;
+namespace Asmitta\FormFlowBundle\Tests\EventListener;
 
-use Craue\FormFlowBundle\EventListener\PreviousStepInvalidEventListener;
-use Craue\FormFlowBundle\Tests\UnitTestCase;
+use Asmitta\FormFlowBundle\EventListener\PreviousStepInvalidEventListener;
+use Asmitta\FormFlowBundle\Tests\UnitTestCase;
 
 /**
  * @group unit
@@ -12,12 +12,13 @@ use Craue\FormFlowBundle\Tests\UnitTestCase;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class PreviousStepInvalidEventListenerTest extends UnitTestCase {
+class PreviousStepInvalidEventListenerTest extends UnitTestCase
+{
 
 	use EventListenerWithTranslatorTestTrait;
 
-	protected function getListener() {
+	protected function getListener()
+	{
 		return new PreviousStepInvalidEventListener();
 	}
-
 }

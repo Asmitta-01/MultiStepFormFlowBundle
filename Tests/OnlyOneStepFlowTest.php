@@ -1,6 +1,6 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests;
+namespace Asmitta\FormFlowBundle\Tests;
 
 /**
  * @group integration
@@ -10,9 +10,11 @@ namespace Craue\FormFlowBundle\Tests;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class OnlyOneStepFlowTest extends IntegrationTestCase {
+class OnlyOneStepFlowTest extends IntegrationTestCase
+{
 
-	public function testFlowWithOnlyOneStep() {
+	public function testFlowWithOnlyOneStep()
+	{
 		$crawler = static::$client->request('GET', $this->url('_FormFlow_onlyOneStep'));
 		$this->assertSame(200, static::$client->getResponse()->getStatusCode());
 		$this->assertCurrentStepNumber(1, $crawler);
@@ -22,5 +24,4 @@ class OnlyOneStepFlowTest extends IntegrationTestCase {
 		static::$client->submit($form);
 		$this->assertJsonResponse('{}');
 	}
-
 }

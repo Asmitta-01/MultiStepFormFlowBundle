@@ -1,6 +1,6 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests\IntegrationTestBundle\Entity;
+namespace Asmitta\FormFlowBundle\Tests\IntegrationTestBundle\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
@@ -10,7 +10,8 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class Topic {
+class Topic
+{
 
 	/**
 	 * @var string
@@ -37,11 +38,13 @@ class Topic {
 	 */
 	public $details;
 
-	public function isBugReport() {
+	public function isBugReport()
+	{
 		return $this->category === 'BUG_REPORT';
 	}
 
-	public static function getValidCategories() {
+	public static function getValidCategories()
+	{
 		return [
 			'DISCUSSION',
 			'BUG_REPORT',
@@ -49,11 +52,11 @@ class Topic {
 		];
 	}
 
-	public static function loadValidatorMetadata(ClassMetadata $metadata) : void {
+	public static function loadValidatorMetadata(ClassMetadata $metadata): void
+	{
 		$metadata->addPropertyConstraint('title', new Assert\NotBlank(['groups' => 'flow_createTopic_step1']));
 		$metadata->addPropertyConstraint('category', new Assert\Choice(['groups' => 'flow_createTopic_step1', 'callback' => 'getValidCategories', 'strict' => true]));
 		$metadata->addPropertyConstraint('category', new Assert\NotBlank(['groups' => 'flow_createTopic_step1']));
 		$metadata->addPropertyConstraint('details', new Assert\NotBlank(['groups' => 'flow_createTopic_step3']));
 	}
-
 }

@@ -1,30 +1,34 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests\IntegrationTestBundle\Form;
+namespace Asmitta\FormFlowBundle\Tests\IntegrationTestBundle\Form;
 
-use Craue\FormFlowBundle\Form\FormFlow;
+use Asmitta\FormFlowBundle\Form\FormFlow;
 
 /**
  * @author Christian Raue <christian.raue@gmail.com>
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class Issue303Flow extends FormFlow {
+class Issue303Flow extends FormFlow
+{
 
 	private static $skips;
 
-	public static function resetSkips() {
+	public static function resetSkips()
+	{
 		self::$skips = [];
 	}
 
-	public static function setSkip($stepNumber) {
+	public static function setSkip($stepNumber)
+	{
 		self::$skips[$stepNumber] = true;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	protected function loadStepsConfig() {
+	protected function loadStepsConfig()
+	{
 		$steps = [
 			1 => [
 				'label' => 'step1',
@@ -40,5 +44,4 @@ class Issue303Flow extends FormFlow {
 
 		return $steps;
 	}
-
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests;
+namespace Asmitta\FormFlowBundle\Tests;
 
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -12,9 +12,11 @@ use Symfony\Component\DomCrawler\Crawler;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class CreateTopicFlowTest extends IntegrationTestCase {
+class CreateTopicFlowTest extends IntegrationTestCase
+{
 
-	public function testCreateTopic_dynamicStepNavigation() {
+	public function testCreateTopic_dynamicStepNavigation()
+	{
 		static::$client->followRedirects();
 		$crawler = static::$client->request('GET', $this->url('_FormFlow_createTopic'));
 		$this->assertSame(200, static::$client->getResponse()->getStatusCode());
@@ -89,7 +91,8 @@ class CreateTopicFlowTest extends IntegrationTestCase {
 		$this->assertJsonResponse('{"title":"blah","description":null,"category":"DISCUSSION","comment":"my comment","details":null}');
 	}
 
-	public function testCreateTopic_dynamicStepNavigation_noLinkForNonVisitedStep() {
+	public function testCreateTopic_dynamicStepNavigation_noLinkForNonVisitedStep()
+	{
 		static::$client->followRedirects();
 		$crawler = static::$client->request('GET', $this->url('_FormFlow_createTopic'));
 		$this->assertSame(200, static::$client->getResponse()->getStatusCode());
@@ -112,7 +115,8 @@ class CreateTopicFlowTest extends IntegrationTestCase {
 		$this->assertCount(2, $crawler->filter('#step-list a'));
 	}
 
-	public function testCreateTopic_dynamicStepNavigation_preserveDataOnGetRequestWithInstanceId() {
+	public function testCreateTopic_dynamicStepNavigation_preserveDataOnGetRequestWithInstanceId()
+	{
 		static::$client->followRedirects();
 		$crawler = static::$client->request('GET', $this->url('_FormFlow_createTopic'));
 
@@ -131,7 +135,8 @@ class CreateTopicFlowTest extends IntegrationTestCase {
 		$this->assertCurrentFormData('{"title":"blah","description":null,"category":"DISCUSSION","comment":null,"details":null}', $crawler);
 	}
 
-	public function testCreateTopic_dynamicStepNavigation_newFlowInstanceOnGetRequest() {
+	public function testCreateTopic_dynamicStepNavigation_newFlowInstanceOnGetRequest()
+	{
 		static::$client->followRedirects();
 		$crawler = static::$client->request('GET', $this->url('_FormFlow_createTopic'));
 
@@ -148,7 +153,8 @@ class CreateTopicFlowTest extends IntegrationTestCase {
 		$this->assertCurrentFormData('{"title":null,"description":null,"category":null,"comment":null,"details":null}', $crawler);
 	}
 
-	public function testCreateTopic_redirectAfterSubmit() {
+	public function testCreateTopic_redirectAfterSubmit()
+	{
 		static::$client->followRedirects();
 		$crawler = static::$client->request('GET', $this->url('_FormFlow_createTopic_redirectAfterSubmit'));
 		$this->assertSame(200, static::$client->getResponse()->getStatusCode());
@@ -245,7 +251,8 @@ class CreateTopicFlowTest extends IntegrationTestCase {
 		$this->assertJsonResponse('{"title":"blah","description":null,"category":"BUG_REPORT","comment":"my comment","details":"blah blah"}');
 	}
 
-	public function testCreateTopic_dynamicStepNavigation_invalidInstanceId_onGetRequest() {
+	public function testCreateTopic_dynamicStepNavigation_invalidInstanceId_onGetRequest()
+	{
 		$crawler = $this->proceedToStep(2);
 
 		$fakeInstanceId = 'invalid instance id';
@@ -260,7 +267,8 @@ class CreateTopicFlowTest extends IntegrationTestCase {
 		$this->assertNotEquals($fakeInstanceId, $crawler->selectButton('next')->form()->get('flow_createTopic_instance')->getValue());
 	}
 
-	public function testCreateTopic_dynamicStepNavigation_invalidInstanceId_onPostRequest() {
+	public function testCreateTopic_dynamicStepNavigation_invalidInstanceId_onPostRequest()
+	{
 		$crawler = $this->proceedToStep(2);
 
 		$fakeInstanceId = 'invalid instance id';
@@ -275,7 +283,8 @@ class CreateTopicFlowTest extends IntegrationTestCase {
 		$this->assertNotEquals($fakeInstanceId, $crawler->selectButton('next')->form()->get('flow_createTopic_instance')->getValue());
 	}
 
-	public function testCreateTopic_dynamicStepNavigation_invalidStep_exceedLowerLimit() {
+	public function testCreateTopic_dynamicStepNavigation_invalidStep_exceedLowerLimit()
+	{
 		$crawler = $this->proceedToStep(2);
 
 		$form = $crawler->selectButton('next')->form();
@@ -287,7 +296,8 @@ class CreateTopicFlowTest extends IntegrationTestCase {
 		$this->assertCurrentStepNumber(1, $crawler);
 	}
 
-	public function testCreateTopic_dynamicStepNavigation_invalidStep_exceedUpperLimit() {
+	public function testCreateTopic_dynamicStepNavigation_invalidStep_exceedUpperLimit()
+	{
 		$crawler = $this->proceedToStep(4);
 
 		$form = $crawler->selectButton('finish')->form();
@@ -299,7 +309,8 @@ class CreateTopicFlowTest extends IntegrationTestCase {
 		$this->assertCurrentStepNumber(4, $crawler);
 	}
 
-	public function testCreateTopic_dynamicStepNavigation_invalidStep_noInteger() {
+	public function testCreateTopic_dynamicStepNavigation_invalidStep_noInteger()
+	{
 		$crawler = $this->proceedToStep(2);
 
 		$form = $crawler->selectButton('next')->form();
@@ -316,7 +327,8 @@ class CreateTopicFlowTest extends IntegrationTestCase {
 	 * @param int $stepNumber The targeted step number.
 	 * @return Crawler
 	 */
-	private function proceedToStep($stepNumber) {
+	private function proceedToStep($stepNumber)
+	{
 		static::$client->followRedirects();
 		$crawler = static::$client->request('GET', $this->url('_FormFlow_createTopic'));
 
@@ -353,5 +365,4 @@ class CreateTopicFlowTest extends IntegrationTestCase {
 
 		return $crawler;
 	}
-
 }

@@ -10,12 +10,12 @@
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 	<parameters>
-		<parameter key="asmitta.form.flow.class">Craue\FormFlowBundle\Form\FormFlow</parameter>
-		<parameter key="asmitta.form.flow.storage.class">Craue\FormFlowBundle\Storage\SessionStorage</parameter>
-		<parameter key="asmitta.form.flow.event_listener.previous_step_invalid.class">Craue\FormFlowBundle\EventListener\PreviousStepInvalidEventListener</parameter>
-		<parameter key="asmitta.form.flow.event_listener.previous_step_invalid.event" type="constant">Craue\FormFlowBundle\Form\FormFlowEvents::PREVIOUS_STEP_INVALID</parameter>
-		<parameter key="asmitta.form.flow.event_listener.flow_expired.class">Craue\FormFlowBundle\EventListener\FlowExpiredEventListener</parameter>
-		<parameter key="asmitta.form.flow.event_listener.flow_expired.event" type="constant">Craue\FormFlowBundle\Form\FormFlowEvents::FLOW_EXPIRED</parameter>
+		<parameter key="asmitta.form.flow.class">Asmitta\FormFlowBundle\Form\FormFlow</parameter>
+		<parameter key="asmitta.form.flow.storage.class">Asmitta\FormFlowBundle\Storage\SessionStorage</parameter>
+		<parameter key="asmitta.form.flow.event_listener.previous_step_invalid.class">Asmitta\FormFlowBundle\EventListener\PreviousStepInvalidEventListener</parameter>
+		<parameter key="asmitta.form.flow.event_listener.previous_step_invalid.event" type="constant">Asmitta\FormFlowBundle\Form\FormFlowEvents::PREVIOUS_STEP_INVALID</parameter>
+		<parameter key="asmitta.form.flow.event_listener.flow_expired.class">Asmitta\FormFlowBundle\EventListener\FlowExpiredEventListener</parameter>
+		<parameter key="asmitta.form.flow.event_listener.flow_expired.event" type="constant">Asmitta\FormFlowBundle\Form\FormFlowEvents::FLOW_EXPIRED</parameter>
 	</parameters>
 
 	<services>
@@ -25,7 +25,7 @@
 
 		<service id="asmitta.form.flow.storage" alias="asmitta.form.flow.storage_default" public="true" />
 
-		<service id="asmitta.form.flow.data_manager_default" class="Craue\FormFlowBundle\Storage\DataManager" public="false">
+		<service id="asmitta.form.flow.data_manager_default" class="Asmitta\FormFlowBundle\Storage\DataManager" public="false">
 			<argument type="service" id="asmitta.form.flow.storage" />
 		</service>
 
@@ -46,11 +46,11 @@
 			</call>
 		</service>
 
-		<service id="asmitta.form.flow.form_extension" class="Craue\FormFlowBundle\Form\Extension\FormFlowFormExtension">
+		<service id="asmitta.form.flow.form_extension" class="Asmitta\FormFlowBundle\Form\Extension\FormFlowFormExtension">
 			<tag name="form.type_extension" extended-type="Symfony\Component\Form\Extension\Core\Type\FormType" />
 		</service>
 
-		<service id="asmitta.form.flow.hidden_field_extension" class="Craue\FormFlowBundle\Form\Extension\FormFlowHiddenFieldExtension">
+		<service id="asmitta.form.flow.hidden_field_extension" class="Asmitta\FormFlowBundle\Form\Extension\FormFlowHiddenFieldExtension">
 			<tag name="form.type_extension" extended-type="Symfony\Component\Form\Extension\Core\Type\HiddenType" />
 		</service>
 

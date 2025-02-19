@@ -1,6 +1,6 @@
 <?php
 
-use Craue\FormFlowBundle\Tests\IntegrationTestBundle\Controller\FormFlowController;
+use Asmitta\FormFlowBundle\Tests\IntegrationTestBundle\Controller\FormFlowController;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
 return function (RoutingConfigurator $routes): void {

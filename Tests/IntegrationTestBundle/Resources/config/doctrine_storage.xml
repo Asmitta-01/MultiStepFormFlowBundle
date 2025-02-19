@@ -9,12 +9,12 @@
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 	<services>
-		<service id="asmitta.form.flow.storageKeyGenerator" class="Craue\FormFlowBundle\Storage\UserSessionStorageKeyGenerator">
+		<service id="asmitta.form.flow.storageKeyGenerator" class="Asmitta\FormFlowBundle\Storage\UserSessionStorageKeyGenerator">
 			<argument type="service" id="security.token_storage" />
 			<argument type="service" id="request_stack" />
 		</service>
 
-		<service id="asmitta.form.flow.storage.doctrine" class="Craue\FormFlowBundle\Storage\DoctrineStorage" public="false">
+		<service id="asmitta.form.flow.storage.doctrine" class="Asmitta\FormFlowBundle\Storage\DoctrineStorage" public="false">
 			<argument type="service" id="doctrine.dbal.default_connection" />
 			<argument type="service" id="asmitta.form.flow.storageKeyGenerator" />
 		</service>

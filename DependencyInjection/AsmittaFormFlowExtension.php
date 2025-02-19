@@ -1,8 +1,8 @@
 <?php
 
-namespace Craue\FormFlowBundle\DependencyInjection;
+namespace Asmitta\FormFlowBundle\DependencyInjection;
 
-use Craue\FormFlowBundle\Form\FormFlowInterface;
+use Asmitta\FormFlowBundle\Form\FormFlowInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

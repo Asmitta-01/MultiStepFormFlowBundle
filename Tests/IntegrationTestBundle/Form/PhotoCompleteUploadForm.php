@@ -1,6 +1,6 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests\IntegrationTestBundle\Form;
+namespace Asmitta\FormFlowBundle\Tests\IntegrationTestBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -11,12 +11,14 @@ use Symfony\Component\Form\FormBuilderInterface;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class PhotoCompleteUploadForm extends AbstractType {
+class PhotoCompleteUploadForm extends AbstractType
+{
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function buildForm(FormBuilderInterface $builder, array $options) : void {
+	public function buildForm(FormBuilderInterface $builder, array $options): void
+	{
 		$builder->add('photo', FileType::class);
 		$builder->add('comment', null, [
 			'required' => false,
@@ -26,8 +28,8 @@ class PhotoCompleteUploadForm extends AbstractType {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getBlockPrefix() : string {
+	public function getBlockPrefix(): string
+	{
 		return 'photoCompleteUpload';
 	}
-
 }

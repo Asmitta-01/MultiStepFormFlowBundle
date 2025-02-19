@@ -21,7 +21,7 @@ If you don't use Symfony Flex, register the bundle manually:
 // in config/bundles.php
 return [
  // ...
-  Craue\FormFlowBundle\CraueFormFlowBundle::class => ['all' => true],
+  Asmitta\FormFlowBundle\AsmittaFormFlowBundle::class => ['all' => true],
 ];
 ```
 

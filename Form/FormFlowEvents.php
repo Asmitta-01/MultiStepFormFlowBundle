@@ -1,13 +1,14 @@
 <?php
 
-namespace Craue\FormFlowBundle\Form;
+namespace Asmitta\FormFlowBundle\Form;
 
 /**
  * @author Marcus Stöhr <dafish@soundtrack-board.de>
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class FormFlowEvents {
+class FormFlowEvents
+{
 
 	const PRE_BIND = 'flow.pre_bind';
 
@@ -24,5 +25,4 @@ class FormFlowEvents {
 	const PREVIOUS_STEP_INVALID = 'flow.previous_step_invalid';
 
 	const POST_VALIDATE = 'flow.post_validate';
-
 }

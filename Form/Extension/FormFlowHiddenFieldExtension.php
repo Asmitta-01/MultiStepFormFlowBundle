@@ -1,6 +1,6 @@
 <?php
 
-namespace Craue\FormFlowBundle\Form\Extension;
+namespace Asmitta\FormFlowBundle\Form\Extension;
 
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -14,27 +14,32 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class FormFlowHiddenFieldExtension extends AbstractTypeExtension {
+class FormFlowHiddenFieldExtension extends AbstractTypeExtension
+{
 
 	/**
 	 * @return string
 	 */
-	public function getExtendedType() {
+	public function getExtendedType()
+	{
 		return HiddenType::class;
 	}
 
-	public static function getExtendedTypes() : iterable {
+	public static function getExtendedTypes(): iterable
+	{
 		return [HiddenType::class];
 	}
 
-	public function configureOptions(OptionsResolver $resolver) : void {
+	public function configureOptions(OptionsResolver $resolver): void
+	{
 		$resolver->setDefined([
 			'flow_instance_key',
 			'flow_step_key',
 		]);
 	}
 
-	public function finishView(FormView $view, FormInterface $form, array $options) : void {
+	public function finishView(FormView $view, FormInterface $form, array $options): void
+	{
 		if (array_key_exists('flow_instance_key', $options) && $view->vars['name'] === $options['flow_instance_key']) {
 			$view->vars['value'] = $options['data'];
 			$view->vars['full_name'] = $options['flow_instance_key'];
@@ -45,5 +50,4 @@ class FormFlowHiddenFieldExtension extends AbstractTypeExtension {
 			$view->vars['full_name'] = $options['flow_step_key'];
 		}
 	}
-
 }

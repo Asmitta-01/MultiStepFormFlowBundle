@@ -1,8 +1,8 @@
 <?php
 
-namespace Craue\FormFlowBundle\EventListener;
+namespace Asmitta\FormFlowBundle\EventListener;
 
-use Craue\FormFlowBundle\Event\FlowExpiredEvent;
+use Asmitta\FormFlowBundle\Event\FlowExpiredEvent;
 use Symfony\Component\Form\FormError;
 
 /**
@@ -12,22 +12,24 @@ use Symfony\Component\Form\FormError;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class FlowExpiredEventListener {
+class FlowExpiredEventListener
+{
 
 	use EventListenerWithTranslatorTrait;
 
-	public function onFlowExpired(FlowExpiredEvent $event) {
+	public function onFlowExpired(FlowExpiredEvent $event)
+	{
 		$event->getCurrentStepForm()->addError($this->getFlowExpiredFormError());
 	}
 
 	/**
 	 * @return FormError
 	 */
-	protected function getFlowExpiredFormError() {
+	protected function getFlowExpiredFormError()
+	{
 		$messageId = 'craueFormFlow.flowExpired';
 		$messageParameters = [];
 
 		return new FormError($this->translator->trans($messageId, $messageParameters, 'validators'), $messageId, $messageParameters);
 	}
-
 }

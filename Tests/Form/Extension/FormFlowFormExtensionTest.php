@@ -1,8 +1,8 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests\Form\Extension;
+namespace Asmitta\FormFlowBundle\Tests\Form\Extension;
 
-use Craue\FormFlowBundle\Form\Extension\FormFlowFormExtension;
+use Asmitta\FormFlowBundle\Form\Extension\FormFlowFormExtension;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 
@@ -13,13 +13,14 @@ use Symfony\Component\Form\Extension\Core\Type\FormType;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class FormFlowFormExtensionTest extends TestCase {
+class FormFlowFormExtensionTest extends TestCase
+{
 
-	public function testGetExtendedType() {
+	public function testGetExtendedType()
+	{
 		$extension = new FormFlowFormExtension();
 
 		$this->assertSame(FormType::class, $extension->getExtendedType());
 		$this->assertSame([FormType::class], FormFlowFormExtension::getExtendedTypes());
 	}
-
 }

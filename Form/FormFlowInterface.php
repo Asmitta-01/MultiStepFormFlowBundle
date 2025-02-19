@@ -1,9 +1,9 @@
 <?php
 
-namespace Craue\FormFlowBundle\Form;
+namespace Asmitta\FormFlowBundle\Form;
 
-use Craue\FormFlowBundle\Exception\InvalidTypeException;
-use Craue\FormFlowBundle\Storage\DataManagerInterface;
+use Asmitta\FormFlowBundle\Exception\InvalidTypeException;
+use Asmitta\FormFlowBundle\Storage\DataManagerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -14,7 +14,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-interface FormFlowInterface {
+interface FormFlowInterface
+{
 
 	/**
 	 * @return string

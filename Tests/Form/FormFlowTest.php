@@ -1,12 +1,12 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests\Form;
+namespace Asmitta\FormFlowBundle\Tests\Form;
 
-use Craue\FormFlowBundle\Event\GetStepsEvent;
-use Craue\FormFlowBundle\Exception\AllStepsSkippedException;
-use Craue\FormFlowBundle\Exception\InvalidTypeException;
-use Craue\FormFlowBundle\Form\FormFlowEvents;
-use Craue\FormFlowBundle\Tests\UnitTestCase;
+use Asmitta\FormFlowBundle\Event\GetStepsEvent;
+use Asmitta\FormFlowBundle\Exception\AllStepsSkippedException;
+use Asmitta\FormFlowBundle\Exception\InvalidTypeException;
+use Asmitta\FormFlowBundle\Form\FormFlowEvents;
+use Asmitta\FormFlowBundle\Tests\UnitTestCase;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\DataMapperInterface;
@@ -28,15 +28,17 @@ use Symfony\Component\Validator\Constraints\GroupSequence;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class FormFlowTest extends UnitTestCase {
+class FormFlowTest extends UnitTestCase
+{
 
-	public function testStepListener() {
+	public function testStepListener()
+	{
 		$steps = [
 			$this->getMockedStepInterface(),
 		];
 
 		$dispatcher = new EventDispatcher();
-		$dispatcher->addListener(FormFlowEvents::GET_STEPS, function(GetStepsEvent $event) use ($steps) {
+		$dispatcher->addListener(FormFlowEvents::GET_STEPS, function (GetStepsEvent $event) use ($steps) {
 			$event->setSteps($steps);
 
 			$event->stopPropagation();
@@ -48,7 +50,8 @@ class FormFlowTest extends UnitTestCase {
 		$this->assertEquals($steps, $flow->getSteps());
 	}
 
-	public function testCreateStepsFromConfig_fixArrayIndexes() {
+	public function testCreateStepsFromConfig_fixArrayIndexes()
+	{
 		$flow = $this->getFlowWithMockedMethods(['loadStepsConfig']);
 
 		$flow
@@ -67,7 +70,8 @@ class FormFlowTest extends UnitTestCase {
 	/**
 	 * Ensure that the generated step-based validation group is added.
 	 */
-	public function testGetFormOptions_addGeneratedValidationGroup() {
+	public function testGetFormOptions_addGeneratedValidationGroup()
+	{
 		$flow = $this->getFlowWithMockedMethods(['getName', 'loadStepsConfig']);
 
 		$flow
@@ -98,7 +102,8 @@ class FormFlowTest extends UnitTestCase {
 	 *
 	 * @dataProvider dataGetFormOptions_setValidationGroups
 	 */
-	public function testGetFormOptions_setValidationGroups($validationGroups) {
+	public function testGetFormOptions_setValidationGroups($validationGroups)
+	{
 		$flow = $this->getFlowWithMockedMethods(['loadStepsConfig']);
 
 		$flow
@@ -116,10 +121,11 @@ class FormFlowTest extends UnitTestCase {
 		$this->assertSame($validationGroups, $options['validation_groups']);
 	}
 
-	public function dataGetFormOptions_setValidationGroups() {
+	public function dataGetFormOptions_setValidationGroups()
+	{
 		return [
 			[false],
-			[function(FormInterface $form) {
+			[function (FormInterface $form) {
 				return ['custom_group'];
 			}],
 			[new GroupSequence(['first', 'second'])],
@@ -130,7 +136,8 @@ class FormFlowTest extends UnitTestCase {
 	 * Ensure that the generated step-based value for "validation_groups" is an array, which can be used to just add
 	 * other groups.
 	 */
-	public function testGetFormOptions_generatedValidationGroupIsArray() {
+	public function testGetFormOptions_generatedValidationGroupIsArray()
+	{
 		$flow = $this->getFlowWithMockedMethods(['getName', 'loadStepsConfig']);
 
 		$flow
@@ -152,7 +159,8 @@ class FormFlowTest extends UnitTestCase {
 		$this->assertEquals(['flow_createTopic_step1'], $options['validation_groups']);
 	}
 
-	public function testGetStepsDoneRemaining() {
+	public function testGetStepsDoneRemaining()
+	{
 		$flow = $this->getFlowWithMockedMethods(['loadStepsConfig', 'retrieveStepData']);
 
 		$flow
@@ -193,7 +201,8 @@ class FormFlowTest extends UnitTestCase {
 	/**
 	 * Ensure that generic options are considered.
 	 */
-	public function testGetFormOptions_considerGenericOptions() {
+	public function testGetFormOptions_considerGenericOptions()
+	{
 		$flow = $this->getFlowWithMockedMethods(['loadStepsConfig']);
 
 		$flow
@@ -216,7 +225,8 @@ class FormFlowTest extends UnitTestCase {
 	/**
 	 * Ensure that step specific options override generic options.
 	 */
-	public function testGetFormOptions_considerStepSpecificOptions() {
+	public function testGetFormOptions_considerStepSpecificOptions()
+	{
 		$flow = $this->getFlowWithMockedMethods(['loadStepsConfig']);
 
 		$flow
@@ -243,7 +253,8 @@ class FormFlowTest extends UnitTestCase {
 	/**
 	 * Ensure that options can be overridden directly.
 	 */
-	public function testGetFormOptions_considerDirectlyPassedOptions() {
+	public function testGetFormOptions_considerDirectlyPassedOptions()
+	{
 		$flow = $this->getFlowWithMockedMethods(['loadStepsConfig']);
 
 		$flow
@@ -279,7 +290,8 @@ class FormFlowTest extends UnitTestCase {
 	 * @param bool $dsnEnabled If dynamic step navigation is enabled.
 	 * @param int $expectedStepNumber The expected step number being requested.
 	 */
-	public function testGetRequestedStepNumber($httpMethod, $parameters, $dsnEnabled, $expectedStepNumber) {
+	public function testGetRequestedStepNumber($httpMethod, $parameters, $dsnEnabled, $expectedStepNumber)
+	{
 		$flow = $this->getFlowWithMockedMethods(['getName', 'getRequest']);
 
 		if ($dsnEnabled) {
@@ -303,7 +315,8 @@ class FormFlowTest extends UnitTestCase {
 		$this->assertSame($expectedStepNumber, $method->invoke($flow));
 	}
 
-	public function dataGetRequestedStepNumber() {
+	public function dataGetRequestedStepNumber()
+	{
 		return [
 			['GET', [], false, 1],
 			['GET', [], true, 1],
@@ -325,7 +338,8 @@ class FormFlowTest extends UnitTestCase {
 	 * @param array $parameters Parameters for the query/request.
 	 * @param bool $expectedValid If the form is expected to be valid.
 	 */
-	public function testIsValid($httpMethod, $parameters, $expectedValid) {
+	public function testIsValid($httpMethod, $parameters, $expectedValid)
+	{
 		$flow = $this->getFlowWithMockedMethods(['getName', 'getRequest']);
 
 		$flow->setRevalidatePreviousSteps(false);
@@ -350,13 +364,13 @@ class FormFlowTest extends UnitTestCase {
 			->add('aField', TextType::class)
 			->setMethod($httpMethod)
 			->setRequestHandler(new HttpFoundationRequestHandler())
-			->getForm()
-		;
+			->getForm();
 
 		$this->assertSame($expectedValid, $flow->isValid($form));
 	}
 
-	public function dataIsValid() {
+	public function dataIsValid()
+	{
 		$defaultData = ['aField' => ''];
 
 		return [
@@ -382,7 +396,8 @@ class FormFlowTest extends UnitTestCase {
 	 * @param bool $submitForm If the form is meant to be submitted.
 	 * @param bool $expectedResult If a redirection should be performed.
 	 */
-	public function testRedirectAfterSubmit($allowRedirectAfterSubmit, $httpMethod, $parameters, $submitForm, $expectedResult) {
+	public function testRedirectAfterSubmit($allowRedirectAfterSubmit, $httpMethod, $parameters, $submitForm, $expectedResult)
+	{
 		$flow = $this->getFlowWithMockedMethods(['getName', 'getRequest']);
 
 		$flow->setAllowRedirectAfterSubmit($allowRedirectAfterSubmit);
@@ -409,8 +424,7 @@ class FormFlowTest extends UnitTestCase {
 			->add('aField', TextType::class)
 			->setMethod($httpMethod)
 			->setRequestHandler(new HttpFoundationRequestHandler())
-			->getForm()
-		;
+			->getForm();
 
 		if ($submitForm) {
 			$form->handleRequest($request);
@@ -419,7 +433,8 @@ class FormFlowTest extends UnitTestCase {
 		$this->assertSame($expectedResult, $flow->redirectAfterSubmit($form));
 	}
 
-	public function dataRedirectAfterSubmit() {
+	public function dataRedirectAfterSubmit()
+	{
 		$defaultData = ['aField' => ''];
 
 		return [
@@ -438,7 +453,8 @@ class FormFlowTest extends UnitTestCase {
 		];
 	}
 
-	public function testSetGetRequestStack() {
+	public function testSetGetRequestStack()
+	{
 		$flow = $this->getMockedFlow();
 
 		$request = Request::create('');
@@ -449,7 +465,8 @@ class FormFlowTest extends UnitTestCase {
 		$this->assertSame($request, $flow->getRequest());
 	}
 
-	public function testGetRequestStack_notAvailable() {
+	public function testGetRequestStack_notAvailable()
+	{
 		$this->expectException(\RuntimeException::class);
 		$this->expectExceptionMessage('The request is not available.');
 
@@ -458,7 +475,8 @@ class FormFlowTest extends UnitTestCase {
 		$flow->getRequest();
 	}
 
-	public function testSetGetDataManager() {
+	public function testSetGetDataManager()
+	{
 		$flow = $this->getMockedFlow();
 
 		$dataManager = $this->getMockedDataManagerInterface();
@@ -467,7 +485,8 @@ class FormFlowTest extends UnitTestCase {
 		$this->assertSame($dataManager, $flow->getDataManager());
 	}
 
-	public function testSetGetId() {
+	public function testSetGetId()
+	{
 		$flow = $this->getMockedFlow();
 
 		$id = 'flow-id';
@@ -476,7 +495,8 @@ class FormFlowTest extends UnitTestCase {
 		$this->assertEquals($id, $flow->getId());
 	}
 
-	public function testSetGetInstanceKey() {
+	public function testSetGetInstanceKey()
+	{
 		$flow = $this->getMockedFlow();
 
 		$instanceKey = 'instance-key';
@@ -485,7 +505,8 @@ class FormFlowTest extends UnitTestCase {
 		$this->assertEquals($instanceKey, $flow->getInstanceKey());
 	}
 
-	public function testSetGetInstanceId() {
+	public function testSetGetInstanceId()
+	{
 		$flow = $this->getMockedFlow();
 
 		$instanceId = 'instance-id';
@@ -494,7 +515,8 @@ class FormFlowTest extends UnitTestCase {
 		$this->assertEquals($instanceId, $flow->getInstanceId());
 	}
 
-	public function testSetGetFormStepKey() {
+	public function testSetGetFormStepKey()
+	{
 		$flow = $this->getMockedFlow();
 
 		$formStepKey = 'form-step-key';
@@ -503,7 +525,8 @@ class FormFlowTest extends UnitTestCase {
 		$this->assertEquals($formStepKey, $flow->getFormStepKey());
 	}
 
-	public function testSetGetFormTransitionKey() {
+	public function testSetGetFormTransitionKey()
+	{
 		$flow = $this->getMockedFlow();
 
 		$formTransitionKey = 'form-transition-key';
@@ -512,7 +535,8 @@ class FormFlowTest extends UnitTestCase {
 		$this->assertEquals($formTransitionKey, $flow->getFormTransitionKey());
 	}
 
-	public function testSetGetValidationGroupPrefix() {
+	public function testSetGetValidationGroupPrefix()
+	{
 		$flow = $this->getMockedFlow();
 
 		$validationGroupPrefix = 'validation-group-prefix';
@@ -524,7 +548,8 @@ class FormFlowTest extends UnitTestCase {
 	/**
 	 * @dataProvider dataBooleanSetter
 	 */
-	public function testSetIsRevalidatePreviousSteps($expectedValue, $revalidatePreviousSteps) {
+	public function testSetIsRevalidatePreviousSteps($expectedValue, $revalidatePreviousSteps)
+	{
 		$flow = $this->getMockedFlow();
 
 		$flow->setRevalidatePreviousSteps($revalidatePreviousSteps);
@@ -535,7 +560,8 @@ class FormFlowTest extends UnitTestCase {
 	/**
 	 * @dataProvider dataBooleanSetter
 	 */
-	public function testSetIsAllowDynamicStepNavigation($expectedValue, $allowDynamicStepNavigation) {
+	public function testSetIsAllowDynamicStepNavigation($expectedValue, $allowDynamicStepNavigation)
+	{
 		$flow = $this->getMockedFlow();
 
 		$flow->setAllowDynamicStepNavigation($allowDynamicStepNavigation);
@@ -546,7 +572,8 @@ class FormFlowTest extends UnitTestCase {
 	/**
 	 * @dataProvider dataBooleanSetter
 	 */
-	public function testSetIsHandleFileUploads($expectedValue, $handleFileUploads) {
+	public function testSetIsHandleFileUploads($expectedValue, $handleFileUploads)
+	{
 		$flow = $this->getMockedFlow();
 
 		$flow->setHandleFileUploads($handleFileUploads);
@@ -557,7 +584,8 @@ class FormFlowTest extends UnitTestCase {
 	/**
 	 * @dataProvider dataSetGetHandleFileUploadsTempDir
 	 */
-	public function testSetGetHandleFileUploadsTempDir($expectedValue, $handleFileUploadsTempDir) {
+	public function testSetGetHandleFileUploadsTempDir($expectedValue, $handleFileUploadsTempDir)
+	{
 		$flow = $this->getMockedFlow();
 
 		$flow->setHandleFileUploadsTempDir($handleFileUploadsTempDir);
@@ -565,7 +593,8 @@ class FormFlowTest extends UnitTestCase {
 		$this->assertEquals($expectedValue, $flow->getHandleFileUploadsTempDir());
 	}
 
-	public function dataSetGetHandleFileUploadsTempDir() {
+	public function dataSetGetHandleFileUploadsTempDir()
+	{
 		return [
 			[null, null],
 			['1', 1],
@@ -576,7 +605,8 @@ class FormFlowTest extends UnitTestCase {
 	/**
 	 * @dataProvider dataBooleanSetter
 	 */
-	public function testSetIsAllowRedirectAfterSubmit($expectedValue, $allowRedirectAfterSubmit) {
+	public function testSetIsAllowRedirectAfterSubmit($expectedValue, $allowRedirectAfterSubmit)
+	{
 		$flow = $this->getMockedFlow();
 
 		$flow->setAllowRedirectAfterSubmit($allowRedirectAfterSubmit);
@@ -584,7 +614,8 @@ class FormFlowTest extends UnitTestCase {
 		$this->assertEquals($expectedValue, $flow->isAllowRedirectAfterSubmit());
 	}
 
-	public function testSetGetDynamicStepNavigationInstanceParameter() {
+	public function testSetGetDynamicStepNavigationInstanceParameter()
+	{
 		$flow = $this->getMockedFlow();
 
 		$dynamicStepNavigationInstanceParameter = 'dsn-instance';
@@ -593,7 +624,8 @@ class FormFlowTest extends UnitTestCase {
 		$this->assertEquals($dynamicStepNavigationInstanceParameter, $flow->getDynamicStepNavigationInstanceParameter());
 	}
 
-	public function testSetGetDynamicStepNavigationStepParameter() {
+	public function testSetGetDynamicStepNavigationStepParameter()
+	{
 		$flow = $this->getMockedFlow();
 
 		$dynamicStepNavigationStepParameter = 'dsn-step';
@@ -602,14 +634,16 @@ class FormFlowTest extends UnitTestCase {
 		$this->assertEquals($dynamicStepNavigationStepParameter, $flow->getDynamicStepNavigationStepParameter());
 	}
 
-	public function testGetFormData_notAvailable() {
+	public function testGetFormData_notAvailable()
+	{
 		$this->expectException(\RuntimeException::class);
 		$this->expectExceptionMessage('Form data has not been evaluated yet and thus cannot be accessed.');
 
 		$this->getMockedFlow()->getFormData();
 	}
 
-	public function testGetCurrentStepNumber_notAvailable() {
+	public function testGetCurrentStepNumber_notAvailable()
+	{
 		$this->expectException(\RuntimeException::class);
 		$this->expectExceptionMessage('The current step has not been determined yet and thus cannot be accessed.');
 
@@ -619,7 +653,8 @@ class FormFlowTest extends UnitTestCase {
 	/**
 	 * @dataProvider dataApplySkipping
 	 */
-	public function testApplySkipping($stepCount, array $stepsSkipped, $stepNumber, $direction, $expectedTargetStep) {
+	public function testApplySkipping($stepCount, array $stepsSkipped, $stepNumber, $direction, $expectedTargetStep)
+	{
 		$flow = $this->getFlowWithMockedMethods(['loadStepsConfig']);
 
 		$stepsConfig = [];
@@ -642,7 +677,8 @@ class FormFlowTest extends UnitTestCase {
 		$this->assertSame($expectedTargetStep, $method->invoke($flow, $stepNumber, $direction));
 	}
 
-	public function dataApplySkipping() {
+	public function dataApplySkipping()
+	{
 		return [
 			[2, [2], 2, 1, 1],
 			[2, [1], 2, -1, 2],
@@ -655,7 +691,8 @@ class FormFlowTest extends UnitTestCase {
 	/**
 	 * @dataProvider dataApplySkipping_invalidArguments
 	 */
-	public function testApplySkipping_invalidArguments($direction) {
+	public function testApplySkipping_invalidArguments($direction)
+	{
 		$this->expectException(\InvalidArgumentException::class);
 
 		$flow = $this->getMockedFlow();
@@ -666,7 +703,8 @@ class FormFlowTest extends UnitTestCase {
 		$method->invoke($flow, 1, $direction);
 	}
 
-	public function dataApplySkipping_invalidArguments() {
+	public function dataApplySkipping_invalidArguments()
+	{
 		return [
 			[2],
 			[-2],
@@ -674,7 +712,8 @@ class FormFlowTest extends UnitTestCase {
 		];
 	}
 
-	public function testApplySkipping_bouncing() {
+	public function testApplySkipping_bouncing()
+	{
 		$this->expectException(AllStepsSkippedException::class);
 		$this->expectExceptionMessage('All steps are marked as skipped. Please check the flow to make sure at least one step is not skipped.');
 
@@ -699,13 +738,15 @@ class FormFlowTest extends UnitTestCase {
 	/**
 	 * @dataProvider dataGetStep_invalidArguments
 	 */
-	public function testGetStep_invalidArguments($stepNumber) {
+	public function testGetStep_invalidArguments($stepNumber)
+	{
 		$this->expectException(InvalidTypeException::class);
 
 		$this->getMockedFlow()->getStep($stepNumber);
 	}
 
-	public function dataGetStep_invalidArguments() {
+	public function dataGetStep_invalidArguments()
+	{
 		return [
 			['a'],
 			[null],
@@ -715,20 +756,23 @@ class FormFlowTest extends UnitTestCase {
 	/**
 	 * @dataProvider dataGetStep_invalidStep
 	 */
-	public function testGetStep_invalidStep($stepNumber) {
+	public function testGetStep_invalidStep($stepNumber)
+	{
 		$this->expectException(\OutOfBoundsException::class);
 		$this->expectExceptionMessage('The step "2" does not exist.');
 
 		$this->getMockedFlow()->getStep($stepNumber);
 	}
 
-	public function dataGetStep_invalidStep() {
+	public function dataGetStep_invalidStep()
+	{
 		return [
 			[2],
 		];
 	}
 
-	public function testGetCurrentStepLabel() {
+	public function testGetCurrentStepLabel()
+	{
 		$label = 'step1';
 
 		$flow = $this->getFlowWithMockedMethods(['loadStepsConfig']);
@@ -748,7 +792,8 @@ class FormFlowTest extends UnitTestCase {
 		$this->assertEquals($label, $flow->getCurrentStepLabel());
 	}
 
-	public function testLoadStepsConfig() {
+	public function testLoadStepsConfig()
+	{
 		$flow = $this->getMockedFlow();
 
 		$method = new \ReflectionMethod($flow, 'loadStepsConfig');
@@ -757,7 +802,8 @@ class FormFlowTest extends UnitTestCase {
 		$this->assertEquals([], $method->invoke($flow));
 	}
 
-	public function dataBooleanSetter() {
+	public function dataBooleanSetter()
+	{
 		return [
 			[true, true],
 			[false, false],
@@ -770,7 +816,8 @@ class FormFlowTest extends UnitTestCase {
 	/**
 	 * @dataProvider dataSaveCurrentStepData
 	 */
-	public function testSaveCurrentStepData(bool $useInputBag) {
+	public function testSaveCurrentStepData(bool $useInputBag)
+	{
 		$flow = $this->getFlowWithMockedMethods(['getRequest', 'getCurrentStepNumber', 'retrieveStepData', 'saveStepData']);
 
 		$formData = ['aField' => 'aValue'];
@@ -816,20 +863,19 @@ class FormFlowTest extends UnitTestCase {
 			->add('aField', TextType::class)
 			->setMethod('POST')
 			->setRequestHandler(new HttpFoundationRequestHandler())
-			->getForm()
-		;
+			->getForm();
 
 		$this->assertTrue($flow->isValid($form));
 
 		$flow->saveCurrentStepData($form);
 	}
 
-	public function dataSaveCurrentStepData() {
+	public function dataSaveCurrentStepData()
+	{
 		yield [false];
 
 		if (class_exists(InputBag::class)) {
 			yield [true];
 		}
 	}
-
 }

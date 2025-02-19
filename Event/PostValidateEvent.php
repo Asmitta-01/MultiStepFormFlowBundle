@@ -1,8 +1,8 @@
 <?php
 
-namespace Craue\FormFlowBundle\Event;
+namespace Asmitta\FormFlowBundle\Event;
 
-use Craue\FormFlowBundle\Form\FormFlowInterface;
+use Asmitta\FormFlowBundle\Form\FormFlowInterface;
 
 /**
  * Is called once for the current step after validating the form data.
@@ -12,7 +12,8 @@ use Craue\FormFlowBundle\Form\FormFlowInterface;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class PostValidateEvent extends FormFlowEvent {
+class PostValidateEvent extends FormFlowEvent
+{
 
 	/**
 	 * @var mixed
@@ -23,7 +24,8 @@ class PostValidateEvent extends FormFlowEvent {
 	 * @param FormFlowInterface $flow
 	 * @param mixed $formData
 	 */
-	public function __construct(FormFlowInterface $flow, $formData) {
+	public function __construct(FormFlowInterface $flow, $formData)
+	{
 		parent::__construct($flow);
 		$this->formData = $formData;
 	}
@@ -31,8 +33,8 @@ class PostValidateEvent extends FormFlowEvent {
 	/**
 	 * @return mixed
 	 */
-	public function getFormData() {
+	public function getFormData()
+	{
 		return $this->formData;
 	}
-
 }

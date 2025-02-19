@@ -1,8 +1,8 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests\Form;
+namespace Asmitta\FormFlowBundle\Tests\Form;
 
-use Craue\FormFlowBundle\Tests\UnitTestCase;
+use Asmitta\FormFlowBundle\Tests\UnitTestCase;
 
 /**
  * Tests for BC.
@@ -18,7 +18,7 @@ class FormFlowBcMethodsTest extends UnitTestCase
 {
 
 	/**
-	 * @expectedDeprecation Method Craue\FormFlowBundle\Form\FormFlow::getCurrentStep is deprecated since AsmittaFormFlowBundle 2.0. Use method getCurrentStepNumber instead.
+	 * @expectedDeprecation Method Asmitta\FormFlowBundle\Form\FormFlow::getCurrentStep is deprecated since AsmittaFormFlowBundle 2.0. Use method getCurrentStepNumber instead.
 	 */
 	public function testBcMethodDelegation_getCurrentStep()
 	{
@@ -33,7 +33,7 @@ class FormFlowBcMethodsTest extends UnitTestCase
 	}
 
 	/**
-	 * @expectedDeprecation Method Craue\FormFlowBundle\Form\FormFlow::getCurrentStepDescription is deprecated since AsmittaFormFlowBundle 2.0. Use method getCurrentStepLabel instead.
+	 * @expectedDeprecation Method Asmitta\FormFlowBundle\Form\FormFlow::getCurrentStepDescription is deprecated since AsmittaFormFlowBundle 2.0. Use method getCurrentStepLabel instead.
 	 */
 	public function testBcMethodDelegation_getCurrentStepDescription()
 	{
@@ -48,7 +48,7 @@ class FormFlowBcMethodsTest extends UnitTestCase
 	}
 
 	/**
-	 * @expectedDeprecation Method Craue\FormFlowBundle\Form\FormFlow::getMaxSteps is deprecated since AsmittaFormFlowBundle 2.0. Use method getStepCount instead.
+	 * @expectedDeprecation Method Asmitta\FormFlowBundle\Form\FormFlow::getMaxSteps is deprecated since AsmittaFormFlowBundle 2.0. Use method getStepCount instead.
 	 */
 	public function testBcMethodDelegation_getMaxSteps()
 	{
@@ -63,7 +63,7 @@ class FormFlowBcMethodsTest extends UnitTestCase
 	}
 
 	/**
-	 * @expectedDeprecation Method Craue\FormFlowBundle\Form\FormFlow::getStepDescriptions is deprecated since AsmittaFormFlowBundle 2.0. Use method getStepLabels instead.
+	 * @expectedDeprecation Method Asmitta\FormFlowBundle\Form\FormFlow::getStepDescriptions is deprecated since AsmittaFormFlowBundle 2.0. Use method getStepLabels instead.
 	 */
 	public function testBcMethodDelegation_getStepDescriptions()
 	{
@@ -78,7 +78,7 @@ class FormFlowBcMethodsTest extends UnitTestCase
 	}
 
 	/**
-	 * @expectedDeprecation Method Craue\FormFlowBundle\Form\FormFlow::getFirstStep is deprecated since AsmittaFormFlowBundle 2.0. Use method getFirstStepNumber instead.
+	 * @expectedDeprecation Method Asmitta\FormFlowBundle\Form\FormFlow::getFirstStep is deprecated since AsmittaFormFlowBundle 2.0. Use method getFirstStepNumber instead.
 	 */
 	public function testBcMethodDelegation_getFirstStep()
 	{
@@ -93,7 +93,7 @@ class FormFlowBcMethodsTest extends UnitTestCase
 	}
 
 	/**
-	 * @expectedDeprecation Method Craue\FormFlowBundle\Form\FormFlow::getLastStep is deprecated since AsmittaFormFlowBundle 2.0. Use method getLastStepNumber instead.
+	 * @expectedDeprecation Method Asmitta\FormFlowBundle\Form\FormFlow::getLastStep is deprecated since AsmittaFormFlowBundle 2.0. Use method getLastStepNumber instead.
 	 */
 	public function testBcMethodDelegation_getLastStep()
 	{
@@ -108,7 +108,7 @@ class FormFlowBcMethodsTest extends UnitTestCase
 	}
 
 	/**
-	 * @expectedDeprecation Method Craue\FormFlowBundle\Form\FormFlow::hasSkipStep is deprecated since AsmittaFormFlowBundle 2.0. Use method isStepSkipped instead.
+	 * @expectedDeprecation Method Asmitta\FormFlowBundle\Form\FormFlow::hasSkipStep is deprecated since AsmittaFormFlowBundle 2.0. Use method isStepSkipped instead.
 	 */
 	public function testBcMethodDelegation_hasSkipStep()
 	{

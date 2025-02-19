@@ -1,6 +1,6 @@
 <?php
 
-namespace Craue\FormFlowBundle\Form;
+namespace Asmitta\FormFlowBundle\Form;
 
 use Symfony\Component\Form\FormTypeInterface;
 
@@ -9,7 +9,8 @@ use Symfony\Component\Form\FormTypeInterface;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-interface StepInterface {
+interface StepInterface
+{
 
 	/**
 	 * @return int
@@ -41,5 +42,4 @@ interface StepInterface {
 	 * @param FormFlowInterface $flow
 	 */
 	function evaluateSkipping($estimatedCurrentStepNumber, FormFlowInterface $flow);
-
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace Craue\FormFlowBundle\Event;
+namespace Asmitta\FormFlowBundle\Event;
 
-use Craue\FormFlowBundle\Form\FormFlowInterface;
+use Asmitta\FormFlowBundle\Form\FormFlowInterface;
 
 /**
  * Is called once after binding all step's saved form data and determining the current step.
@@ -11,7 +11,8 @@ use Craue\FormFlowBundle\Form\FormFlowInterface;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class PostBindFlowEvent extends FormFlowEvent {
+class PostBindFlowEvent extends FormFlowEvent
+{
 
 	/**
 	 * @var mixed
@@ -22,7 +23,8 @@ class PostBindFlowEvent extends FormFlowEvent {
 	 * @param FormFlowInterface $flow
 	 * @param mixed $formData
 	 */
-	public function __construct(FormFlowInterface $flow, $formData) {
+	public function __construct(FormFlowInterface $flow, $formData)
+	{
 		parent::__construct($flow);
 		$this->formData = $formData;
 	}
@@ -30,8 +32,8 @@ class PostBindFlowEvent extends FormFlowEvent {
 	/**
 	 * @return mixed
 	 */
-	public function getFormData() {
+	public function getFormData()
+	{
 		return $this->formData;
 	}
-
 }

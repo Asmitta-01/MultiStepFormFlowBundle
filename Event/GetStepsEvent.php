@@ -1,8 +1,8 @@
 <?php
 
-namespace Craue\FormFlowBundle\Event;
+namespace Asmitta\FormFlowBundle\Event;
 
-use Craue\FormFlowBundle\Form\StepInterface;
+use Asmitta\FormFlowBundle\Form\StepInterface;
 
 /**
  * Is called once to define steps for the flow.
@@ -11,7 +11,8 @@ use Craue\FormFlowBundle\Form\StepInterface;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class GetStepsEvent extends FormFlowEvent {
+class GetStepsEvent extends FormFlowEvent
+{
 
 	/**
 	 * @var StepInterface[]
@@ -21,12 +22,13 @@ class GetStepsEvent extends FormFlowEvent {
 	/**
 	 * @param StepInterface[] $steps
 	 */
-	public function setSteps(array $steps) {
+	public function setSteps(array $steps)
+	{
 		$this->steps = $steps;
 	}
 
-	public function getSteps() {
+	public function getSteps()
+	{
 		return $this->steps;
 	}
-
 }

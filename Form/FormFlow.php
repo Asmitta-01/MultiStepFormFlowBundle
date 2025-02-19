@@ -1,20 +1,20 @@
 <?php
 
-namespace Craue\FormFlowBundle\Form;
+namespace Asmitta\FormFlowBundle\Form;
 
-use Craue\FormFlowBundle\Event\FlowExpiredEvent;
-use Craue\FormFlowBundle\Event\FormFlowEvent;
-use Craue\FormFlowBundle\Event\GetStepsEvent;
-use Craue\FormFlowBundle\Event\PostBindFlowEvent;
-use Craue\FormFlowBundle\Event\PostBindRequestEvent;
-use Craue\FormFlowBundle\Event\PostBindSavedDataEvent;
-use Craue\FormFlowBundle\Event\PostValidateEvent;
-use Craue\FormFlowBundle\Event\PreBindEvent;
-use Craue\FormFlowBundle\Event\PreviousStepInvalidEvent;
-use Craue\FormFlowBundle\Exception\AllStepsSkippedException;
-use Craue\FormFlowBundle\Exception\InvalidTypeException;
-use Craue\FormFlowBundle\Storage\DataManagerInterface;
-use Craue\FormFlowBundle\Util\StringUtil;
+use Asmitta\FormFlowBundle\Event\FlowExpiredEvent;
+use Asmitta\FormFlowBundle\Event\FormFlowEvent;
+use Asmitta\FormFlowBundle\Event\GetStepsEvent;
+use Asmitta\FormFlowBundle\Event\PostBindFlowEvent;
+use Asmitta\FormFlowBundle\Event\PostBindRequestEvent;
+use Asmitta\FormFlowBundle\Event\PostBindSavedDataEvent;
+use Asmitta\FormFlowBundle\Event\PostValidateEvent;
+use Asmitta\FormFlowBundle\Event\PreBindEvent;
+use Asmitta\FormFlowBundle\Event\PreviousStepInvalidEvent;
+use Asmitta\FormFlowBundle\Exception\AllStepsSkippedException;
+use Asmitta\FormFlowBundle\Exception\InvalidTypeException;
+use Asmitta\FormFlowBundle\Storage\DataManagerInterface;
+use Asmitta\FormFlowBundle\Util\StringUtil;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormFactoryInterface;

@@ -1,20 +1,22 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests\IntegrationTestBundle\Form;
+namespace Asmitta\FormFlowBundle\Tests\IntegrationTestBundle\Form;
 
-use Craue\FormFlowBundle\Form\FormFlow;
+use Asmitta\FormFlowBundle\Form\FormFlow;
 
 /**
  * @author Christian Raue <christian.raue@gmail.com>
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class Issue64Flow extends FormFlow {
+class Issue64Flow extends FormFlow
+{
 
 	/**
 	 * {@inheritDoc}
 	 */
-	protected function loadStepsConfig() {
+	protected function loadStepsConfig()
+	{
 		$formType = Issue64Form::class;
 
 		return [
@@ -36,5 +38,4 @@ class Issue64Flow extends FormFlow {
 			],
 		];
 	}
-
 }

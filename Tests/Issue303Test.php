@@ -1,8 +1,8 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests;
+namespace Asmitta\FormFlowBundle\Tests;
 
-use Craue\FormFlowBundle\Tests\IntegrationTestBundle\Form\Issue303Flow;
+use Asmitta\FormFlowBundle\Tests\IntegrationTestBundle\Form\Issue303Flow;
 
 /**
  * @group integration
@@ -13,12 +13,14 @@ use Craue\FormFlowBundle\Tests\IntegrationTestBundle\Form\Issue303Flow;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class Issue303Test extends IntegrationTestCase {
+class Issue303Test extends IntegrationTestCase
+{
 
 	/**
 	 * @dataProvider dataIssue303
 	 */
-	public function testIssue303($stepNumberToSkipInBetween, $buttonToPressInBetween, $expectedTargetStep) {
+	public function testIssue303($stepNumberToSkipInBetween, $buttonToPressInBetween, $expectedTargetStep)
+	{
 		Issue303Flow::resetSkips();
 
 		$crawler = static::$client->request('GET', $this->url('_FormFlow_issue303'));
@@ -36,7 +38,8 @@ class Issue303Test extends IntegrationTestCase {
 		$this->assertCurrentStepNumber($expectedTargetStep, $crawler);
 	}
 
-	public function dataIssue303() {
+	public function dataIssue303()
+	{
 		return [
 			[2, 'start over', 1],
 			[1, 'back', 2],
@@ -45,5 +48,4 @@ class Issue303Test extends IntegrationTestCase {
 			[2, 'back', 1],
 		];
 	}
-
 }

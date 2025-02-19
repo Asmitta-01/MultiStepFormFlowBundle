@@ -1,8 +1,8 @@
 <?php
 
-namespace Craue\FormFlowBundle\Event;
+namespace Asmitta\FormFlowBundle\Event;
 
-use Craue\FormFlowBundle\Form\FormFlowInterface;
+use Asmitta\FormFlowBundle\Form\FormFlowInterface;
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**
@@ -10,7 +10,8 @@ use Symfony\Contracts\EventDispatcher\Event;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-abstract class FormFlowEvent extends Event {
+abstract class FormFlowEvent extends Event
+{
 
 	/**
 	 * @var FormFlowInterface
@@ -20,15 +21,16 @@ abstract class FormFlowEvent extends Event {
 	/**
 	 * @param FormFlowInterface $flow
 	 */
-	public function __construct(FormFlowInterface $flow) {
+	public function __construct(FormFlowInterface $flow)
+	{
 		$this->flow = $flow;
 	}
 
 	/**
 	 * @return FormFlowInterface
 	 */
-	public function getFlow() {
+	public function getFlow()
+	{
 		return $this->flow;
 	}
-
 }

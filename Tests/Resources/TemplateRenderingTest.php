@@ -1,11 +1,11 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests\Resources;
+namespace Asmitta\FormFlowBundle\Tests\Resources;
 
-use Craue\FormFlowBundle\Form\FormFlow;
-use Craue\FormFlowBundle\Storage\DataManager;
-use Craue\FormFlowBundle\Storage\SessionStorage;
-use Craue\FormFlowBundle\Tests\IntegrationTestCase;
+use Asmitta\FormFlowBundle\Form\FormFlow;
+use Asmitta\FormFlowBundle\Storage\DataManager;
+use Asmitta\FormFlowBundle\Storage\SessionStorage;
+use Asmitta\FormFlowBundle\Tests\IntegrationTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;

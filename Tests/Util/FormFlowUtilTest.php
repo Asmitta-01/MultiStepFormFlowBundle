@@ -1,9 +1,9 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests\Util;
+namespace Asmitta\FormFlowBundle\Tests\Util;
 
-use Craue\FormFlowBundle\Tests\UnitTestCase;
-use Craue\FormFlowBundle\Util\FormFlowUtil;
+use Asmitta\FormFlowBundle\Tests\UnitTestCase;
+use Asmitta\FormFlowBundle\Util\FormFlowUtil;
 
 /**
  * @group unit
@@ -12,7 +12,8 @@ use Craue\FormFlowBundle\Util\FormFlowUtil;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class FormFlowUtilTest extends UnitTestCase {
+class FormFlowUtilTest extends UnitTestCase
+{
 
 	/**
 	 * @var FormFlowUtil
@@ -22,11 +23,13 @@ class FormFlowUtilTest extends UnitTestCase {
 	/**
 	 * {@inheritDoc}
 	 */
-	protected function setUp() : void {
+	protected function setUp(): void
+	{
 		$this->util = new FormFlowUtil();
 	}
 
-	public function testAddRouteParameters() {
+	public function testAddRouteParameters()
+	{
 		$flow = $this->getFlowWithMockedMethods(['loadStepsConfig']);
 
 		$flow
@@ -48,7 +51,8 @@ class FormFlowUtilTest extends UnitTestCase {
 		$this->assertEquals(['key' => 'value', 'instance' => $instanceId, 'step' => 1], $actualParameters);
 	}
 
-	public function testAddRouteParameters_explicitStepNumber() {
+	public function testAddRouteParameters_explicitStepNumber()
+	{
 		$flow = $this->getMockedFlow();
 
 		$instanceId = 'xyz';
@@ -59,12 +63,12 @@ class FormFlowUtilTest extends UnitTestCase {
 		$this->assertEquals(['key' => 'value', 'instance' => $instanceId, 'step' => 5], $actualParameters);
 	}
 
-	public function testRemoveRouteParameters() {
+	public function testRemoveRouteParameters()
+	{
 		$flow = $this->getMockedFlow();
 
 		$actualParameters = $this->util->removeRouteParameters(['key' => 'value', 'instance' => 'xyz', 'step' => 2], $flow);
 
 		$this->assertEquals(['key' => 'value'], $actualParameters);
 	}
-
 }

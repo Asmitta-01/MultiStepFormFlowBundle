@@ -1,6 +1,6 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests;
+namespace Asmitta\FormFlowBundle\Tests;
 
 /**
  * @group integration
@@ -11,9 +11,11 @@ namespace Craue\FormFlowBundle\Tests;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class Issue87Test extends IntegrationTestCase {
+class Issue87Test extends IntegrationTestCase
+{
 
-	public function testIssue87() {
+	public function testIssue87()
+	{
 		$crawler = static::$client->request('GET', $this->url('_FormFlow_issue87'));
 		$this->assertSame(200, static::$client->getResponse()->getStatusCode());
 
@@ -34,5 +36,4 @@ class Issue87Test extends IntegrationTestCase {
 		// make sure we actually arrived at step 2
 		$this->assertCurrentStepNumber(2, $crawler);
 	}
-
 }

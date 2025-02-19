@@ -1,8 +1,8 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests\Exception;
+namespace Asmitta\FormFlowBundle\Tests\Exception;
 
-use Craue\FormFlowBundle\Exception\InvalidTypeException;
+use Asmitta\FormFlowBundle\Exception\InvalidTypeException;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -10,12 +10,14 @@ use PHPUnit\Framework\TestCase;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class InvalidTypeExceptionTest extends TestCase {
+class InvalidTypeExceptionTest extends TestCase
+{
 
 	/**
 	 * @dataProvider dataExceptionMessage
 	 */
-	public function testExceptionMessage($expectedMessage, $value, $allowedType) {
+	public function testExceptionMessage($expectedMessage, $value, $allowedType)
+	{
 		try {
 			throw new InvalidTypeException($value, $allowedType);
 		} catch (InvalidTypeException $e) {
@@ -23,7 +25,8 @@ class InvalidTypeExceptionTest extends TestCase {
 		}
 	}
 
-	public function dataExceptionMessage() {
+	public function dataExceptionMessage()
+	{
 		return [
 			['Expected argument of type "A", but "string" given.', 'test', 'A'],
 			['Expected argument of either type "A" or "B", but "string" given.', 'test', ['A', 'B']],
@@ -31,5 +34,4 @@ class InvalidTypeExceptionTest extends TestCase {
 			['Expected argument of either type "A", "B", "C", or "D", but "string" given.', 'test', ['A', 'B', 'C', 'D']],
 		];
 	}
-
 }

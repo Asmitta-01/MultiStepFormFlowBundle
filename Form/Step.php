@@ -1,9 +1,9 @@
 <?php
 
-namespace Craue\FormFlowBundle\Form;
+namespace Asmitta\FormFlowBundle\Form;
 
-use Craue\FormFlowBundle\Exception\InvalidTypeException;
-use Craue\FormFlowBundle\Exception\StepLabelCallableInvalidReturnValueException;
+use Asmitta\FormFlowBundle\Exception\InvalidTypeException;
+use Asmitta\FormFlowBundle\Exception\StepLabelCallableInvalidReturnValueException;
 use Symfony\Component\Form\FormTypeInterface;
 
 /**

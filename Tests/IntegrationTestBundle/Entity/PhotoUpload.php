@@ -1,6 +1,6 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests\IntegrationTestBundle\Entity;
+namespace Asmitta\FormFlowBundle\Tests\IntegrationTestBundle\Entity;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -11,7 +11,8 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class PhotoUpload {
+class PhotoUpload
+{
 
 	/**
 	 * @var UploadedFile
@@ -23,17 +24,19 @@ class PhotoUpload {
 	 */
 	public $comment;
 
-	public function getPhotoDataBase64Encoded() {
+	public function getPhotoDataBase64Encoded()
+	{
 		return base64_encode(file_get_contents($this->photo->getPathname()));
 	}
 
-	public function getPhotoMimeType() {
+	public function getPhotoMimeType()
+	{
 		return $this->photo->getMimeType();
 	}
 
-	public static function loadValidatorMetadata(ClassMetadata $metadata) : void {
+	public static function loadValidatorMetadata(ClassMetadata $metadata): void
+	{
 		$metadata->addPropertyConstraint('photo', new Assert\NotNull(['groups' => 'flow_photoUpload_step1']));
 		$metadata->addPropertyConstraint('photo', new Assert\Image(['groups' => 'flow_photoUpload_step1']));
 	}
-
 }

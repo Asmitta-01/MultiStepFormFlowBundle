@@ -1,8 +1,8 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests\Form;
+namespace Asmitta\FormFlowBundle\Tests\Form;
 
-use Craue\FormFlowBundle\Form\Step;
+use Asmitta\FormFlowBundle\Form\Step;
 use PHPUnit\Framework\TestCase;
 
 /**

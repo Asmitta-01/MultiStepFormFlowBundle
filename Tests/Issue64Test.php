@@ -1,6 +1,6 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests;
+namespace Asmitta\FormFlowBundle\Tests;
 
 /**
  * @group integration
@@ -11,9 +11,11 @@ namespace Craue\FormFlowBundle\Tests;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class Issue64Test extends IntegrationTestCase {
+class Issue64Test extends IntegrationTestCase
+{
 
-	public function testIssue64() {
+	public function testIssue64()
+	{
 		$crawler = static::$client->request('GET', $this->url('_FormFlow_issue64'));
 		$this->assertSame(200, static::$client->getResponse()->getStatusCode());
 		$this->assertCurrentStepNumber(1, $crawler);
@@ -48,5 +50,4 @@ class Issue64Test extends IntegrationTestCase {
 		static::$client->submit($form);
 		$this->assertJsonResponse('{"sub":{"prop1":"foo","prop2":"baz"}}');
 	}
-
 }

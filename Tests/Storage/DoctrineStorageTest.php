@@ -1,9 +1,9 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests\Storage;
+namespace Asmitta\FormFlowBundle\Tests\Storage;
 
-use Craue\FormFlowBundle\Storage\DoctrineStorage;
-use Craue\FormFlowBundle\Storage\StorageKeyGeneratorInterface;
+use Asmitta\FormFlowBundle\Storage\DoctrineStorage;
+use Asmitta\FormFlowBundle\Storage\StorageKeyGeneratorInterface;
 use Doctrine\DBAL\Configuration;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
@@ -19,7 +19,8 @@ use Doctrine\DBAL\Tools\DsnParser;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class DoctrineStorageTest extends AbstractStorageTest {
+class DoctrineStorageTest extends AbstractStorageTest
+{
 
 	/**
 	 * @var Connection
@@ -29,7 +30,8 @@ class DoctrineStorageTest extends AbstractStorageTest {
 	/**
 	 * {@inheritDoc}
 	 */
-	protected function getStorageImplementation() {
+	protected function getStorageImplementation()
+	{
 		// TODO remove $configuration variable as soon as DBAL >= 4 is required
 		$configuration = new Configuration();
 
@@ -48,7 +50,7 @@ class DoctrineStorageTest extends AbstractStorageTest {
 				'mysql'      => 'pdo_mysql',
 				'pgsql'      => 'pdo_pgsql',
 				'sqlite'     => 'pdo_sqlite',
-				]))->parse($dsn)
+			]))->parse($dsn)
 			: ['url' => $dsn];
 
 		$this->conn = DriverManager::getConnection($params, $configuration);
@@ -63,7 +65,8 @@ class DoctrineStorageTest extends AbstractStorageTest {
 		return new DoctrineStorage($this->conn, $generator);
 	}
 
-	protected function setUp() : void {
+	protected function setUp(): void
+	{
 		parent::setUp();
 
 		// TODO just call `createSchemaManager()` as soon as DBAL >= 3.1 is required
@@ -79,16 +82,17 @@ class DoctrineStorageTest extends AbstractStorageTest {
 	 * Ensure that quoted data is properly handled by DBAL.
 	 * @dataProvider dataSetGet_stringsContainQuotes
 	 */
-	public function testSetGet_stringsContainQuotes($key, $value) {
+	public function testSetGet_stringsContainQuotes($key, $value)
+	{
 		$this->storage->set($key, $value);
 		$this->assertSame($value, $this->storage->get($key));
 	}
 
-	public function dataSetGet_stringsContainQuotes() {
+	public function dataSetGet_stringsContainQuotes()
+	{
 		return [
 			["f'oo", "b'ar"],
 			['f"oo', 'b"ar'],
 		];
 	}
-
 }

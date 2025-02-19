@@ -1,6 +1,6 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests\IntegrationTestBundle\DependencyInjection\Compiler;
+namespace Asmitta\FormFlowBundle\Tests\IntegrationTestBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;

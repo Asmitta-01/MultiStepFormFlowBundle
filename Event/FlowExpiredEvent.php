@@ -1,8 +1,8 @@
 <?php
 
-namespace Craue\FormFlowBundle\Event;
+namespace Asmitta\FormFlowBundle\Event;
 
-use Craue\FormFlowBundle\Form\FormFlowInterface;
+use Asmitta\FormFlowBundle\Form\FormFlowInterface;
 use Symfony\Component\Form\FormInterface;
 
 /**
@@ -12,7 +12,8 @@ use Symfony\Component\Form\FormInterface;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class FlowExpiredEvent extends FormFlowEvent {
+class FlowExpiredEvent extends FormFlowEvent
+{
 
 	/**
 	 * @var FormInterface
@@ -23,7 +24,8 @@ class FlowExpiredEvent extends FormFlowEvent {
 	 * @param FormFlowInterface $flow
 	 * @param FormInterface $currentStepForm
 	 */
-	public function __construct(FormFlowInterface $flow, FormInterface $currentStepForm) {
+	public function __construct(FormFlowInterface $flow, FormInterface $currentStepForm)
+	{
 		parent::__construct($flow);
 		$this->currentStepForm = $currentStepForm;
 	}
@@ -31,8 +33,8 @@ class FlowExpiredEvent extends FormFlowEvent {
 	/**
 	 * @return FormInterface
 	 */
-	public function getCurrentStepForm() {
+	public function getCurrentStepForm()
+	{
 		return $this->currentStepForm;
 	}
-
 }

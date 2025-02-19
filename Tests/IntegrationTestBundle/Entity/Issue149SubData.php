@@ -1,6 +1,6 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests\IntegrationTestBundle\Entity;
+namespace Asmitta\FormFlowBundle\Tests\IntegrationTestBundle\Entity;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -9,7 +9,8 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class Issue149SubData {
+class Issue149SubData
+{
 
 	/**
 	 * @var UploadedFile
@@ -20,5 +21,4 @@ class Issue149SubData {
 	 * @var string
 	 */
 	public $title;
-
 }

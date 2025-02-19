@@ -1,10 +1,10 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests\IntegrationTestBundle\Form;
+namespace Asmitta\FormFlowBundle\Tests\IntegrationTestBundle\Form;
 
-use Craue\FormFlowBundle\Event\PreviousStepInvalidEvent;
-use Craue\FormFlowBundle\Form\FormFlow;
-use Craue\FormFlowBundle\Form\FormFlowEvents;
+use Asmitta\FormFlowBundle\Event\PreviousStepInvalidEvent;
+use Asmitta\FormFlowBundle\Form\FormFlow;
+use Asmitta\FormFlowBundle\Form\FormFlowEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -13,14 +13,16 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class RevalidatePreviousStepsFlow extends FormFlow implements EventSubscriberInterface {
+class RevalidatePreviousStepsFlow extends FormFlow implements EventSubscriberInterface
+{
 
 	use LogEventCallsTrait;
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function setEventDispatcher(EventDispatcherInterface $dispatcher) {
+	public function setEventDispatcher(EventDispatcherInterface $dispatcher)
+	{
 		parent::setEventDispatcher($dispatcher);
 
 		$dispatcher->removeSubscriber($this);
@@ -30,7 +32,8 @@ class RevalidatePreviousStepsFlow extends FormFlow implements EventSubscriberInt
 	/**
 	 * {@inheritDoc}
 	 */
-	public static function getSubscribedEvents() : array {
+	public static function getSubscribedEvents(): array
+	{
 		return [
 			FormFlowEvents::PREVIOUS_STEP_INVALID => 'onPreviousStepInvalid',
 		];
@@ -39,7 +42,8 @@ class RevalidatePreviousStepsFlow extends FormFlow implements EventSubscriberInt
 	/**
 	 * {@inheritDoc}
 	 */
-	protected function loadStepsConfig() {
+	protected function loadStepsConfig()
+	{
 		return [
 			[
 				'label' => 'step1',
@@ -56,18 +60,19 @@ class RevalidatePreviousStepsFlow extends FormFlow implements EventSubscriberInt
 	/**
 	 * {@inheritDoc}
 	 */
-	public function bind($formData) {
+	public function bind($formData)
+	{
 		$this->clearLoggedEventCalls();
 
 		parent::bind($formData);
 	}
 
-	public function onPreviousStepInvalid(PreviousStepInvalidEvent $event) {
+	public function onPreviousStepInvalid(PreviousStepInvalidEvent $event)
+	{
 		if ($event->getFlow() !== $this) {
 			return;
 		}
 
 		$this->logEventCall('onPreviousStepInvalid #' . $event->getInvalidStepNumber());
 	}
-
 }

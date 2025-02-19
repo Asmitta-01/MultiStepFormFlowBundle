@@ -1,9 +1,9 @@
 <?php
 
-namespace Craue\FormFlowBundle;
+namespace Asmitta\FormFlowBundle;
 
-use Craue\FormFlowBundle\DependencyInjection\Compiler\LegacySessionCompilerPass;
-use Craue\FormFlowBundle\Util\TempFileUtil;
+use Asmitta\FormFlowBundle\DependencyInjection\Compiler\LegacySessionCompilerPass;
+use Asmitta\FormFlowBundle\Util\TempFileUtil;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Bundle\Bundle;

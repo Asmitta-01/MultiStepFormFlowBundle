@@ -1,9 +1,9 @@
 <?php
 
-namespace Craue\FormFlowBundle\Storage;
+namespace Asmitta\FormFlowBundle\Storage;
 
-use Craue\FormFlowBundle\Exception\InvalidTypeException;
-use Craue\FormFlowBundle\Util\TempFileUtil;
+use Asmitta\FormFlowBundle\Exception\InvalidTypeException;
+use Asmitta\FormFlowBundle\Util\TempFileUtil;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
@@ -13,7 +13,8 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class SerializableFile {
+class SerializableFile
+{
 
 	/**
 	 * @var string Base64-encoded content of the original file.
@@ -32,7 +33,8 @@ class SerializableFile {
 	 * @param mixed $file An object meant to be serialized.
 	 * @throws InvalidTypeException If the type of <code>$file</code> is unsupported.
 	 */
-	public function __construct($file) {
+	public function __construct($file)
+	{
 		if (!self::isSupported($file)) {
 			throw new InvalidTypeException($file, UploadedFile::class);
 		}
@@ -48,7 +50,8 @@ class SerializableFile {
 	 * @param string|null $tempDir Directory for storing temporary files. If <code>null</code>, the system's default will be used.
 	 * @return mixed The unserialized object.
 	 */
-	public function getAsFile($tempDir = null) {
+	public function getAsFile($tempDir = null)
+	{
 		if ($tempDir === null) {
 			$tempDir = sys_get_temp_dir();
 		}
@@ -66,11 +69,13 @@ class SerializableFile {
 	 * @param mixed $file
 	 * @return bool
 	 */
-	public static function isSupported($file) {
+	public static function isSupported($file)
+	{
 		return $file instanceof UploadedFile;
 	}
 
-	public function __serialize() : array {
+	public function __serialize(): array
+	{
 		return [
 			'content' => $this->content,
 			'type' => $this->type,
@@ -79,7 +84,8 @@ class SerializableFile {
 		];
 	}
 
-	public function __unserialize(array $data) : void {
+	public function __unserialize(array $data): void
+	{
 		// TODO remove for 4.0
 		// handle representation of object which got serialized before `__serialize` method was added
 		if (count(array_diff(array_keys($data), ["\x00*\x00content", "\x00*\x00type", "\x00*\x00clientOriginalName", "\x00*\x00clientMimeType"])) === 0) {
@@ -95,5 +101,4 @@ class SerializableFile {
 		$this->clientOriginalName = $data['clientOriginalName'];
 		$this->clientMimeType = $data['clientMimeType'];
 	}
-
 }

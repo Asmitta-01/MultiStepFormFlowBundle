@@ -1,15 +1,16 @@
 <?php
 
-namespace Craue\FormFlowBundle\Util;
+namespace Asmitta\FormFlowBundle\Util;
 
-use Craue\FormFlowBundle\Exception\InvalidTypeException;
+use Asmitta\FormFlowBundle\Exception\InvalidTypeException;
 
 /**
  * @author Christian Raue <christian.raue@gmail.com>
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-abstract class StringUtil {
+abstract class StringUtil
+{
 
 	private function __construct() {}
 
@@ -17,7 +18,8 @@ abstract class StringUtil {
 	 * @param int $length
 	 * @return string
 	 */
-	public static function generateRandomString($length) {
+	public static function generateRandomString($length)
+	{
 		if (!is_int($length)) {
 			throw new InvalidTypeException($length, 'int');
 		}
@@ -34,7 +36,8 @@ abstract class StringUtil {
 	 * @param int $length
 	 * @return bool
 	 */
-	public static function isRandomString($input, $length) {
+	public static function isRandomString($input, $length)
+	{
 		if (!is_string($input)) {
 			throw new InvalidTypeException($input, 'string');
 		}
@@ -54,7 +57,8 @@ abstract class StringUtil {
 	 * @param string $fqcn FQCN
 	 * @return string|null flow name or null if not a FQCN
 	 */
-	public static function fqcnToFlowName($fqcn) {
+	public static function fqcnToFlowName($fqcn)
+	{
 		if (!is_string($fqcn)) {
 			throw new InvalidTypeException($fqcn, 'string');
 		}
@@ -65,5 +69,4 @@ abstract class StringUtil {
 
 		return null;
 	}
-
 }

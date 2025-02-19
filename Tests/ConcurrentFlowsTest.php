@@ -1,6 +1,6 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests;
+namespace Asmitta\FormFlowBundle\Tests;
 
 /**
  * @group integration
@@ -10,15 +10,16 @@ namespace Craue\FormFlowBundle\Tests;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class ConcurrentFlowsTest extends IntegrationTestCase {
+class ConcurrentFlowsTest extends IntegrationTestCase
+{
 
-	protected function setUpClient() {
-	}
+	protected function setUpClient() {}
 
 	/**
 	 * @dataProvider getEnvironmentConfigs
 	 */
-	public function testCreateTopic_concurrentUsageOfTwoFlows($environment, $config) {
+	public function testCreateTopic_concurrentUsageOfTwoFlows($environment, $config)
+	{
 		static::$client = static::createClient(['environment' => $environment, 'config' => $config]);
 		static::$client->followRedirects();
 
@@ -84,5 +85,4 @@ class ConcurrentFlowsTest extends IntegrationTestCase {
 		static::$client->submit($formB);
 		$this->assertJsonResponse('{"title":"question","description":null,"category":"DISCUSSION","comment":null,"details":null}');
 	}
-
 }

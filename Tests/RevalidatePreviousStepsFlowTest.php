@@ -1,9 +1,9 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests;
+namespace Asmitta\FormFlowBundle\Tests;
 
-use Craue\FormFlowBundle\Tests\IntegrationTestBundle\Entity\RevalidatePreviousStepsData;
-use Craue\FormFlowBundle\Tests\IntegrationTestBundle\Form\RevalidatePreviousStepsFlow;
+use Asmitta\FormFlowBundle\Tests\IntegrationTestBundle\Entity\RevalidatePreviousStepsData;
+use Asmitta\FormFlowBundle\Tests\IntegrationTestBundle\Form\RevalidatePreviousStepsFlow;
 
 /**
  * @group integration
@@ -13,24 +13,26 @@ use Craue\FormFlowBundle\Tests\IntegrationTestBundle\Form\RevalidatePreviousStep
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class RevalidatePreviousStepsFlowTest extends IntegrationTestCase {
+class RevalidatePreviousStepsFlowTest extends IntegrationTestCase
+{
 
 	/**
 	 * {@inheritDoc}
 	 */
-	protected function setUp() : void {
+	protected function setUp(): void
+	{
 		parent::setUp();
 
 		RevalidatePreviousStepsData::resetValidationCalls();
 	}
 
-	protected function setUpClient() {
-	}
+	protected function setUpClient() {}
 
 	/**
 	 * @dataProvider getEnvironmentConfigs
 	 */
-	public function testRevalidatePreviousSteps_enabled($environment, $config) {
+	public function testRevalidatePreviousSteps_enabled($environment, $config)
+	{
 		static::$client = static::createClient(['environment' => $environment, 'config' => $config]);
 
 		$crawler = static::$client->request('GET', $this->url('_FormFlow_revalidatePreviousSteps_enabled'));
@@ -61,7 +63,8 @@ class RevalidatePreviousStepsFlowTest extends IntegrationTestCase {
 	/**
 	 * @dataProvider getEnvironmentConfigs
 	 */
-	public function testRevalidatePreviousSteps_disabled($environment, $config) {
+	public function testRevalidatePreviousSteps_disabled($environment, $config)
+	{
 		static::$client = static::createClient(['environment' => $environment, 'config' => $config]);
 
 		$crawler = static::$client->request('GET', $this->url('_FormFlow_revalidatePreviousSteps_disabled'));
@@ -77,11 +80,11 @@ class RevalidatePreviousStepsFlowTest extends IntegrationTestCase {
 		$this->assertCurrentStepNumber(3, $crawler);
 	}
 
-	private function getCalledEvents() {
+	private function getCalledEvents()
+	{
 		$container = static::$kernel->getContainer();
 		$flow = $container->get(RevalidatePreviousStepsFlow::class);
 
 		return $flow->getLoggedEventCalls();
 	}
-
 }

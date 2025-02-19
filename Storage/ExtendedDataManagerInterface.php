@@ -1,6 +1,6 @@
 <?php
 
-namespace Craue\FormFlowBundle\Storage;
+namespace Asmitta\FormFlowBundle\Storage;
 
 /**
  * Extends the base {@link DataManagerInterface} by methods which may be used for custom flow management.
@@ -9,7 +9,8 @@ namespace Craue\FormFlowBundle\Storage;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-interface ExtendedDataManagerInterface extends DataManagerInterface {
+interface ExtendedDataManagerInterface extends DataManagerInterface
+{
 
 	/**
 	 * Note: This method may be used for custom flow management.
@@ -29,5 +30,4 @@ interface ExtendedDataManagerInterface extends DataManagerInterface {
 	 * Note: This method may be used for custom flow management.
 	 */
 	function dropAll();
-
 }

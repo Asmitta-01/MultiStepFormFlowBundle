@@ -1,8 +1,8 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests\Form\Extension;
+namespace Asmitta\FormFlowBundle\Tests\Form\Extension;
 
-use Craue\FormFlowBundle\Form\Extension\FormFlowHiddenFieldExtension;
+use Asmitta\FormFlowBundle\Form\Extension\FormFlowHiddenFieldExtension;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
@@ -13,13 +13,14 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class FormFlowHiddenFieldExtensionTest extends TestCase {
+class FormFlowHiddenFieldExtensionTest extends TestCase
+{
 
-	public function testGetExtendedType() {
+	public function testGetExtendedType()
+	{
 		$extension = new FormFlowHiddenFieldExtension();
 
 		$this->assertSame(HiddenType::class, $extension->getExtendedType());
 		$this->assertSame([HiddenType::class], FormFlowHiddenFieldExtension::getExtendedTypes());
 	}
-
 }

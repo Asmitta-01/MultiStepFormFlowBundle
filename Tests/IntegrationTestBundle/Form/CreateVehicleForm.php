@@ -1,6 +1,6 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests\IntegrationTestBundle\Form;
+namespace Asmitta\FormFlowBundle\Tests\IntegrationTestBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -11,12 +11,14 @@ use Symfony\Component\Form\FormBuilderInterface;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class CreateVehicleForm extends AbstractType {
+class CreateVehicleForm extends AbstractType
+{
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function buildForm(FormBuilderInterface $builder, array $options) : void {
+	public function buildForm(FormBuilderInterface $builder, array $options): void
+	{
 		switch ($options['flow_step']) {
 			case 1:
 				$choices = [2, 4];
@@ -42,8 +44,8 @@ class CreateVehicleForm extends AbstractType {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getBlockPrefix() : string {
+	public function getBlockPrefix(): string
+	{
 		return 'createVehicle';
 	}
-
 }

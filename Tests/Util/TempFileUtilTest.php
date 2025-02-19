@@ -1,8 +1,8 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests\Util;
+namespace Asmitta\FormFlowBundle\Tests\Util;
 
-use Craue\FormFlowBundle\Util\TempFileUtil;
+use Asmitta\FormFlowBundle\Util\TempFileUtil;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -12,9 +12,11 @@ use PHPUnit\Framework\TestCase;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class TempFileUtilTest extends TestCase {
+class TempFileUtilTest extends TestCase
+{
 
-	public function testAddAndRemoveFiles() {
+	public function testAddAndRemoveFiles()
+	{
 		$tempFile = tempnam(sys_get_temp_dir(), 'craue_form_flow_temp_file');
 		$this->assertFileExists($tempFile);
 
@@ -30,11 +32,11 @@ class TempFileUtilTest extends TestCase {
 		$this->assertFileDoesNotExist($tempFile);
 	}
 
-	private function getTempFiles() {
+	private function getTempFiles()
+	{
 		$reflectionClass = new \ReflectionClass(TempFileUtil::class);
 		$staticProperties = $reflectionClass->getStaticProperties();
 
 		return $staticProperties['tempFiles'];
 	}
-
 }

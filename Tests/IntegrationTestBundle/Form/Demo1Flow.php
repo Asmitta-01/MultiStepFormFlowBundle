@@ -1,15 +1,15 @@
 <?php
 
-namespace Craue\FormFlowBundle\Tests\IntegrationTestBundle\Form;
+namespace Asmitta\FormFlowBundle\Tests\IntegrationTestBundle\Form;
 
-use Craue\FormFlowBundle\Event\GetStepsEvent;
-use Craue\FormFlowBundle\Event\PostBindFlowEvent;
-use Craue\FormFlowBundle\Event\PostBindRequestEvent;
-use Craue\FormFlowBundle\Event\PostBindSavedDataEvent;
-use Craue\FormFlowBundle\Event\PostValidateEvent;
-use Craue\FormFlowBundle\Event\PreBindEvent;
-use Craue\FormFlowBundle\Form\FormFlow;
-use Craue\FormFlowBundle\Form\FormFlowEvents;
+use Asmitta\FormFlowBundle\Event\GetStepsEvent;
+use Asmitta\FormFlowBundle\Event\PostBindFlowEvent;
+use Asmitta\FormFlowBundle\Event\PostBindRequestEvent;
+use Asmitta\FormFlowBundle\Event\PostBindSavedDataEvent;
+use Asmitta\FormFlowBundle\Event\PostValidateEvent;
+use Asmitta\FormFlowBundle\Event\PreBindEvent;
+use Asmitta\FormFlowBundle\Form\FormFlow;
+use Asmitta\FormFlowBundle\Form\FormFlowEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -18,14 +18,16 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class Demo1Flow extends FormFlow implements EventSubscriberInterface {
+class Demo1Flow extends FormFlow implements EventSubscriberInterface
+{
 
 	use LogEventCallsTrait;
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function setEventDispatcher(EventDispatcherInterface $dispatcher) {
+	public function setEventDispatcher(EventDispatcherInterface $dispatcher)
+	{
 		parent::setEventDispatcher($dispatcher);
 
 		$dispatcher->removeSubscriber($this);
@@ -35,7 +37,8 @@ class Demo1Flow extends FormFlow implements EventSubscriberInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public static function getSubscribedEvents() : array {
+	public static function getSubscribedEvents(): array
+	{
 		return [
 			FormFlowEvents::PRE_BIND => 'onPreBind',
 			FormFlowEvents::GET_STEPS => 'onGetSteps',
@@ -49,7 +52,8 @@ class Demo1Flow extends FormFlow implements EventSubscriberInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	protected function loadStepsConfig() {
+	protected function loadStepsConfig()
+	{
 		return [
 			[
 				'label' => 'step1',
@@ -74,13 +78,15 @@ class Demo1Flow extends FormFlow implements EventSubscriberInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function bind($formData) {
+	public function bind($formData)
+	{
 		$this->clearLoggedEventCalls();
 
 		parent::bind($formData);
 	}
 
-	public function onPreBind(PreBindEvent $event) {
+	public function onPreBind(PreBindEvent $event)
+	{
 		if ($event->getFlow() !== $this) {
 			return;
 		}
@@ -88,7 +94,8 @@ class Demo1Flow extends FormFlow implements EventSubscriberInterface {
 		$this->logEventCall('onPreBind');
 	}
 
-	public function onGetSteps(GetStepsEvent $event) {
+	public function onGetSteps(GetStepsEvent $event)
+	{
 		if ($event->getFlow() !== $this) {
 			return;
 		}
@@ -96,7 +103,8 @@ class Demo1Flow extends FormFlow implements EventSubscriberInterface {
 		$this->logEventCall('onGetSteps');
 	}
 
-	public function onPostBindSavedData(PostBindSavedDataEvent $event) {
+	public function onPostBindSavedData(PostBindSavedDataEvent $event)
+	{
 		if ($event->getFlow() !== $this) {
 			return;
 		}
@@ -104,7 +112,8 @@ class Demo1Flow extends FormFlow implements EventSubscriberInterface {
 		$this->logEventCall('onPostBindSavedData #' . $event->getStepNumber());
 	}
 
-	public function onPostBindFlow(PostBindFlowEvent $event) {
+	public function onPostBindFlow(PostBindFlowEvent $event)
+	{
 		if ($event->getFlow() !== $this) {
 			return;
 		}
@@ -112,7 +121,8 @@ class Demo1Flow extends FormFlow implements EventSubscriberInterface {
 		$this->logEventCall('onPostBindFlow #' . $event->getFlow()->getCurrentStepNumber());
 	}
 
-	public function onPostBindRequest(PostBindRequestEvent $event) {
+	public function onPostBindRequest(PostBindRequestEvent $event)
+	{
 		if ($event->getFlow() !== $this) {
 			return;
 		}
@@ -120,12 +130,12 @@ class Demo1Flow extends FormFlow implements EventSubscriberInterface {
 		$this->logEventCall('onPostBindRequest');
 	}
 
-	public function onPostValidate(PostValidateEvent $event) {
+	public function onPostValidate(PostValidateEvent $event)
+	{
 		if ($event->getFlow() !== $this) {
 			return;
 		}
 
 		$this->logEventCall('onPostValidate');
 	}
-
 }

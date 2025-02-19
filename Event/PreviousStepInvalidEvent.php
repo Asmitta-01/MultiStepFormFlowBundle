@@ -1,8 +1,8 @@
 <?php
 
-namespace Craue\FormFlowBundle\Event;
+namespace Asmitta\FormFlowBundle\Event;
 
-use Craue\FormFlowBundle\Form\FormFlowInterface;
+use Asmitta\FormFlowBundle\Form\FormFlowInterface;
 use Symfony\Component\Form\FormInterface;
 
 /**
@@ -12,7 +12,8 @@ use Symfony\Component\Form\FormInterface;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class PreviousStepInvalidEvent extends FormFlowEvent {
+class PreviousStepInvalidEvent extends FormFlowEvent
+{
 
 	/**
 	 * @var int
@@ -29,7 +30,8 @@ class PreviousStepInvalidEvent extends FormFlowEvent {
 	 * @param FormInterface $currentStepForm
 	 * @param int $invalidStepNumber
 	 */
-	public function __construct(FormFlowInterface $flow, FormInterface $currentStepForm, $invalidStepNumber) {
+	public function __construct(FormFlowInterface $flow, FormInterface $currentStepForm, $invalidStepNumber)
+	{
 		parent::__construct($flow);
 		$this->currentStepForm = $currentStepForm;
 		$this->invalidStepNumber = $invalidStepNumber;
@@ -38,15 +40,16 @@ class PreviousStepInvalidEvent extends FormFlowEvent {
 	/**
 	 * @return FormInterface
 	 */
-	public function getCurrentStepForm() {
+	public function getCurrentStepForm()
+	{
 		return $this->currentStepForm;
 	}
 
 	/**
 	 * @return int
 	 */
-	public function getInvalidStepNumber() {
+	public function getInvalidStepNumber()
+	{
 		return $this->invalidStepNumber;
 	}
-
 }

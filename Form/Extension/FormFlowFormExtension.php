@@ -1,6 +1,6 @@
 <?php
 
-namespace Craue\FormFlowBundle\Form\Extension;
+namespace Asmitta\FormFlowBundle\Form\Extension;
 
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -14,20 +14,24 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class FormFlowFormExtension extends AbstractTypeExtension {
+class FormFlowFormExtension extends AbstractTypeExtension
+{
 
 	/**
 	 * @return string
 	 */
-	public function getExtendedType() {
+	public function getExtendedType()
+	{
 		return FormType::class;
 	}
 
-	public static function getExtendedTypes() : iterable {
+	public static function getExtendedTypes(): iterable
+	{
 		return [FormType::class];
 	}
 
-	public function configureOptions(OptionsResolver $resolver) : void {
+	public function configureOptions(OptionsResolver $resolver): void
+	{
 		$resolver->setDefined([
 			'flow_instance',
 			'flow_instance_key',
@@ -36,7 +40,8 @@ class FormFlowFormExtension extends AbstractTypeExtension {
 		]);
 	}
 
-	public function buildForm(FormBuilderInterface $builder, array $options) : void {
+	public function buildForm(FormBuilderInterface $builder, array $options): void
+	{
 		if (array_key_exists('flow_instance', $options) && array_key_exists('flow_instance_key', $options)) {
 			$builder->add($options['flow_instance_key'], HiddenType::class, [
 				'data' => $options['flow_instance'],
@@ -53,5 +58,4 @@ class FormFlowFormExtension extends AbstractTypeExtension {
 			]);
 		}
 	}
-
 }
