@@ -15,28 +15,32 @@ use Twig\TwigFunction;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class FormFlowExtension extends AbstractExtension {
+class FormFlowExtension extends AbstractExtension
+{
 
 	/**
 	 * @var FormFlowUtil
 	 */
 	protected $formFlowUtil;
 
-	public function setFormFlowUtil(FormFlowUtil $formFlowUtil) {
+	public function setFormFlowUtil(FormFlowUtil $formFlowUtil)
+	{
 		$this->formFlowUtil = $formFlowUtil;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getName() {
+	public function getName()
+	{
 		return 'craue_formflow';
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getFilters() : array {
+	public function getFilters(): array
+	{
 		return [
 			new TwigFilter('craue_addDynamicStepNavigationParameters', [$this, 'addDynamicStepNavigationParameters']),
 			new TwigFilter('craue_removeDynamicStepNavigationParameters', [$this, 'removeDynamicStepNavigationParameters']),
@@ -49,7 +53,8 @@ class FormFlowExtension extends AbstractExtension {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getFunctions() : array {
+	public function getFunctions(): array
+	{
 		return [
 			new TwigFunction('craue_isStepLinkable', [$this, 'isStepLinkable']),
 		];
@@ -62,7 +67,8 @@ class FormFlowExtension extends AbstractExtension {
 	 * @param int $stepNumber Number of the step the link will be generated for.
 	 * @return array Route parameters plus instance and step parameter.
 	 */
-	public function addDynamicStepNavigationParameters(array $parameters, FormFlow $flow, $stepNumber) {
+	public function addDynamicStepNavigationParameters(array $parameters, FormFlow $flow, $stepNumber)
+	{
 		return $this->formFlowUtil->addRouteParameters($parameters, $flow, $stepNumber);
 	}
 
@@ -72,7 +78,8 @@ class FormFlowExtension extends AbstractExtension {
 	 * @param FormFlow $flow The flow involved.
 	 * @return array Route parameters without instance and step parameter.
 	 */
-	public function removeDynamicStepNavigationParameters(array $parameters, FormFlow $flow) {
+	public function removeDynamicStepNavigationParameters(array $parameters, FormFlow $flow)
+	{
 		return $this->formFlowUtil->removeRouteParameters($parameters, $flow);
 	}
 
@@ -81,10 +88,13 @@ class FormFlowExtension extends AbstractExtension {
 	 * @param int $stepNumber Number of the step the link will be generated for.
 	 * @return bool If the step can be linked to.
 	 */
-	public function isStepLinkable(FormFlow $flow, $stepNumber) {
-		if (!$flow->isAllowDynamicStepNavigation()
-				|| $flow->getCurrentStepNumber() === $stepNumber
-				|| $flow->isStepSkipped($stepNumber)) {
+	public function isStepLinkable(FormFlow $flow, $stepNumber)
+	{
+		if (
+			!$flow->isAllowDynamicStepNavigation()
+			|| $flow->getCurrentStepNumber() === $stepNumber
+			|| $flow->isStepSkipped($stepNumber)
+		) {
 			return false;
 		}
 
@@ -108,14 +118,15 @@ class FormFlowExtension extends AbstractExtension {
 
 	// methods for BC with third-party templates (e.g. MopaBootstrapBundle)
 
-	public function addDynamicStepNavigationParameter(array $parameters, FormFlow $flow, $stepNumber) {
-		@trigger_error('Twig filter craue_addDynamicStepNavigationParameter is deprecated since CraueFormFlowBundle 3.0. Use filter craue_addDynamicStepNavigationParameters instead.', E_USER_DEPRECATED);
+	public function addDynamicStepNavigationParameter(array $parameters, FormFlow $flow, $stepNumber)
+	{
+		@trigger_error('Twig filter craue_addDynamicStepNavigationParameter is deprecated since AsmittaFormFlowBundle 3.0. Use filter craue_addDynamicStepNavigationParameters instead.', E_USER_DEPRECATED);
 		return $this->addDynamicStepNavigationParameters($parameters, $flow, $stepNumber);
 	}
 
-	public function removeDynamicStepNavigationParameter(array $parameters, FormFlow $flow) {
-		@trigger_error('Twig filter craue_removeDynamicStepNavigationParameter is deprecated since CraueFormFlowBundle 3.0. Use filter craue_removeDynamicStepNavigationParameters instead.', E_USER_DEPRECATED);
+	public function removeDynamicStepNavigationParameter(array $parameters, FormFlow $flow)
+	{
+		@trigger_error('Twig filter craue_removeDynamicStepNavigationParameter is deprecated since AsmittaFormFlowBundle 3.0. Use filter craue_removeDynamicStepNavigationParameters instead.', E_USER_DEPRECATED);
 		return $this->removeDynamicStepNavigationParameters($parameters, $flow);
 	}
-
 }

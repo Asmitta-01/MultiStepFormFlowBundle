@@ -13,9 +13,9 @@
 	</parameters>
 
 	<services>
-		<service id="craue_formflow_util" class="%craue_formflow.util.class%" public="true" />
+		<service id="asmitta_formflow_util" class="%craue_formflow.util.class%" public="true" />
 
 		<!-- autowiring alias -->
-		<service id="Craue\FormFlowBundle\Util\FormFlowUtil" alias="craue_formflow_util" public="false" />
+		<service id="Craue\FormFlowBundle\Util\FormFlowUtil" alias="asmitta_formflow_util" public="false" />
 	</services>
 </container>

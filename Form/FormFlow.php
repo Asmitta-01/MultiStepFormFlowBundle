@@ -30,7 +30,8 @@ use Symfony\Component\Validator\Constraints\GroupSequence;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-abstract class FormFlow implements FormFlowInterface {
+abstract class FormFlow implements FormFlowInterface
+{
 
 	const TRANSITION_BACK = 'back';
 	const TRANSITION_RESET = 'reset';
@@ -170,14 +171,16 @@ abstract class FormFlow implements FormFlowInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function setFormFactory(FormFactoryInterface $formFactory) {
+	public function setFormFactory(FormFactoryInterface $formFactory)
+	{
 		$this->formFactory = $formFactory;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function setRequestStack(RequestStack $requestStack) {
+	public function setRequestStack(RequestStack $requestStack)
+	{
 		$this->requestStack = $requestStack;
 	}
 
@@ -185,7 +188,8 @@ abstract class FormFlow implements FormFlowInterface {
 	 * @return Request
 	 * @throws \RuntimeException If the request is not available.
 	 */
-	public function getRequest() {
+	public function getRequest()
+	{
 		$currentRequest = $this->requestStack->getCurrentRequest();
 
 		if ($currentRequest === null) {
@@ -198,32 +202,37 @@ abstract class FormFlow implements FormFlowInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function setDataManager(DataManagerInterface $dataManager) {
+	public function setDataManager(DataManagerInterface $dataManager)
+	{
 		$this->dataManager = $dataManager;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getDataManager() {
+	public function getDataManager()
+	{
 		return $this->dataManager;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function setEventDispatcher(EventDispatcherInterface $eventDispatcher) {
+	public function setEventDispatcher(EventDispatcherInterface $eventDispatcher)
+	{
 		$this->eventDispatcher = $eventDispatcher;
 	}
 
-	public function setId($id) {
+	public function setId($id)
+	{
 		$this->id = $id;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getId() {
+	public function getId()
+	{
 		if ($this->id === null) {
 			$this->id = 'flow_' . $this->getName();
 		}
@@ -234,15 +243,18 @@ abstract class FormFlow implements FormFlowInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getName() {
+	public function getName()
+	{
 		return StringUtil::fqcnToFlowName(get_class($this));
 	}
 
-	public function setInstanceKey($instanceKey) {
+	public function setInstanceKey($instanceKey)
+	{
 		$this->instanceKey = $instanceKey;
 	}
 
-	public function getInstanceKey() {
+	public function getInstanceKey()
+	{
 		if ($this->instanceKey === null) {
 			$this->instanceKey = $this->getId() . '_instance';
 		}
@@ -250,14 +262,16 @@ abstract class FormFlow implements FormFlowInterface {
 		return $this->instanceKey;
 	}
 
-	public function setInstanceId($instanceId) {
+	public function setInstanceId($instanceId)
+	{
 		$this->instanceId = $instanceId;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getInstanceId() {
+	public function getInstanceId()
+	{
 		if ($this->instanceId === null) {
 			$this->instanceId = $this->getId();
 		}
@@ -265,11 +279,13 @@ abstract class FormFlow implements FormFlowInterface {
 		return $this->instanceId;
 	}
 
-	public function setFormStepKey($formStepKey) {
+	public function setFormStepKey($formStepKey)
+	{
 		$this->formStepKey = $formStepKey;
 	}
 
-	public function getFormStepKey() {
+	public function getFormStepKey()
+	{
 		if ($this->formStepKey === null) {
 			$this->formStepKey = $this->getId() . '_step';
 		}
@@ -277,11 +293,13 @@ abstract class FormFlow implements FormFlowInterface {
 		return $this->formStepKey;
 	}
 
-	public function setFormTransitionKey($formTransitionKey) {
+	public function setFormTransitionKey($formTransitionKey)
+	{
 		$this->formTransitionKey = $formTransitionKey;
 	}
 
-	public function getFormTransitionKey() {
+	public function getFormTransitionKey()
+	{
 		if ($this->formTransitionKey === null) {
 			$this->formTransitionKey = $this->getId() . '_transition';
 		}
@@ -289,11 +307,13 @@ abstract class FormFlow implements FormFlowInterface {
 		return $this->formTransitionKey;
 	}
 
-	public function setValidationGroupPrefix($validationGroupPrefix) {
+	public function setValidationGroupPrefix($validationGroupPrefix)
+	{
 		$this->validationGroupPrefix = $validationGroupPrefix;
 	}
 
-	public function getValidationGroupPrefix() {
+	public function getValidationGroupPrefix()
+	{
 		if ($this->validationGroupPrefix === null) {
 			$this->validationGroupPrefix = $this->getId() . '_step';
 		}
@@ -304,7 +324,8 @@ abstract class FormFlow implements FormFlowInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getStepCount() {
+	public function getStepCount()
+	{
 		if ($this->stepCount === null) {
 			$this->stepCount = count($this->getSteps());
 		}
@@ -315,7 +336,8 @@ abstract class FormFlow implements FormFlowInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getFormData() {
+	public function getFormData()
+	{
 		if ($this->formData === null) {
 			throw new \RuntimeException('Form data has not been evaluated yet and thus cannot be accessed.');
 		}
@@ -326,7 +348,8 @@ abstract class FormFlow implements FormFlowInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getCurrentStepNumber() {
+	public function getCurrentStepNumber()
+	{
 		if ($this->currentStepNumber === null) {
 			throw new \RuntimeException('The current step has not been determined yet and thus cannot be accessed.');
 		}
@@ -334,89 +357,106 @@ abstract class FormFlow implements FormFlowInterface {
 		return $this->currentStepNumber;
 	}
 
-	public function setRevalidatePreviousSteps($revalidatePreviousSteps) {
+	public function setRevalidatePreviousSteps($revalidatePreviousSteps)
+	{
 		$this->revalidatePreviousSteps = (bool) $revalidatePreviousSteps;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function isRevalidatePreviousSteps() {
+	public function isRevalidatePreviousSteps()
+	{
 		return $this->revalidatePreviousSteps;
 	}
 
-	public function setAllowDynamicStepNavigation($allowDynamicStepNavigation) {
+	public function setAllowDynamicStepNavigation($allowDynamicStepNavigation)
+	{
 		$this->allowDynamicStepNavigation = (bool) $allowDynamicStepNavigation;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function isAllowDynamicStepNavigation() {
+	public function isAllowDynamicStepNavigation()
+	{
 		return $this->allowDynamicStepNavigation;
 	}
 
-	public function setHandleFileUploads($handleFileUploads) {
+	public function setHandleFileUploads($handleFileUploads)
+	{
 		$this->handleFileUploads = (bool) $handleFileUploads;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function isHandleFileUploads() {
+	public function isHandleFileUploads()
+	{
 		return $this->handleFileUploads;
 	}
 
-	public function setHandleFileUploadsTempDir($handleFileUploadsTempDir) {
+	public function setHandleFileUploadsTempDir($handleFileUploadsTempDir)
+	{
 		$this->handleFileUploadsTempDir = $handleFileUploadsTempDir !== null ? (string) $handleFileUploadsTempDir : null;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getHandleFileUploadsTempDir() {
+	public function getHandleFileUploadsTempDir()
+	{
 		return $this->handleFileUploadsTempDir;
 	}
 
-	public function setAllowRedirectAfterSubmit($allowRedirectAfterSubmit) {
+	public function setAllowRedirectAfterSubmit($allowRedirectAfterSubmit)
+	{
 		$this->allowRedirectAfterSubmit = (bool) $allowRedirectAfterSubmit;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function isAllowRedirectAfterSubmit() {
+	public function isAllowRedirectAfterSubmit()
+	{
 		return $this->allowRedirectAfterSubmit;
 	}
 
-	public function setDynamicStepNavigationInstanceParameter($dynamicStepNavigationInstanceParameter) {
+	public function setDynamicStepNavigationInstanceParameter($dynamicStepNavigationInstanceParameter)
+	{
 		$this->dynamicStepNavigationInstanceParameter = $dynamicStepNavigationInstanceParameter;
 	}
 
-	public function getDynamicStepNavigationInstanceParameter() {
+	public function getDynamicStepNavigationInstanceParameter()
+	{
 		return $this->dynamicStepNavigationInstanceParameter;
 	}
 
-	public function setDynamicStepNavigationStepParameter($dynamicStepNavigationStepParameter) {
+	public function setDynamicStepNavigationStepParameter($dynamicStepNavigationStepParameter)
+	{
 		$this->dynamicStepNavigationStepParameter = $dynamicStepNavigationStepParameter;
 	}
 
-	public function getDynamicStepNavigationStepParameter() {
+	public function getDynamicStepNavigationStepParameter()
+	{
 		return $this->dynamicStepNavigationStepParameter;
 	}
 
-	public function setGenericFormOptions(array $genericFormOptions) {
+	public function setGenericFormOptions(array $genericFormOptions)
+	{
 		$this->genericFormOptions = $genericFormOptions;
 	}
 
-	public function getGenericFormOptions() {
+	public function getGenericFormOptions()
+	{
 		return $this->genericFormOptions;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function isStepSkipped($stepNumber) {
+	public function isStepSkipped($stepNumber)
+	{
 		return $this->getStep($stepNumber)->isSkipped();
 	}
 
@@ -427,7 +467,8 @@ abstract class FormFlow implements FormFlowInterface {
 	 * @return int Target step number with skipping applied.
 	 * @throws \InvalidArgumentException If the value of <code>$direction</code> is invalid.
 	 */
-	protected function applySkipping($stepNumber, $direction = 1, $boundsReached = 0) {
+	protected function applySkipping($stepNumber, $direction = 1, $boundsReached = 0)
+	{
 		if ($direction !== 1 && $direction !== -1) {
 			throw new \InvalidArgumentException(sprintf('Argument of either -1 or 1 expected, "%s" given.', $direction));
 		}
@@ -459,7 +500,8 @@ abstract class FormFlow implements FormFlowInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function reset() {
+	public function reset()
+	{
 		$this->dataManager->drop($this);
 		$this->currentStepNumber = $this->getFirstStepNumber();
 
@@ -472,21 +514,24 @@ abstract class FormFlow implements FormFlowInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getFirstStepNumber() {
+	public function getFirstStepNumber()
+	{
 		return $this->applySkipping(1);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getLastStepNumber() {
+	public function getLastStepNumber()
+	{
 		return $this->applySkipping($this->getStepCount(), -1);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function nextStep() {
+	public function nextStep()
+	{
 		$currentStepNumber = $this->currentStepNumber + 1;
 
 		foreach ($this->getSteps() as $step) {
@@ -512,7 +557,8 @@ abstract class FormFlow implements FormFlowInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function isStepDone($stepNumber) {
+	public function isStepDone($stepNumber)
+	{
 		if ($this->isStepSkipped($stepNumber)) {
 			return true;
 		}
@@ -520,7 +566,8 @@ abstract class FormFlow implements FormFlowInterface {
 		return array_key_exists($stepNumber, $this->retrieveStepData());
 	}
 
-	public function getRequestedTransition() {
+	public function getRequestedTransition()
+	{
 		if (!is_string($this->transition) || $this->transition === '') {
 			$this->transition = strtolower($this->getRequest()->request->get($this->getFormTransitionKey(), ''));
 		}
@@ -528,7 +575,8 @@ abstract class FormFlow implements FormFlowInterface {
 		return $this->transition;
 	}
 
-	protected function getRequestedStepNumber() {
+	protected function getRequestedStepNumber()
+	{
 		$defaultStepNumber = 1;
 
 		$request = $this->getRequest();
@@ -539,8 +587,8 @@ abstract class FormFlow implements FormFlowInterface {
 				return intval($request->request->get($this->getFormStepKey(), $defaultStepNumber));
 			case 'GET':
 				return $this->allowDynamicStepNavigation || $this->allowRedirectAfterSubmit ?
-						intval($request->get($this->dynamicStepNavigationStepParameter, $defaultStepNumber)) :
-						$defaultStepNumber;
+					intval($request->get($this->dynamicStepNavigationStepParameter, $defaultStepNumber)) :
+					$defaultStepNumber;
 		}
 
 		return $defaultStepNumber;
@@ -550,7 +598,8 @@ abstract class FormFlow implements FormFlowInterface {
 	 * Finds out which step is the current one.
 	 * @return int
 	 */
-	protected function determineCurrentStepNumber() {
+	protected function determineCurrentStepNumber()
+	{
 		$requestedStepNumber = $this->getRequestedStepNumber();
 
 		if ($this->getRequestedTransition() === self::TRANSITION_BACK) {
@@ -579,7 +628,8 @@ abstract class FormFlow implements FormFlowInterface {
 	 * @param int $stepNumber
 	 * @return int
 	 */
-	private function ensureStepNumberRange($stepNumber) {
+	private function ensureStepNumberRange($stepNumber)
+	{
 		return max(min($stepNumber, $this->getStepCount()), 1);
 	}
 
@@ -588,7 +638,8 @@ abstract class FormFlow implements FormFlowInterface {
 	 * @param int $refinedStepNumber
 	 * @return int
 	 */
-	protected function refineCurrentStepNumber($refinedStepNumber) {
+	protected function refineCurrentStepNumber($refinedStepNumber)
+	{
 		foreach ($this->getSteps() as $step) {
 			$step->evaluateSkipping($refinedStepNumber, $this);
 		}
@@ -599,7 +650,8 @@ abstract class FormFlow implements FormFlowInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function bind($formData) {
+	public function bind($formData)
+	{
 		$this->setInstanceId($this->determineInstanceId());
 
 		if ($this->hasListeners(FormFlowEvents::PRE_BIND)) {
@@ -620,7 +672,8 @@ abstract class FormFlow implements FormFlowInterface {
 		}
 	}
 
-	protected function determineInstanceId() {
+	protected function determineInstanceId()
+	{
 		$request = $this->getRequest();
 		$instanceId = null;
 
@@ -640,7 +693,8 @@ abstract class FormFlow implements FormFlowInterface {
 		return $instanceId;
 	}
 
-	protected function bindFlow() {
+	protected function bindFlow()
+	{
 		$request = $this->getRequest();
 		$reset = false;
 
@@ -699,7 +753,8 @@ abstract class FormFlow implements FormFlowInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function saveCurrentStepData(FormInterface $form) {
+	public function saveCurrentStepData(FormInterface $form)
+	{
 		$stepData = $this->retrieveStepData();
 
 		$request = $this->getRequest();
@@ -725,7 +780,8 @@ abstract class FormFlow implements FormFlowInterface {
 	 * Invalidates data for steps >= $fromStepNumber.
 	 * @param int $fromStepNumber
 	 */
-	public function invalidateStepData($fromStepNumber) {
+	public function invalidateStepData($fromStepNumber)
+	{
 		$stepData = $this->retrieveStepData();
 
 		for ($step = $fromStepNumber, $stepCount = $this->getStepCount(); $step < $stepCount; ++$step) {
@@ -738,7 +794,8 @@ abstract class FormFlow implements FormFlowInterface {
 	/**
 	 * Updates form data class with previously saved form data of all steps.
 	 */
-	protected function applyDataFromSavedSteps() {
+	protected function applyDataFromSavedSteps()
+	{
 		$stepData = $this->retrieveStepData();
 
 		$this->stepForms = [];
@@ -769,7 +826,8 @@ abstract class FormFlow implements FormFlowInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function createForm() {
+	public function createForm()
+	{
 		$form = $this->createFormForStep($this->currentStepNumber);
 
 		if ($this->expired && $this->hasListeners(FormFlowEvents::FLOW_EXPIRED)) {
@@ -779,7 +837,8 @@ abstract class FormFlow implements FormFlowInterface {
 		return $form;
 	}
 
-	public function getFormOptions($step, array $options = []) {
+	public function getFormOptions($step, array $options = [])
+	{
 		// override options in a specific order
 		$options = array_merge(
 			$this->getGenericFormOptions(),
@@ -813,7 +872,8 @@ abstract class FormFlow implements FormFlowInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getStep($stepNumber) {
+	public function getStep($stepNumber)
+	{
 		if (!is_int($stepNumber)) {
 			throw new InvalidTypeException($stepNumber, 'int');
 		}
@@ -831,7 +891,8 @@ abstract class FormFlow implements FormFlowInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getSteps() {
+	public function getSteps()
+	{
 		// The steps have been loaded already.
 		if ($this->steps !== null) {
 			return $this->steps;
@@ -858,7 +919,8 @@ abstract class FormFlow implements FormFlowInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getStepLabels() {
+	public function getStepLabels()
+	{
 		if ($this->stepLabels === null) {
 			$stepLabels = [];
 
@@ -875,14 +937,16 @@ abstract class FormFlow implements FormFlowInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getCurrentStepLabel() {
+	public function getCurrentStepLabel()
+	{
 		return $this->getStep($this->currentStepNumber)->getLabel();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function isValid(FormInterface $form) {
+	public function isValid(FormInterface $form)
+	{
 		$request = $this->getRequest();
 
 		if (in_array($request->getMethod(), ['POST', 'PUT'], true) && !in_array($this->getRequestedTransition(), [
@@ -938,7 +1002,8 @@ abstract class FormFlow implements FormFlowInterface {
 	 * @param FormInterface $submittedForm
 	 * @return bool If a redirection should be performed.
 	 */
-	public function redirectAfterSubmit(FormInterface $submittedForm) {
+	public function redirectAfterSubmit(FormInterface $submittedForm)
+	{
 		if ($this->allowRedirectAfterSubmit && in_array($this->getRequest()->getMethod(), ['POST', 'PUT'], true)) {
 			switch ($this->getRequestedTransition()) {
 				case self::TRANSITION_BACK:
@@ -959,7 +1024,8 @@ abstract class FormFlow implements FormFlowInterface {
 	 * @param array $options
 	 * @return FormInterface
 	 */
-	protected function createFormForStep($stepNumber, array $options = []) {
+	protected function createFormForStep($stepNumber, array $options = [])
+	{
 		$formType = $this->getStep($stepNumber)->getFormType();
 		$options = $this->getFormOptions($stepNumber, $options);
 
@@ -975,7 +1041,8 @@ abstract class FormFlow implements FormFlowInterface {
 	 * @param array $stepsConfig
 	 * @return StepInterface[] Value with index 0 is step 1.
 	 */
-	public function createStepsFromConfig(array $stepsConfig) {
+	public function createStepsFromConfig(array $stepsConfig)
+	{
 		$steps = [];
 
 		// fix array indexes not starting at 0
@@ -992,15 +1059,18 @@ abstract class FormFlow implements FormFlowInterface {
 	 * Defines the configuration for all steps of this flow.
 	 * @return array
 	 */
-	protected function loadStepsConfig() {
+	protected function loadStepsConfig()
+	{
 		return [];
 	}
 
-	protected function retrieveStepData() {
+	protected function retrieveStepData()
+	{
 		return $this->dataManager->load($this);
 	}
 
-	protected function saveStepData(array $data) {
+	protected function saveStepData(array $data)
+	{
 		$this->dataManager->save($this, $data);
 	}
 
@@ -1008,7 +1078,8 @@ abstract class FormFlow implements FormFlowInterface {
 	 * @param string $eventName
 	 * @return bool
 	 */
-	protected function hasListeners($eventName) {
+	protected function hasListeners($eventName)
+	{
 		return $this->eventDispatcher !== null && $this->eventDispatcher->hasListeners($eventName);
 	}
 
@@ -1016,14 +1087,16 @@ abstract class FormFlow implements FormFlowInterface {
 	 * @param FormFlowEvent $event
 	 * @param string $eventName
 	 */
-	private function dispatchEvent($event, $eventName) {
+	private function dispatchEvent($event, $eventName)
+	{
 		$this->eventDispatcher->dispatch($event, $eventName);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getStepsDone() {
+	public function getStepsDone()
+	{
 		$stepsDone = [];
 
 		foreach ($this->getSteps() as $step) {
@@ -1038,7 +1111,8 @@ abstract class FormFlow implements FormFlowInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getStepsRemaining() {
+	public function getStepsRemaining()
+	{
 		$stepsRemaining = [];
 
 		foreach ($this->getSteps() as $step) {
@@ -1053,52 +1127,60 @@ abstract class FormFlow implements FormFlowInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getStepsDoneCount() {
+	public function getStepsDoneCount()
+	{
 		return count($this->getStepsDone());
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getStepsRemainingCount() {
+	public function getStepsRemainingCount()
+	{
 		return count($this->getStepsRemaining());
 	}
 
 	// methods for BC with third-party templates (e.g. MopaBootstrapBundle)
 
-	public function getCurrentStep() {
-		@trigger_error('Method ' . __METHOD__ . ' is deprecated since CraueFormFlowBundle 2.0. Use method getCurrentStepNumber instead.', E_USER_DEPRECATED);
+	public function getCurrentStep()
+	{
+		@trigger_error('Method ' . __METHOD__ . ' is deprecated since AsmittaFormFlowBundle 2.0. Use method getCurrentStepNumber instead.', E_USER_DEPRECATED);
 		return $this->getCurrentStepNumber();
 	}
 
-	public function getCurrentStepDescription() {
-		@trigger_error('Method ' . __METHOD__ . ' is deprecated since CraueFormFlowBundle 2.0. Use method getCurrentStepLabel instead.', E_USER_DEPRECATED);
+	public function getCurrentStepDescription()
+	{
+		@trigger_error('Method ' . __METHOD__ . ' is deprecated since AsmittaFormFlowBundle 2.0. Use method getCurrentStepLabel instead.', E_USER_DEPRECATED);
 		return $this->getCurrentStepLabel();
 	}
 
-	public function getMaxSteps() {
-		@trigger_error('Method ' . __METHOD__ . ' is deprecated since CraueFormFlowBundle 2.0. Use method getStepCount instead.', E_USER_DEPRECATED);
+	public function getMaxSteps()
+	{
+		@trigger_error('Method ' . __METHOD__ . ' is deprecated since AsmittaFormFlowBundle 2.0. Use method getStepCount instead.', E_USER_DEPRECATED);
 		return $this->getStepCount();
 	}
 
-	public function getStepDescriptions() {
-		@trigger_error('Method ' . __METHOD__ . ' is deprecated since CraueFormFlowBundle 2.0. Use method getStepLabels instead.', E_USER_DEPRECATED);
+	public function getStepDescriptions()
+	{
+		@trigger_error('Method ' . __METHOD__ . ' is deprecated since AsmittaFormFlowBundle 2.0. Use method getStepLabels instead.', E_USER_DEPRECATED);
 		return $this->getStepLabels();
 	}
 
-	public function getFirstStep() {
-		@trigger_error('Method ' . __METHOD__ . ' is deprecated since CraueFormFlowBundle 2.0. Use method getFirstStepNumber instead.', E_USER_DEPRECATED);
+	public function getFirstStep()
+	{
+		@trigger_error('Method ' . __METHOD__ . ' is deprecated since AsmittaFormFlowBundle 2.0. Use method getFirstStepNumber instead.', E_USER_DEPRECATED);
 		return $this->getFirstStepNumber();
 	}
 
-	public function getLastStep() {
-		@trigger_error('Method ' . __METHOD__ . ' is deprecated since CraueFormFlowBundle 2.0. Use method getLastStepNumber instead.', E_USER_DEPRECATED);
+	public function getLastStep()
+	{
+		@trigger_error('Method ' . __METHOD__ . ' is deprecated since AsmittaFormFlowBundle 2.0. Use method getLastStepNumber instead.', E_USER_DEPRECATED);
 		return $this->getLastStepNumber();
 	}
 
-	public function hasSkipStep($stepNumber) {
-		@trigger_error('Method ' . __METHOD__ . ' is deprecated since CraueFormFlowBundle 2.0. Use method isStepSkipped instead.', E_USER_DEPRECATED);
+	public function hasSkipStep($stepNumber)
+	{
+		@trigger_error('Method ' . __METHOD__ . ' is deprecated since AsmittaFormFlowBundle 2.0. Use method isStepSkipped instead.', E_USER_DEPRECATED);
 		return $this->isStepSkipped($stepNumber);
 	}
-
 }

@@ -15,12 +15,14 @@ use Craue\FormFlowBundle\Twig\Extension\FormFlowExtension;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class FormFlowExtensionBcMethodsTest extends UnitTestCase {
+class FormFlowExtensionBcMethodsTest extends UnitTestCase
+{
 
 	/**
-	 * @expectedDeprecation Twig filter craue_addDynamicStepNavigationParameter is deprecated since CraueFormFlowBundle 3.0. Use filter craue_addDynamicStepNavigationParameters instead.
+	 * @expectedDeprecation Twig filter craue_addDynamicStepNavigationParameter is deprecated since AsmittaFormFlowBundle 3.0. Use filter craue_addDynamicStepNavigationParameters instead.
 	 */
-	public function testBcMethodDelegation_addDynamicStepNavigationParameter() {
+	public function testBcMethodDelegation_addDynamicStepNavigationParameter()
+	{
 		$extension = $this->getMockBuilder(FormFlowExtension::class)->onlyMethods(['addDynamicStepNavigationParameters'])->getMock();
 
 		$parameters = ['foo' => 'bar'];
@@ -37,9 +39,10 @@ class FormFlowExtensionBcMethodsTest extends UnitTestCase {
 	}
 
 	/**
-	 * @expectedDeprecation Twig filter craue_removeDynamicStepNavigationParameter is deprecated since CraueFormFlowBundle 3.0. Use filter craue_removeDynamicStepNavigationParameters instead.
+	 * @expectedDeprecation Twig filter craue_removeDynamicStepNavigationParameter is deprecated since AsmittaFormFlowBundle 3.0. Use filter craue_removeDynamicStepNavigationParameters instead.
 	 */
-	public function testBcMethodDelegation_removeDynamicStepNavigationParameter() {
+	public function testBcMethodDelegation_removeDynamicStepNavigationParameter()
+	{
 		$extension = $this->getMockBuilder(FormFlowExtension::class)->onlyMethods(['removeDynamicStepNavigationParameters'])->getMock();
 
 		$parameters = ['foo' => 'bar'];
@@ -53,5 +56,4 @@ class FormFlowExtensionBcMethodsTest extends UnitTestCase {
 
 		$extension->removeDynamicStepNavigationParameter($parameters, $flow);
 	}
-
 }

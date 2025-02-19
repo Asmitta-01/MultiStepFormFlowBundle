@@ -20,12 +20,14 @@ use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class DataManagerIntegrationTest extends IntegrationTestCase {
+class DataManagerIntegrationTest extends IntegrationTestCase
+{
 
 	/**
 	 * Ensure that a file uploaded within a flow is saved and restored correctly.
 	 */
-	public function testSaveLoad_file() : void {
+	public function testSaveLoad_file(): void
+	{
 		if (\version_compare(\PHP_VERSION, '7.4', '<') && ($_ENV['DB_FLAVOR'] ?? '') === 'postgresql') {
 			$this->markTestSkipped('Would fail because SerializableFile::__serialize is only supported as of PHP 7.4.');
 		}
@@ -39,7 +41,7 @@ class DataManagerIntegrationTest extends IntegrationTestCase {
 		$this->getService('request_stack')->push($request);
 
 		/** @var $dataManager DataManager */
-		$dataManager = $this->getService('craue.form.flow.data_manager.test');
+		$dataManager = $this->getService('asmitta.form.flow.data_manager.test');
 		$dataManager->dropAll();
 
 		$flow = $this->getFlow('testFlow', 'instance');
@@ -58,7 +60,8 @@ class DataManagerIntegrationTest extends IntegrationTestCase {
 	/**
 	 * @return MockObject|FormFlow
 	 */
-	private function getFlow(string $name, string $instanceId) {
+	private function getFlow(string $name, string $instanceId)
+	{
 		$flow = $this->getMockBuilder(FormFlow::class)->onlyMethods(['getName', 'isHandleFileUploads'])->getMock();
 
 		$flow
@@ -75,5 +78,4 @@ class DataManagerIntegrationTest extends IntegrationTestCase {
 
 		return $flow;
 	}
-
 }

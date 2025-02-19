@@ -15,17 +15,18 @@ use PHPUnit\Framework\TestCase;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class StepBcTest extends TestCase {
+class StepBcTest extends TestCase
+{
 
 	/**
-	 * @expectedDeprecation Step config option "type" is deprecated since CraueFormFlowBundle 3.0. Use "form_type" instead.
+	 * @expectedDeprecation Step config option "type" is deprecated since AsmittaFormFlowBundle 3.0. Use "form_type" instead.
 	 */
-	public function testCreateFromConfig_bcOptionType() {
+	public function testCreateFromConfig_bcOptionType()
+	{
 		$step = Step::createFromConfig(1, [
 			'type' => 'myFormType',
 		]);
 
 		$this->assertEquals('myFormType', $step->getFormType());
 	}
-
 }

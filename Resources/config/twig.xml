@@ -16,7 +16,7 @@
 		<service id="twig.extension.craue_formflow" class="%craue_twig_extensions.formflow.class%">
 			<tag name="twig.extension" />
 			<call method="setFormFlowUtil">
-				<argument type="service" id="craue_formflow_util" />
+				<argument type="service" id="asmitta_formflow_util" />
 			</call>
 		</service>
 	</services>

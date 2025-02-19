@@ -11,7 +11,8 @@ use Symfony\Component\Form\FormTypeInterface;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class Step implements StepInterface {
+class Step implements StepInterface
+{
 
 	/**
 	 * @var int
@@ -43,7 +44,8 @@ class Step implements StepInterface {
 	 */
 	private $skipped = false;
 
-	public static function createFromConfig($number, array $config) {
+	public static function createFromConfig($number, array $config)
+	{
 		$step = new static();
 
 		$step->setNumber($number);
@@ -54,7 +56,7 @@ class Step implements StepInterface {
 					$step->setLabel($value);
 					break;
 				case 'type':
-					@trigger_error('Step config option "type" is deprecated since CraueFormFlowBundle 3.0. Use "form_type" instead.', E_USER_DEPRECATED);
+					@trigger_error('Step config option "type" is deprecated since AsmittaFormFlowBundle 3.0. Use "form_type" instead.', E_USER_DEPRECATED);
 				case 'form_type':
 					$step->setFormType($value);
 					break;
@@ -75,7 +77,8 @@ class Step implements StepInterface {
 	/**
 	 * @param int $number
 	 */
-	public function setNumber($number) {
+	public function setNumber($number)
+	{
 		if (is_int($number)) {
 			$this->number = $number;
 
@@ -88,14 +91,16 @@ class Step implements StepInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getNumber() {
+	public function getNumber()
+	{
 		return $this->number;
 	}
 
 	/**
 	 * @param string|StepLabel|null $label
 	 */
-	public function setLabel($label) {
+	public function setLabel($label)
+	{
 		if (is_string($label)) {
 			$this->label = StepLabel::createStringLabel($label);
 
@@ -114,12 +119,15 @@ class Step implements StepInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getLabel() {
+	public function getLabel()
+	{
 		try {
 			return $this->label !== null ? $this->label->getText() : null;
 		} catch (StepLabelCallableInvalidReturnValueException $e) {
-			throw new \RuntimeException(sprintf('The label callable for step %d did not return a string or null value.',
-					$this->number));
+			throw new \RuntimeException(sprintf(
+				'The label callable for step %d did not return a string or null value.',
+				$this->number
+			));
 		}
 	}
 
@@ -127,7 +135,8 @@ class Step implements StepInterface {
 	 * @param FormTypeInterface|string|null $formType
 	 * @throws InvalidTypeException
 	 */
-	public function setFormType($formType) {
+	public function setFormType($formType)
+	{
 		if ($formType === null || is_string($formType) || $formType instanceof FormTypeInterface) {
 			$this->formType = $formType;
 
@@ -140,14 +149,16 @@ class Step implements StepInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getFormType() {
+	public function getFormType()
+	{
 		return $this->formType;
 	}
 
 	/**
 	 * @param array $formOptions
 	 */
-	public function setFormOptions($formOptions) {
+	public function setFormOptions($formOptions)
+	{
 		if (is_array($formOptions)) {
 			$this->formOptions = $formOptions;
 
@@ -160,7 +171,8 @@ class Step implements StepInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getFormOptions() {
+	public function getFormOptions()
+	{
 		return $this->formOptions;
 	}
 
@@ -168,7 +180,8 @@ class Step implements StepInterface {
 	 * @param bool|callable $skip
 	 * @throws InvalidTypeException
 	 */
-	public function setSkip($skip) {
+	public function setSkip($skip)
+	{
 		if (is_bool($skip)) {
 			$this->skipFunction = null;
 			$this->skipped = $skip;
@@ -189,13 +202,16 @@ class Step implements StepInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function evaluateSkipping($estimatedCurrentStepNumber, FormFlowInterface $flow) {
+	public function evaluateSkipping($estimatedCurrentStepNumber, FormFlowInterface $flow)
+	{
 		if ($this->skipFunction !== null) {
 			$returnValue = ($this->skipFunction)(...[$estimatedCurrentStepNumber, $flow]);
 
 			if (!is_bool($returnValue)) {
-				throw new \RuntimeException(sprintf('The skip callable for step %d did not return a boolean value.',
-						$this->number));
+				throw new \RuntimeException(sprintf(
+					'The skip callable for step %d did not return a boolean value.',
+					$this->number
+				));
 			}
 
 			$this->skipped = $returnValue;
@@ -205,8 +221,8 @@ class Step implements StepInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function isSkipped() {
+	public function isSkipped()
+	{
 		return $this->skipped === true;
 	}
-
 }

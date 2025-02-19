@@ -15,7 +15,8 @@ use Craue\FormFlowBundle\Tests\IntegrationTestCase;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class StorageImplementationTest extends IntegrationTestCase {
+class StorageImplementationTest extends IntegrationTestCase
+{
 
 	/**
 	 * Ensure that, depending on the configuration, the correct {@link StorageInterface} implementation is used.
@@ -23,10 +24,10 @@ class StorageImplementationTest extends IntegrationTestCase {
 	 * database connection and the storage service while relying on an DI extension to load the (overridden) service
 	 * may silently fail leading to a wrong implementation being used in tests.
 	 */
-	public function testUseCorrectStorageImplementation() {
-		$storage = $this->getService('craue.form.flow.storage');
+	public function testUseCorrectStorageImplementation()
+	{
+		$storage = $this->getService('asmitta.form.flow.storage');
 		$expectedClass = empty($_ENV['DB_DSN']) ? SessionStorage::class : DoctrineStorage::class;
 		$this->assertInstanceOf($expectedClass, $storage);
 	}
-
 }

@@ -12,9 +12,11 @@ use Symfony\Component\HttpKernel\Kernel;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class CreateVehicleFlowTest extends IntegrationTestCase {
+class CreateVehicleFlowTest extends IntegrationTestCase
+{
 
-	public function testCreateVehicle_skipAndBack() {
+	public function testCreateVehicle_skipAndBack()
+	{
 		$crawler = static::$client->request('GET', $this->url('_FormFlow_createVehicle'));
 		$this->assertSame(200, static::$client->getResponse()->getStatusCode());
 		$this->assertCurrentStepNumber(1, $crawler);
@@ -56,7 +58,8 @@ class CreateVehicleFlowTest extends IntegrationTestCase {
 		$this->assertJsonResponse('{"numberOfWheels":4,"engine":"gas"}');
 	}
 
-	public function testCreateVehicle_flowExpired() {
+	public function testCreateVehicle_flowExpired()
+	{
 		$crawler = static::$client->request('GET', $this->url('_FormFlow_createVehicle'));
 		$this->assertSame(200, static::$client->getResponse()->getStatusCode());
 		$this->assertCurrentStepNumber(1, $crawler);
@@ -86,7 +89,8 @@ class CreateVehicleFlowTest extends IntegrationTestCase {
 		}
 	}
 
-	public function testCreateVehicle_invalidateStepData() {
+	public function testCreateVehicle_invalidateStepData()
+	{
 		$crawler = static::$client->request('GET', $this->url('_FormFlow_createVehicle'));
 
 		// 4 wheels -> step 2
@@ -131,7 +135,8 @@ class CreateVehicleFlowTest extends IntegrationTestCase {
 		$this->assertJsonResponse('{"numberOfWheels":2,"engine":null}');
 	}
 
-	public function testCreateVehicle_reset() {
+	public function testCreateVehicle_reset()
+	{
 		$crawler = static::$client->request('GET', $this->url('_FormFlow_createVehicle'));
 
 		// 4 wheels -> step 2
@@ -167,7 +172,8 @@ class CreateVehicleFlowTest extends IntegrationTestCase {
 		$this->assertJsonResponse('{"numberOfWheels":2,"engine":null}');
 	}
 
-	public function testCreateVehicle_reload() {
+	public function testCreateVehicle_reload()
+	{
 		$crawler = static::$client->request('GET', $this->url('_FormFlow_createVehicle'));
 
 		// 2 wheels -> step 3
@@ -182,7 +188,8 @@ class CreateVehicleFlowTest extends IntegrationTestCase {
 		$this->assertCurrentStepNumber(3, $crawler);
 	}
 
-	public function testCreateVehicle_resetFlowOnGetRequest() {
+	public function testCreateVehicle_resetFlowOnGetRequest()
+	{
 		$crawler = static::$client->request('GET', $this->url('_FormFlow_createVehicle'));
 
 		// 2 wheels -> step 3
@@ -197,7 +204,8 @@ class CreateVehicleFlowTest extends IntegrationTestCase {
 		$this->assertCurrentFormData('{"numberOfWheels":null,"engine":null}', $crawler);
 	}
 
-	public function testCreateVehicle_tamperWithHiddenStepField() {
+	public function testCreateVehicle_tamperWithHiddenStepField()
+	{
 		$crawler = static::$client->request('GET', $this->url('_FormFlow_createVehicle'));
 
 		// no number of wheels -> step 1 again
@@ -219,7 +227,8 @@ class CreateVehicleFlowTest extends IntegrationTestCase {
 		$this->assertCurrentFormData('{"numberOfWheels":4,"engine":null}', $crawler);
 	}
 
-	public function testCreateVehicle_unskipStepWhenGoingBack() {
+	public function testCreateVehicle_unskipStepWhenGoingBack()
+	{
 		$crawler = static::$client->request('GET', $this->url('_FormFlow_createVehicle'));
 
 		// 2 wheels -> step 3
@@ -229,7 +238,7 @@ class CreateVehicleFlowTest extends IntegrationTestCase {
 		]);
 		$this->assertCurrentStepNumber(3, $crawler);
 		// step 2 must be marked as skipped
-		$this->assertStringContainsString('<li class="craue_formflow_skipped_step">engine</li>', $this->getHtml($crawler->filter('#step-list')));
+		$this->assertStringContainsString('<li class="asmitta_formflow_skipped_step">engine</li>', $this->getHtml($crawler->filter('#step-list')));
 
 		// go back
 		$form = $crawler->selectButton('back')->form();
@@ -239,7 +248,8 @@ class CreateVehicleFlowTest extends IntegrationTestCase {
 		$this->assertStringContainsString('<li>engine</li>', $this->getHtml($crawler->filter('#step-list')));
 	}
 
-	public function testCreateVehicle_submitInvalidValues() {
+	public function testCreateVehicle_submitInvalidValues()
+	{
 		$crawler = static::$client->request('GET', $this->url('_FormFlow_createVehicle'));
 
 		// invalid number of wheels -> step 1 again
@@ -267,5 +277,4 @@ class CreateVehicleFlowTest extends IntegrationTestCase {
 		$this->assertCurrentStepNumber(2, $crawler);
 		$this->assertContainsFormError(Kernel::VERSION_ID < 60000 ? 'This value is not valid.' : 'The selected choice is invalid.', $crawler); // TODO cleanup as soon as Symfony >= 6.0 is required
 	}
-
 }

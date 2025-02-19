@@ -6,11 +6,13 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\Kernel;
 
-class AppKernel extends Kernel {
+class AppKernel extends Kernel
+{
 
 	private $configFile;
 
-	public function __construct($environment, $configFile) {
+	public function __construct($environment, $configFile)
+	{
 		parent::__construct($environment, false);
 
 		$fs = new Filesystem();
@@ -25,22 +27,25 @@ class AppKernel extends Kernel {
 		$this->configFile = $configFile;
 	}
 
-	public function registerBundles() : iterable {
+	public function registerBundles(): iterable
+	{
 		return [
 			new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
 			new \Symfony\Bundle\SecurityBundle\SecurityBundle(),
 			new \Symfony\Bundle\TwigBundle\TwigBundle(),
 			new \Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
-			new \Craue\FormFlowBundle\CraueFormFlowBundle(),
+			new \Craue\FormFlowBundle\AsmittaFormFlowBundle(),
 			new \Craue\FormFlowBundle\Tests\IntegrationTestBundle\IntegrationTestBundle(),
 		];
 	}
 
-	public function registerContainerConfiguration(LoaderInterface $loader) : void {
+	public function registerContainerConfiguration(LoaderInterface $loader): void
+	{
 		$loader->load($this->configFile);
 	}
 
-	public function getCacheDir() : string {
+	public function getCacheDir(): string
+	{
 		if (array_key_exists('CACHE_DIR', $_ENV)) {
 			return $_ENV['CACHE_DIR'] . DIRECTORY_SEPARATOR . $this->environment;
 		}
@@ -48,7 +53,8 @@ class AppKernel extends Kernel {
 		return parent::getCacheDir();
 	}
 
-	public function getLogDir() : string {
+	public function getLogDir(): string
+	{
 		if (array_key_exists('LOG_DIR', $_ENV)) {
 			return $_ENV['LOG_DIR'] . DIRECTORY_SEPARATOR . $this->environment;
 		}
@@ -56,13 +62,14 @@ class AppKernel extends Kernel {
 		return parent::getLogDir();
 	}
 
-	public function serialize() {
+	public function serialize()
+	{
 		return serialize([$this->environment, $this->configFile]);
 	}
 
-	public function unserialize($data) {
+	public function unserialize($data)
+	{
 		list($environment, $configFile) = unserialize($data);
 		$this->__construct($environment, $configFile);
 	}
-
 }

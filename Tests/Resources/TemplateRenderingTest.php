@@ -17,12 +17,14 @@ use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class TemplateRenderingTest extends IntegrationTestCase {
+class TemplateRenderingTest extends IntegrationTestCase
+{
 
-	const BUTTONS_TEMPLATE = '@CraueFormFlow/FormFlow/buttons.html.twig';
-	const STEP_LIST_TEMPLATE = '@CraueFormFlow/FormFlow/stepList.html.twig';
+	const BUTTONS_TEMPLATE = '@AsmittaFormFlow/FormFlow/buttons.html.twig';
+	const STEP_LIST_TEMPLATE = '@AsmittaFormFlow/FormFlow/stepList.html.twig';
 
-	public function testButtons() {
+	public function testButtons()
+	{
 		$flow = $this->getFlowStub();
 
 		// first step
@@ -32,9 +34,9 @@ class TemplateRenderingTest extends IntegrationTestCase {
 			'flow' => $flow,
 		]);
 
-		$this->assertStringContainsString('<div class="craue_formflow_buttons craue_formflow_button_count_2">', $renderedTemplate);
-		$this->assertStringContainsString('<button type="submit" class="craue_formflow_button_last">next</button>', $renderedTemplate);
-		$this->assertStringContainsString('<button type="submit" class="craue_formflow_button_first" name="flow_renderingTest_transition" value="reset" formnovalidate="formnovalidate">start over</button>', $renderedTemplate);
+		$this->assertStringContainsString('<div class="asmitta_formflow_buttons asmitta_formflow_button_count_2">', $renderedTemplate);
+		$this->assertStringContainsString('<button type="submit" class="asmitta_formflow_button_last">next</button>', $renderedTemplate);
+		$this->assertStringContainsString('<button type="submit" class="asmitta_formflow_button_first" name="flow_renderingTest_transition" value="reset" formnovalidate="formnovalidate">start over</button>', $renderedTemplate);
 
 		// next step
 		$flow->nextStep();
@@ -43,37 +45,39 @@ class TemplateRenderingTest extends IntegrationTestCase {
 			'flow' => $flow,
 		]);
 
-		$this->assertStringContainsString('<div class="craue_formflow_buttons craue_formflow_button_count_3">', $renderedTemplate);
-		$this->assertStringContainsString('<button type="submit" class="craue_formflow_button_last">finish</button>', $renderedTemplate);
+		$this->assertStringContainsString('<div class="asmitta_formflow_buttons asmitta_formflow_button_count_3">', $renderedTemplate);
+		$this->assertStringContainsString('<button type="submit" class="asmitta_formflow_button_last">finish</button>', $renderedTemplate);
 		$this->assertStringContainsString('<button type="submit" class="" name="flow_renderingTest_transition" value="back" formnovalidate="formnovalidate">back</button>', $renderedTemplate);
-		$this->assertStringContainsString('<button type="submit" class="craue_formflow_button_first" name="flow_renderingTest_transition" value="reset" formnovalidate="formnovalidate">start over</button>', $renderedTemplate);
+		$this->assertStringContainsString('<button type="submit" class="asmitta_formflow_button_first" name="flow_renderingTest_transition" value="reset" formnovalidate="formnovalidate">start over</button>', $renderedTemplate);
 	}
 
-	public function testButtons_noResetButton() {
+	public function testButtons_noResetButton()
+	{
 		$flow = $this->getFlowStub();
 
 		// first step
 		$flow->nextStep();
 
 		$renderedTemplate = $this->getTwig()->render(self::BUTTONS_TEMPLATE, [
-			'craue_formflow_button_render_reset' => false,
+			'asmitta_formflow_button_render_reset' => false,
 			'flow' => $flow,
 		]);
-		$this->assertStringContainsString('<div class="craue_formflow_buttons craue_formflow_button_count_1">', $renderedTemplate);
-		$this->assertStringNotContainsString('<button type="submit" class="craue_formflow_button_first" name="flow_renderingTest_transition" value="reset" formnovalidate="formnovalidate">start over</button>', $renderedTemplate);
+		$this->assertStringContainsString('<div class="asmitta_formflow_buttons asmitta_formflow_button_count_1">', $renderedTemplate);
+		$this->assertStringNotContainsString('<button type="submit" class="asmitta_formflow_button_first" name="flow_renderingTest_transition" value="reset" formnovalidate="formnovalidate">start over</button>', $renderedTemplate);
 
 		// second step
 		$flow->nextStep();
 
 		$renderedTemplate = $this->getTwig()->render(self::BUTTONS_TEMPLATE, [
-			'craue_formflow_button_render_reset' => false,
+			'asmitta_formflow_button_render_reset' => false,
 			'flow' => $flow,
 		]);
-		$this->assertStringContainsString('<div class="craue_formflow_buttons craue_formflow_button_count_2">', $renderedTemplate);
-		$this->assertStringNotContainsString('<button type="submit" class="craue_formflow_button_first" name="flow_renderingTest_transition" value="reset" formnovalidate="formnovalidate">start over</button>', $renderedTemplate);
+		$this->assertStringContainsString('<div class="asmitta_formflow_buttons asmitta_formflow_button_count_2">', $renderedTemplate);
+		$this->assertStringNotContainsString('<button type="submit" class="asmitta_formflow_button_first" name="flow_renderingTest_transition" value="reset" formnovalidate="formnovalidate">start over</button>', $renderedTemplate);
 	}
 
-	public function testButtons_firstStepSkipped() {
+	public function testButtons_firstStepSkipped()
+	{
 		$flow = $this->getFlowStub([], [
 			[
 				'label' => 'step1',
@@ -91,12 +95,13 @@ class TemplateRenderingTest extends IntegrationTestCase {
 			'flow' => $flow,
 		]);
 
-		$this->assertStringContainsString('<div class="craue_formflow_buttons craue_formflow_button_count_2">', $renderedTemplate);
-		$this->assertStringContainsString('<button type="submit" class="craue_formflow_button_last">finish</button>', $renderedTemplate);
-		$this->assertStringContainsString('<button type="submit" class="craue_formflow_button_first" name="flow_renderingTest_transition" value="reset" formnovalidate="formnovalidate">start over</button>', $renderedTemplate);
+		$this->assertStringContainsString('<div class="asmitta_formflow_buttons asmitta_formflow_button_count_2">', $renderedTemplate);
+		$this->assertStringContainsString('<button type="submit" class="asmitta_formflow_button_last">finish</button>', $renderedTemplate);
+		$this->assertStringContainsString('<button type="submit" class="asmitta_formflow_button_first" name="flow_renderingTest_transition" value="reset" formnovalidate="formnovalidate">start over</button>', $renderedTemplate);
 	}
 
-	public function testButtons_onlyOneStep() {
+	public function testButtons_onlyOneStep()
+	{
 		$flow = $this->getFlowStub([], [
 			[
 				'label' => 'step1',
@@ -110,15 +115,16 @@ class TemplateRenderingTest extends IntegrationTestCase {
 			'flow' => $flow,
 		]);
 
-		$this->assertStringContainsString('<div class="craue_formflow_buttons craue_formflow_button_count_2">', $renderedTemplate);
-		$this->assertStringContainsString('<button type="submit" class="craue_formflow_button_last">finish</button>', $renderedTemplate);
-		$this->assertStringContainsString('<button type="submit" class="craue_formflow_button_first" name="flow_renderingTest_transition" value="reset" formnovalidate="formnovalidate">start over</button>', $renderedTemplate);
+		$this->assertStringContainsString('<div class="asmitta_formflow_buttons asmitta_formflow_button_count_2">', $renderedTemplate);
+		$this->assertStringContainsString('<button type="submit" class="asmitta_formflow_button_last">finish</button>', $renderedTemplate);
+		$this->assertStringContainsString('<button type="submit" class="asmitta_formflow_button_first" name="flow_renderingTest_transition" value="reset" formnovalidate="formnovalidate">start over</button>', $renderedTemplate);
 	}
 
 	/**
 	 * @dataProvider dataCustomizedButton
 	 */
-	public function testCustomizedButton($numberOfSteps, $jumpToStep, array $parameters, $expectedHtml) {
+	public function testCustomizedButton($numberOfSteps, $jumpToStep, array $parameters, $expectedHtml)
+	{
 		$flow = $this->getFlowStub([], array_fill_keys(range(1, $numberOfSteps), []));
 
 		do {
@@ -132,72 +138,86 @@ class TemplateRenderingTest extends IntegrationTestCase {
 		$this->assertStringContainsString($expectedHtml, $renderedTemplate);
 	}
 
-	public function dataCustomizedButton() {
+	public function dataCustomizedButton()
+	{
 		return [
 			'next button custom class' => [
-				2, 1,
-				['craue_formflow_button_class_next' => 'next'],
+				2,
+				1,
+				['asmitta_formflow_button_class_next' => 'next'],
 				'<button type="submit" class="next">next</button>',
 			],
 			'next button custom label' => [
-				2, 1,
-				['craue_formflow_button_label_next' => 'custom next'],
-				'<button type="submit" class="craue_formflow_button_last">custom next</button>',
+				2,
+				1,
+				['asmitta_formflow_button_label_next' => 'custom next'],
+				'<button type="submit" class="asmitta_formflow_button_last">custom next</button>',
 			],
 			'finish button custom class' => [
-				1, 1,
-				['craue_formflow_button_class_finish' => 'finish'],
+				1,
+				1,
+				['asmitta_formflow_button_class_finish' => 'finish'],
 				'<button type="submit" class="finish">finish</button>',
 			],
 			'finish button custom label' => [
-				1, 1,
-				['craue_formflow_button_label_finish' => 'custom finish'],
-				'<button type="submit" class="craue_formflow_button_last">custom finish</button>',
+				1,
+				1,
+				['asmitta_formflow_button_label_finish' => 'custom finish'],
+				'<button type="submit" class="asmitta_formflow_button_last">custom finish</button>',
 			],
 			'last button custom class (finish)' => [
-				1, 1,
-				['craue_formflow_button_class_last' => 'last'],
+				1,
+				1,
+				['asmitta_formflow_button_class_last' => 'last'],
 				'<button type="submit" class="last">finish</button>',
 			],
 			'last button custom label (finish)' => [
-				1, 1,
-				['craue_formflow_button_label_last' => 'custom last'],
-				'<button type="submit" class="craue_formflow_button_last">custom last</button>',
+				1,
+				1,
+				['asmitta_formflow_button_label_last' => 'custom last'],
+				'<button type="submit" class="asmitta_formflow_button_last">custom last</button>',
 			],
 			'last button custom class (next)' => [
-				2, 1,
-				['craue_formflow_button_class_last' => 'last'],
+				2,
+				1,
+				['asmitta_formflow_button_class_last' => 'last'],
 				'<button type="submit" class="last">next</button>',
 			],
 			'last button custom label (next)' => [
-				2, 1,
-				['craue_formflow_button_label_last' => 'custom last'],
-				'<button type="submit" class="craue_formflow_button_last">custom last</button>',
+				2,
+				1,
+				['asmitta_formflow_button_label_last' => 'custom last'],
+				'<button type="submit" class="asmitta_formflow_button_last">custom last</button>',
 			],
 			'back button custom class' => [
-				2, 2,
-				['craue_formflow_button_class_back' => 'back'],
+				2,
+				2,
+				['asmitta_formflow_button_class_back' => 'back'],
 				'<button type="submit" class="back" name="flow_renderingTest_transition" value="back" formnovalidate="formnovalidate">back</button>',
 			],
 			'back button custom label' => [
-				2, 2,
-				['craue_formflow_button_label_back' => 'custom back'],
+				2,
+				2,
+				['asmitta_formflow_button_label_back' => 'custom back'],
 				'<button type="submit" class="" name="flow_renderingTest_transition" value="back" formnovalidate="formnovalidate">custom back</button>',
 			],
 			'reset button custom class' => [
-				1, 1,
-				['craue_formflow_button_class_reset' => 'reset'],
+				1,
+				1,
+				['asmitta_formflow_button_class_reset' => 'reset'],
 				'<button type="submit" class="reset" name="flow_renderingTest_transition" value="reset" formnovalidate="formnovalidate">start over</button>',
 			],
 			'reset button custom label' => [
-				1, 1,
-				['craue_formflow_button_label_reset' => 'custom reset'],
-				'<button type="submit" class="craue_formflow_button_first" name="flow_renderingTest_transition" value="reset" formnovalidate="formnovalidate">custom reset</button>',
+				1,
+				1,
+				['asmitta_formflow_button_label_reset' => 'custom reset'],
+				'<button type="submit" class="asmitta_formflow_button_first" name="flow_renderingTest_transition" value="reset" formnovalidate="formnovalidate">custom reset</button>',
 			],
 		];
 	}
 
-	public function testStepList() {
+	public function testStepList()
+	{
 		$flow = $this->getFlowStub();
 
 		// first step
@@ -207,8 +227,8 @@ class TemplateRenderingTest extends IntegrationTestCase {
 			'flow' => $flow,
 		]);
 
-		$this->assertStringContainsString('<ol class="craue_formflow_steplist">', $renderedTemplate);
-		$this->assertStringContainsString('<li class="craue_formflow_current_step">step1</li>', $renderedTemplate);
+		$this->assertStringContainsString('<ol class="asmitta_formflow_steplist">', $renderedTemplate);
+		$this->assertStringContainsString('<li class="asmitta_formflow_current_step">step1</li>', $renderedTemplate);
 		$this->assertStringContainsString('<li>step2</li>', $renderedTemplate);
 
 		// next step
@@ -219,10 +239,11 @@ class TemplateRenderingTest extends IntegrationTestCase {
 		]);
 
 		$this->assertStringContainsString('<li>step1</li>', $renderedTemplate);
-		$this->assertStringContainsString('<li class="craue_formflow_current_step">step2</li>', $renderedTemplate);
+		$this->assertStringContainsString('<li class="asmitta_formflow_current_step">step2</li>', $renderedTemplate);
 	}
 
-	public function testStepList_stepDone() {
+	public function testStepList_stepDone()
+	{
 		$flow = $this->getFlowStub(['isStepDone']);
 
 		// second step
@@ -239,10 +260,11 @@ class TemplateRenderingTest extends IntegrationTestCase {
 			'flow' => $flow,
 		]);
 
-		$this->assertStringContainsString('<li class="craue_formflow_done_step">step1</li>', $renderedTemplate);
+		$this->assertStringContainsString('<li class="asmitta_formflow_done_step">step1</li>', $renderedTemplate);
 	}
 
-	public function testStepList_stepSkipped() {
+	public function testStepList_stepSkipped()
+	{
 		$flow = $this->getFlowStub([], [
 			[
 				'label' => 'step1',
@@ -260,8 +282,8 @@ class TemplateRenderingTest extends IntegrationTestCase {
 			'flow' => $flow,
 		]);
 
-		$this->assertStringContainsString('<li class="craue_formflow_skipped_step">step1</li>', $renderedTemplate);
-		$this->assertStringContainsString('<li class="craue_formflow_current_step">step2</li>', $renderedTemplate);
+		$this->assertStringContainsString('<li class="asmitta_formflow_skipped_step">step1</li>', $renderedTemplate);
+		$this->assertStringContainsString('<li class="asmitta_formflow_current_step">step2</li>', $renderedTemplate);
 	}
 
 	/**
@@ -269,7 +291,8 @@ class TemplateRenderingTest extends IntegrationTestCase {
 	 * @param array $stepsConfig steps config
 	 * @return MockObject|FormFlow
 	 */
-	protected function getFlowStub(array $stubbedMethods = [], array $stepsConfig = null) {
+	protected function getFlowStub(array $stubbedMethods = [], array $stepsConfig = null)
+	{
 		/* @var $flow MockObject|FormFlow */
 		$flow = $this->getMockBuilder(FormFlow::class)->onlyMethods(array_merge(['getName', 'loadStepsConfig'], $stubbedMethods))->getMock();
 
@@ -299,5 +322,4 @@ class TemplateRenderingTest extends IntegrationTestCase {
 
 		return $flow;
 	}
-
 }

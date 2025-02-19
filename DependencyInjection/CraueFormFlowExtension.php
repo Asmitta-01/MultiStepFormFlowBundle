@@ -16,15 +16,17 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class CraueFormFlowExtension extends Extension implements CompilerPassInterface {
+class AsmittaFormFlowExtension extends Extension implements CompilerPassInterface
+{
 
-	const FORM_FLOW_TAG = 'craue.form.flow';
+	const FORM_FLOW_TAG = 'asmitta.form.flow';
 
 	/**
 	 * @return void
 	 */
-	public function load(array $config, ContainerBuilder $container) {
-		$loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+	public function load(array $config, ContainerBuilder $container)
+	{
+		$loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 		$loader->load('form_flow.xml');
 		$loader->load('twig.xml');
 		$loader->load('util.xml');
@@ -35,12 +37,12 @@ class CraueFormFlowExtension extends Extension implements CompilerPassInterface 
 	/**
 	 * @return void
 	 */
-	public function process(ContainerBuilder $container) {
-		$baseFlowDefinitionMethodCalls = $container->getDefinition('craue.form.flow')->getMethodCalls();
+	public function process(ContainerBuilder $container)
+	{
+		$baseFlowDefinitionMethodCalls = $container->getDefinition('asmitta.form.flow')->getMethodCalls();
 
 		foreach (array_keys($container->findTaggedServiceIds(self::FORM_FLOW_TAG)) as $id) {
 			$container->findDefinition($id)->setMethodCalls($baseFlowDefinitionMethodCalls);
 		}
 	}
-
 }

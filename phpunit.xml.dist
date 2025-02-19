@@ -9,7 +9,7 @@
 		failOnRisky="true"
 		failOnWarning="true">
 	<testsuites>
-		<testsuite name="CraueFormFlowBundle">
+		<testsuite name="AsmittaFormFlowBundle">
 			<directory suffix="Test.php">Tests</directory>
 		</testsuite>
 	</testsuites>

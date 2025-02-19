@@ -10,9 +10,11 @@ namespace Craue\FormFlowBundle\Tests;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class RemoveSecondStepSkipMarkOnResetFlowTest extends IntegrationTestCase {
+class RemoveSecondStepSkipMarkOnResetFlowTest extends IntegrationTestCase
+{
 
-	public function testRemoveSecondStepSkipMarkOnReset() {
+	public function testRemoveSecondStepSkipMarkOnReset()
+	{
 		$crawler = static::$client->request('GET', $this->url('_FormFlow_removeSecondStepSkipMarkOnReset'));
 		$this->assertSame(200, static::$client->getResponse()->getStatusCode());
 		$this->assertCurrentStepNumber(1, $crawler);
@@ -23,7 +25,7 @@ class RemoveSecondStepSkipMarkOnResetFlowTest extends IntegrationTestCase {
 		$crawler = static::$client->submit($form);
 		$this->assertCurrentStepNumber(3, $crawler);
 		// step 2 must be marked as skipped
-		$this->assertStringContainsString('<li class="craue_formflow_skipped_step">step2</li>', $this->getHtml($crawler->filter('#step-list')));
+		$this->assertStringContainsString('<li class="asmitta_formflow_skipped_step">step2</li>', $this->getHtml($crawler->filter('#step-list')));
 
 		// reset
 		$form = $crawler->selectButton('start over')->form();
@@ -32,5 +34,4 @@ class RemoveSecondStepSkipMarkOnResetFlowTest extends IntegrationTestCase {
 		// step 2 must not be marked as skipped
 		$this->assertStringContainsString('<li>step2</li>', $this->getHtml($crawler->filter('#step-list')));
 	}
-
 }

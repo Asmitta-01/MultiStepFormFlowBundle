@@ -15,14 +15,15 @@ use Symfony\Component\DependencyInjection\Reference;
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class LegacySessionCompilerPass implements CompilerPassInterface {
+class LegacySessionCompilerPass implements CompilerPassInterface
+{
 
 	/**
 	 * @return void
 	 */
-	public function process(ContainerBuilder $container) : void {
+	public function process(ContainerBuilder $container): void
+	{
 		// TODO remove as soon as Symfony >= 5.3 is required
-		$container->findDefinition('craue.form.flow.storage_default')->replaceArgument(0, new Reference('session'));
+		$container->findDefinition('asmitta.form.flow.storage_default')->replaceArgument(0, new Reference('session'));
 	}
-
 }
