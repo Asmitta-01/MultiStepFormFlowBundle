@@ -256,6 +256,15 @@ Example:
 
 You can also remove the reset button by setting `asmitta_formflow_button_render_reset` to `false`.
 
+The buttons are displayed in a `div` with the class _asmitta_formflow_buttons_. You can override its rules in your CSS file.
+
+```css
+/* Default*/
+.asmitta_formflow_buttons {
+   overflow: hidden;
+}
+```
+
 ## Handle Unmapped Fields
 
 If you have unmapped fields in your form, you can handle them at the end of the form fill.

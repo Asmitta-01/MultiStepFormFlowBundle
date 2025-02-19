@@ -2,20 +2,19 @@
 {% set renderResetButton = asmitta_formflow_button_render_reset is defined ? asmitta_formflow_button_render_reset : true %}
 {% set buttonCount = 1 + (renderBackButton ? 1 : 0) + (renderResetButton ? 1 : 0) %}
 
-<div
-	class="asmitta_formflow_buttons asmitta_formflow_button_count_{{ buttonCount }}">
-	{#
-			Default button (the one trigged by pressing the enter/return key) must be defined first.
-			Thus, all buttons are defined in reverse order and will be reversed again via CSS.
-			See http://stackoverflow.com/questions/1963245/multiple-submit-buttons-specifying-default-button
-		#}
+<div class="asmitta_formflow_buttons asmitta_formflow_button_count_{{ buttonCount }}">
+
+	{# Default button (the one triggering by pressing the enter/return key) must be defined first.  #}
+	{# Thus, all buttons are defined in reverse order and will be reversed again via CSS. #}
+	{# See http://stackoverflow.com/questions/1963245/multiple-submit-buttons-specifying-default-button #}
+
 	{%- set isLastStep = flow.getCurrentStepNumber() == flow.getLastStepNumber() -%}
 	{%- set asmitta_formflow_button_class_last = asmitta_formflow_button_class_last | default('asmitta_formflow_button_last') -%}
 	{%- set asmitta_formflow_button_class_last = isLastStep
 			? asmitta_formflow_button_class_finish | default(asmitta_formflow_button_class_last)
 			: asmitta_formflow_button_class_next | default(asmitta_formflow_button_class_last)
 		-%}
-	{%- set craue_buttons = [
+	{%- set buttons = [
 			{
 				label: asmitta_formflow_button_label_last | default(isLastStep ? asmitta_formflow_button_label_finish | default('button.finish') : asmitta_formflow_button_label_next | default('button.next')),
 				render: true,
@@ -45,10 +44,9 @@
 			},
 		] -%}
 
-	{% for button in craue_buttons %}
-		{% if button.render %}
-			<button type="submit" {% for key, value in button.attr %} {{ key }}="{{ value }}" {% endfor %}>
-				{{- button.label | trans({}, 'AsmittaFormFlowBundle') -}}
+		{% for button in buttons %}
+			{% if button.render %}
+				<button type="submit" {% for key, value in button.attr %} {{ key }}="{{ value }}" {% endfor %}> {{- button.label | trans({}, 'AsmittaFormFlowBundle') -}}
 			</button>
 		{% endif %}
 	{% endfor %}
