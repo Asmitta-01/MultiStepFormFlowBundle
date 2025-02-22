@@ -19,12 +19,12 @@ class SessionStorage implements StorageInterface
 	use SessionProviderTrait;
 
 	/**
-	 * @param RequestStack|SessionInterface $requestStackOrSession
+	 * @param RequestStack $requestStack
 	 * @throws InvalidTypeException
 	 */
-	public function __construct($requestStackOrSession)
+	public function __construct($requestStack)
 	{
-		$this->setRequestStackOrSession($requestStackOrSession);
+		$this->requestStack = $requestStack;
 	}
 
 	/**

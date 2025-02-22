@@ -27,6 +27,7 @@ use Symfony\Component\Validator\Constraints\GroupSequence;
  * @author Christian Raue <christian.raue@gmail.com>
  * @author Marcus Stöhr <dafish@soundtrack-board.de>
  * @author Toni Uebernickel <tuebernickel@gmail.com>
+ * @author Brayan Tiwa <tiwabrayan@gmail.com>
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
@@ -1059,7 +1060,7 @@ abstract class FormFlow implements FormFlowInterface
 	 * Defines the configuration for all steps of this flow.
 	 * @return array
 	 */
-	protected function loadStepsConfig()
+	protected function loadStepsConfig(): array
 	{
 		return [];
 	}
