@@ -202,7 +202,7 @@ class Step implements StepInterface
 	/**
 	 * {@inheritDoc}
 	 */
-	public function evaluateSkipping($estimatedCurrentStepNumber, FormFlowInterface $flow)
+	public function evaluateSkipping(int $estimatedCurrentStepNumber, FormFlowInterface $flow)
 	{
 		if ($this->skipFunction !== null) {
 			$returnValue = ($this->skipFunction)(...[$estimatedCurrentStepNumber, $flow]);
