@@ -3,6 +3,8 @@
 This is a fork of the package [craue/CraueFormFlowBundle](https://github.com/craue/CraueFormFlowBundle) version __3.7.0__. You can check it to know all the features of this package.
 In this fork i focus on the usage and installation on Symfony 7.
 
+> :warning: __Note__: This fork doesn't support a Symfony version prior to 5.3.
+
 ## Installation
 
 ### Get the bundle
@@ -27,7 +29,7 @@ return [
 
 ## Usage
 
-This section shows how to create a 3-step form flow for creating a vehicle. The package provides 03 approaches but i will focus on one: One form type for the entire flow.
+This section shows how to create a 3-step form flow for a user. The package provides 03 approaches but i will focus on one: One form type for the entire flow.
 This approach makes it easy to turn an existing (common) form into a form flow.
 We will use this _FormType_:
 
