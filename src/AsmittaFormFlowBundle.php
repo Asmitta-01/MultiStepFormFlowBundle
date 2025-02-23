@@ -38,7 +38,7 @@ class AsmittaFormFlowBundle extends AbstractBundle implements CompilerPassInterf
 	public function loadExtension(array $config, ContainerConfigurator $container, ContainerBuilder $builder): void
 	{
 		// load an XML, PHP or YAML file
-		$container->import(__DIR__ . '/config/services.yaml');
+		$container->import(__DIR__ . '/../config/services.yaml');
 		$builder->registerForAutoconfiguration(FormFlowInterface::class)->addTag(self::FORM_FLOW_TAG);
 	}
 
