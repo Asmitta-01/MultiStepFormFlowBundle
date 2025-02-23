@@ -5,6 +5,7 @@ namespace Asmitta\FormFlowBundle;
 use Asmitta\FormFlowBundle\Util\TempFileUtil;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Asmitta\FormFlowBundle\Form\FormFlowInterface;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
@@ -14,7 +15,7 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
  * @copyright 2011-2024 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class AsmittaFormFlowBundle extends AbstractBundle
+class AsmittaFormFlowBundle extends AbstractBundle implements CompilerPassInterface
 {
 
 	const FORM_FLOW_TAG = 'asmitta.form.flow';
