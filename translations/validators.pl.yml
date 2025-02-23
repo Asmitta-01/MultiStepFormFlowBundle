@@ -1,2 +1,2 @@
-craueFormFlow.previousStepInvalid: Formularz dla kroku %stepNumber% został wypełniony nieprawidłowo. Proszę cofnąć się i wypełnić go ponownie.
-craueFormFlow.flowExpired: Formularz stracił ważność. Proszę wypełnić go ponownie.
+asmittaFormFlow.previousStepInvalid: Formularz dla kroku %stepNumber% został wypełniony nieprawidłowo. Proszę cofnąć się i wypełnić go ponownie.
+asmittaFormFlow.flowExpired: Formularz stracił ważność. Proszę wypełnić go ponownie.

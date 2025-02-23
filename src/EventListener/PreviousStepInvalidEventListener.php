@@ -28,7 +28,7 @@ class PreviousStepInvalidEventListener
 	 */
 	protected function getPreviousStepInvalidFormError($stepNumber)
 	{
-		$messageId = 'craueFormFlow.previousStepInvalid';
+		$messageId = 'asmittaFormFlow.previousStepInvalid';
 		$messageParameters = ['%stepNumber%' => $stepNumber];
 
 		return new FormError($this->translator->trans($messageId, $messageParameters, 'validators'), $messageId, $messageParameters);

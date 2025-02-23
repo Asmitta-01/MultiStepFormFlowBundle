@@ -1,2 +1,2 @@
-craueFormFlow.previousStepInvalid: El formulario del paso %stepNumber% está inválido. Por favor, utilice el botón de atrás y pruebe de enviar el formulario de nuevo.
-craueFormFlow.flowExpired: El formulario ha expirado. Intente enviar de nuevo, por favor.
+asmittaFormFlow.previousStepInvalid: El formulario del paso %stepNumber% está inválido. Por favor, utilice el botón de atrás y pruebe de enviar el formulario de nuevo.
+asmittaFormFlow.flowExpired: El formulario ha expirado. Intente enviar de nuevo, por favor.

@@ -27,7 +27,7 @@ class FlowExpiredEventListener
 	 */
 	protected function getFlowExpiredFormError()
 	{
-		$messageId = 'craueFormFlow.flowExpired';
+		$messageId = 'asmittaFormFlow.flowExpired';
 		$messageParameters = [];
 
 		return new FormError($this->translator->trans($messageId, $messageParameters, 'validators'), $messageId, $messageParameters);
