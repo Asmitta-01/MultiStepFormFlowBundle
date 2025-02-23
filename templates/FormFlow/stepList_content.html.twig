@@ -1,0 +1,17 @@
+{% use '@AsmittaFormFlow/FormFlow/stepList_blocks.html.twig' %}
+
+{%- if flow.getStepLabels() is not empty -%}
+	<ol class="asmitta_formflow_steplist">
+		{% for stepLabel in flow.getStepLabels() %}
+			<li{{block('asmitta_flow_stepList_class')}}>
+				{%- if asmitta_isStepLinkable(flow, loop.index) -%}
+					<a href="{{ path(app.request.attributes.get('_route'), app.request.query.all | merge(app.request.attributes.get('_route_params')) | asmitta_addDynamicStepNavigationParameters(flow, loop.index)) }}">
+						{{- block('asmitta_flow_stepLabel') -}}
+					</a>
+				{%- else -%}
+					{{ block('asmitta_flow_stepLabel') }}
+				{%- endif -%}
+			</li>
+		{% endfor %}
+	</ol>
+{%- endif -%}

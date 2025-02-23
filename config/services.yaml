@@ -1,0 +1,84 @@
+services:
+   # Util
+    asmitta_formflow_util:
+        class: Asmitta\FormFlowBundle\Util\FormFlowUtil
+        public: true
+
+    Asmitta\FormFlowBundle\Util\FormFlowUtil:
+        alias: asmitta_formflow_util
+        public: false
+
+    # Twig
+    twig.extension.asmitta_formflow:
+        class: Asmitta\FormFlowBundle\Twig\Extension\FormFlowExtension
+        tags:
+            - { name: twig.extension }
+        calls:
+            - method: setFormFlowUtil
+              arguments:
+                  - '@asmitta_formflow_util'
+    
+    # Form flow
+    asmitta.form.flow.storage_default:
+        class: Asmitta\FormFlowBundle\Storage\SessionStorage
+        arguments:
+            - '@request_stack'
+        public: false
+
+    asmitta.form.flow.storage:
+        alias: asmitta.form.flow.storage_default
+        public: true
+
+    asmitta.form.flow.data_manager_default:
+        class: Asmitta\FormFlowBundle\Storage\DataManager
+        arguments:
+            - '@asmitta.form.flow.storage'
+        public: false
+
+    asmitta.form.flow.data_manager:
+        alias: asmitta.form.flow.data_manager_default
+
+    asmitta.form.flow:
+        class: Asmitta\FormFlowBundle\Form\FormFlow
+        calls:
+            - method: setDataManager
+              arguments:
+                  - '@asmitta.form.flow.data_manager'
+            - method: setFormFactory
+              arguments:
+                  - '@form.factory'
+            - method: setRequestStack
+              arguments:
+                  - '@request_stack'
+            - method: setEventDispatcher
+              arguments:
+                  - '@event_dispatcher'
+              on-invalid: ignore
+
+    asmitta.form.flow.form_extension:
+        class: Asmitta\FormFlowBundle\Form\Extension\FormFlowFormExtension
+        tags:
+            - { name: form.type_extension, extended-type: Symfony\Component\Form\Extension\Core\Type\FormType }
+
+    asmitta.form.flow.hidden_field_extension:
+        class: Asmitta\FormFlowBundle\Form\Extension\FormFlowHiddenFieldExtension
+        tags:
+            - { name: form.type_extension, extended-type: Symfony\Component\Form\Extension\Core\Type\HiddenType }
+
+    asmitta.form.flow.event_listener.previous_step_invalid:
+        class: Asmitta\FormFlowBundle\EventListener\PreviousStepInvalidEventListener
+        tags:
+            - { name: kernel.event_listener, event: Asmitta\FormFlowBundle\Form\FormFlowEvents::PREVIOUS_STEP_INVALID, method: onPreviousStepInvalid }
+        calls:
+            - method: setTranslator
+              arguments:
+                  - '@translator'
+
+    asmitta.form.flow.event_listener.flow_expired:
+        class: Asmitta\FormFlowBundle\EventListener\FlowExpiredEventListener
+        tags:
+            - { name: kernel.event_listener, event: Asmitta\FormFlowBundle\Form\FormFlowEvents::FLOW_EXPIRED, method: onFlowExpired }
+        calls:
+            - method: setTranslator
+              arguments:
+                  - '@translator'
