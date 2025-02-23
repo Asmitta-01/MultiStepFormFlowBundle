@@ -15,7 +15,7 @@ interface StorageInterface
 	 * @param string $key
 	 * @param mixed $value
 	 */
-	function set($key, $value);
+	function set($key, $value): void;
 
 	/**
 	 * Retrieve the data stored under the given key.
@@ -36,5 +36,5 @@ interface StorageInterface
 	 * Delete the stored data of the given key.
 	 * @param string $key
 	 */
-	function remove($key);
+	function remove($key): void;
 }

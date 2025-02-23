@@ -28,6 +28,7 @@ interface ExtendedDataManagerInterface extends DataManagerInterface
 	/**
 	 * Drops data of all flows.
 	 * Note: This method may be used for custom flow management.
+	 * @return void
 	 */
 	function dropAll();
 }

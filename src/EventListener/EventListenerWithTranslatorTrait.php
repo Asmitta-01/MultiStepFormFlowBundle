@@ -26,7 +26,7 @@ trait EventListenerWithTranslatorTrait
 	 * @param TranslatorInterface $translator
 	 * @throws InvalidTypeException
 	 */
-	public function setTranslator(TranslatorInterface $translator)
+	public function setTranslator(TranslatorInterface $translator): void
 	{
 		$this->translator = $translator;
 

@@ -26,8 +26,8 @@ class SerializableFile
 	 */
 	protected $type;
 
-	protected $clientOriginalName;
-	protected $clientMimeType;
+	protected string $clientOriginalName;
+	protected string $clientMimeType;
 
 	/**
 	 * @param mixed $file An object meant to be serialized.
@@ -84,6 +84,9 @@ class SerializableFile
 		];
 	}
 
+	/**
+	 * @param array<string, mixed> $data
+	 */
 	public function __unserialize(array $data): void
 	{
 		// TODO remove for 4.0

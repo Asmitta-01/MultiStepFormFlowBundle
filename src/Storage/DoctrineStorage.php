@@ -37,6 +37,7 @@ class DoctrineStorage implements StorageInterface
 
 	/**
 	 * @var AbstractSchemaManager
+	 * @phpstan-ignore-next-line
 	 */
 	private $schemaManager;
 
@@ -62,7 +63,7 @@ class DoctrineStorage implements StorageInterface
 	/**
 	 * {@inheritDoc}
 	 */
-	public function set($key, $value)
+	public function set($key, $value): void
 	{
 		if (!$this->tableExists()) {
 			$this->createTable();
@@ -117,7 +118,7 @@ class DoctrineStorage implements StorageInterface
 	/**
 	 * {@inheritDoc}
 	 */
-	public function remove($key)
+	public function remove($key): void
 	{
 		if (!$this->tableExists()) {
 			return;
@@ -146,12 +147,12 @@ class DoctrineStorage implements StorageInterface
 		return $result->fetchOne();
 	}
 
-	private function tableExists()
+	private function tableExists(): bool
 	{
 		return $this->schemaManager->tablesExist([self::TABLE]);
 	}
 
-	private function createTable()
+	private function createTable(): void
 	{
 		$table = new Table(self::TABLE, [
 			new Column($this->keyColumn, Type::getType(Types::STRING), ['length' => 255]),
@@ -162,7 +163,10 @@ class DoctrineStorage implements StorageInterface
 		$this->schemaManager->createTable($table);
 	}
 
-	private function generateKey($key)
+	/**
+	 * @param string $key
+	 */
+	private function generateKey($key): string
 	{
 		return $this->storageKeyGenerator->generate($key);
 	}

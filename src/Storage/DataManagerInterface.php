@@ -6,7 +6,9 @@ use Asmitta\FormFlowBundle\Form\FormFlowInterface;
 
 /**
  * @author Christian Raue <christian.raue@gmail.com>
+ * @author Brayan Tiwa <tiwabrayan@gmail.com>
  * @copyright 2011-2024 Christian Raue
+ * @copyright 2025 Brayan Tiwa
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 interface DataManagerInterface
@@ -25,9 +27,9 @@ interface DataManagerInterface
 	/**
 	 * Saves data of the given flow.
 	 * @param FormFlowInterface $flow
-	 * @param array $data
+	 * @param array<mixed> $data
 	 */
-	function save(FormFlowInterface $flow, array $data);
+	function save(FormFlowInterface $flow, array $data): void;
 
 	/**
 	 * Checks if data exists for a given flow.
@@ -39,7 +41,7 @@ interface DataManagerInterface
 	/**
 	 * Loads data of the given flow.
 	 * @param FormFlowInterface $flow
-	 * @return array
+	 * @return array<mixed>
 	 */
 	function load(FormFlowInterface $flow): array;
 

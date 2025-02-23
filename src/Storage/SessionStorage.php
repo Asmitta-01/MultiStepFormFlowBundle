@@ -30,7 +30,7 @@ class SessionStorage implements StorageInterface
 	/**
 	 * {@inheritDoc}
 	 */
-	public function set($key, $value)
+	public function set($key, $value): void
 	{
 		$this->getSession()->set($key, $value);
 	}
@@ -54,7 +54,7 @@ class SessionStorage implements StorageInterface
 	/**
 	 * {@inheritDoc}
 	 */
-	public function remove($key)
+	public function remove($key): void
 	{
 		$this->getSession()->remove($key);
 	}

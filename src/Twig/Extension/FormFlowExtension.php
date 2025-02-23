@@ -23,7 +23,7 @@ class FormFlowExtension extends AbstractExtension
 	 */
 	protected $formFlowUtil;
 
-	public function setFormFlowUtil(FormFlowUtil $formFlowUtil)
+	public function setFormFlowUtil(FormFlowUtil $formFlowUtil): void
 	{
 		$this->formFlowUtil = $formFlowUtil;
 	}
@@ -31,7 +31,7 @@ class FormFlowExtension extends AbstractExtension
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getName()
+	public function getName(): string
 	{
 		return 'asmitta_formflow';
 	}
@@ -59,23 +59,23 @@ class FormFlowExtension extends AbstractExtension
 
 	/**
 	 * Adds route parameters for dynamic step navigation.
-	 * @param array $parameters Current route parameters.
+	 * @param mixed[] $parameters Current route parameters.
 	 * @param FormFlow $flow The flow involved.
 	 * @param int $stepNumber Number of the step the link will be generated for.
-	 * @return array Route parameters plus instance and step parameter.
+	 * @return mixed[] Route parameters plus instance and step parameter.
 	 */
-	public function addDynamicStepNavigationParameters(array $parameters, FormFlow $flow, $stepNumber)
+	public function addDynamicStepNavigationParameters(array $parameters, FormFlow $flow, $stepNumber): array
 	{
 		return $this->formFlowUtil->addRouteParameters($parameters, $flow, $stepNumber);
 	}
 
 	/**
 	 * Removes route parameters for dynamic step navigation.
-	 * @param array $parameters Current route parameters.
+	 * @param array<mixed> $parameters Current route parameters.
 	 * @param FormFlow $flow The flow involved.
-	 * @return array Route parameters without instance and step parameter.
+	 * @return array<mixed> Route parameters without instance and step parameter.
 	 */
-	public function removeDynamicStepNavigationParameters(array $parameters, FormFlow $flow)
+	public function removeDynamicStepNavigationParameters(array $parameters, FormFlow $flow): array
 	{
 		return $this->formFlowUtil->removeRouteParameters($parameters, $flow);
 	}

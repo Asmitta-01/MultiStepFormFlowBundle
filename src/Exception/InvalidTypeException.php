@@ -10,6 +10,10 @@ namespace Asmitta\FormFlowBundle\Exception;
 class InvalidTypeException extends \InvalidArgumentException
 {
 
+	/**
+	 * @param mixed $value
+	 * @param string|array<string> $expectedType
+	 */
 	public function __construct($value, $expectedType)
 	{
 		$givenType = is_object($value) ? get_class($value) : gettype($value);
@@ -23,7 +27,11 @@ class InvalidTypeException extends \InvalidArgumentException
 		parent::__construct($message);
 	}
 
-	protected function conjunctTypes(array $expectedTypes)
+	/**
+	 * @param string[] $expectedTypes
+	 * @return string
+	 */
+	protected function conjunctTypes(array $expectedTypes): string
 	{
 		$expectedTypes = array_values($expectedTypes);
 

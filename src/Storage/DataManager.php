@@ -19,7 +19,9 @@ use Asmitta\FormFlowBundle\Form\FormFlowInterface;
  * </code>
  *
  * @author Christian Raue <christian.raue@gmail.com>
+ * @author Brayan Tiwa <tiwabrayan@gmail.com>
  * @copyright 2011-2024 Christian Raue
+ * @copyright 2025 Brayan Tiwa
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 class DataManager implements ExtendedDataManagerInterface
@@ -54,7 +56,7 @@ class DataManager implements ExtendedDataManagerInterface
 	/**
 	 * {@inheritDoc}
 	 */
-	public function save(FormFlowInterface $flow, array $data)
+	public function save(FormFlowInterface $flow, array $data): void
 	{
 		// handle file uploads
 		if ($flow->isHandleFileUploads()) {

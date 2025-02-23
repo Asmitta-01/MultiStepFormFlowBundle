@@ -17,7 +17,7 @@ class PreviousStepInvalidEventListener
 
 	use EventListenerWithTranslatorTrait;
 
-	public function onPreviousStepInvalid(PreviousStepInvalidEvent $event)
+	public function onPreviousStepInvalid(PreviousStepInvalidEvent $event): void
 	{
 		$event->getCurrentStepForm()->addError($this->getPreviousStepInvalidFormError($event->getInvalidStepNumber()));
 	}

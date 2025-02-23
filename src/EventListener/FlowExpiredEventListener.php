@@ -17,7 +17,7 @@ class FlowExpiredEventListener
 
 	use EventListenerWithTranslatorTrait;
 
-	public function onFlowExpired(FlowExpiredEvent $event)
+	public function onFlowExpired(FlowExpiredEvent $event): void
 	{
 		$event->getCurrentStepForm()->addError($this->getFlowExpiredFormError());
 	}
