@@ -20,7 +20,7 @@ interface DataManagerInterface
 	/**
 	 * @return StorageInterface
 	 */
-	function getStorage();
+	function getStorage(): StorageInterface;
 
 	/**
 	 * Saves data of the given flow.
@@ -34,18 +34,18 @@ interface DataManagerInterface
 	 * @param FormFlowInterface $flow
 	 * @return bool
 	 */
-	function exists(FormFlowInterface $flow);
+	function exists(FormFlowInterface $flow): bool;
 
 	/**
 	 * Loads data of the given flow.
 	 * @param FormFlowInterface $flow
 	 * @return array
 	 */
-	function load(FormFlowInterface $flow);
+	function load(FormFlowInterface $flow): array;
 
 	/**
 	 * Drops data of the given flow.
 	 * @param FormFlowInterface $flow
 	 */
-	function drop(FormFlowInterface $flow);
+	function drop(FormFlowInterface $flow): void;
 }

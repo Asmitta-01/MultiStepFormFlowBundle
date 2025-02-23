@@ -8,10 +8,12 @@ use Symfony\Component\Form\FormTypeInterface;
 
 /**
  * @author Christian Raue <christian.raue@gmail.com>
+ * @author Brayan Tiwa <tiwabrayan@gmail.com>
  * @copyright 2011-2024 Christian Raue
+ * @copyright 2025 Brayan Tiwa
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class Step implements StepInterface
+final class Step implements StepInterface
 {
 
 	/**
@@ -30,7 +32,7 @@ class Step implements StepInterface
 	protected $formType = null;
 
 	/**
-	 * @var array
+	 * @var mixed[]
 	 */
 	protected $formOptions = [];
 
@@ -44,7 +46,11 @@ class Step implements StepInterface
 	 */
 	private $skipped = false;
 
-	public static function createFromConfig($number, array $config)
+	/**
+	 * @param int $number
+	 * @param mixed[] $config
+	 */
+	public static function createFromConfig(int $number, array $config): static
 	{
 		$step = new static();
 
@@ -55,8 +61,6 @@ class Step implements StepInterface
 				case 'label':
 					$step->setLabel($value);
 					break;
-				case 'type':
-					@trigger_error('Step config option "type" is deprecated since AsmittaFormFlowBundle 3.0. Use "form_type" instead.', E_USER_DEPRECATED);
 				case 'form_type':
 					$step->setFormType($value);
 					break;
@@ -77,15 +81,11 @@ class Step implements StepInterface
 	/**
 	 * @param int $number
 	 */
-	public function setNumber($number)
+	public function setNumber(int $number): void
 	{
-		if (is_int($number)) {
-			$this->number = $number;
+		$this->number = $number;
 
-			return;
-		}
-
-		throw new InvalidTypeException($number, 'int');
+		return;
 	}
 
 	/**
@@ -99,7 +99,7 @@ class Step implements StepInterface
 	/**
 	 * @param string|StepLabel|null $label
 	 */
-	public function setLabel($label)
+	public function setLabel($label): void
 	{
 		if (is_string($label)) {
 			$this->label = StepLabel::createStringLabel($label);
@@ -135,7 +135,7 @@ class Step implements StepInterface
 	 * @param FormTypeInterface|string|null $formType
 	 * @throws InvalidTypeException
 	 */
-	public function setFormType($formType)
+	public function setFormType($formType): void
 	{
 		if ($formType === null || is_string($formType) || $formType instanceof FormTypeInterface) {
 			$this->formType = $formType;
@@ -155,23 +155,19 @@ class Step implements StepInterface
 	}
 
 	/**
-	 * @param array $formOptions
+	 * @param mixed[] $formOptions
 	 */
-	public function setFormOptions($formOptions)
+	public function setFormOptions(array $formOptions): void
 	{
-		if (is_array($formOptions)) {
-			$this->formOptions = $formOptions;
+		$this->formOptions = $formOptions;
 
-			return;
-		}
-
-		throw new InvalidTypeException($formOptions, 'array');
+		return;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getFormOptions()
+	public function getFormOptions(): array
 	{
 		return $this->formOptions;
 	}
@@ -180,7 +176,7 @@ class Step implements StepInterface
 	 * @param bool|callable $skip
 	 * @throws InvalidTypeException
 	 */
-	public function setSkip($skip)
+	public function setSkip($skip): void
 	{
 		if (is_bool($skip)) {
 			$this->skipFunction = null;
@@ -202,7 +198,7 @@ class Step implements StepInterface
 	/**
 	 * {@inheritDoc}
 	 */
-	public function evaluateSkipping(int $estimatedCurrentStepNumber, FormFlowInterface $flow)
+	public function evaluateSkipping(int $estimatedCurrentStepNumber, FormFlowInterface $flow): void
 	{
 		if ($this->skipFunction !== null) {
 			$returnValue = ($this->skipFunction)(...[$estimatedCurrentStepNumber, $flow]);

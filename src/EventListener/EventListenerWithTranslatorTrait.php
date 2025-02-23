@@ -3,37 +3,33 @@
 namespace Asmitta\FormFlowBundle\EventListener;
 
 use Asmitta\FormFlowBundle\Exception\InvalidTypeException;
-use Symfony\Component\Translation\TranslatorInterface as LegacyTranslatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @internal
  *
  * @author Christian Raue <christian.raue@gmail.com>
+ * @author Brayan Tiwa <tiwabrayan@gmail.com>
  * @copyright 2011-2024 Christian Raue
+ * @copyright 2025 Brayan Tiwa
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 trait EventListenerWithTranslatorTrait
 {
 
 	/**
-	 * @var TranslatorInterface|LegacyTranslatorInterface
+	 * @var TranslatorInterface
 	 */
 	protected $translator;
 
 	/**
-	 * @param TranslatorInterface|LegacyTranslatorInterface $translator
+	 * @param TranslatorInterface $translator
 	 * @throws InvalidTypeException
 	 */
-	public function setTranslator($translator)
+	public function setTranslator(TranslatorInterface $translator)
 	{
-		// TODO revert to type-hint with only TranslatorInterface as soon as Symfony >= 5.0 is required
-		if ($translator instanceof TranslatorInterface || $translator instanceof LegacyTranslatorInterface) {
-			$this->translator = $translator;
+		$this->translator = $translator;
 
-			return;
-		}
-
-		throw new InvalidTypeException($translator, [TranslatorInterface::class, LegacyTranslatorInterface::class]);
+		return;
 	}
 }

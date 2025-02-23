@@ -40,16 +40,14 @@
 		"symfony/yaml": "^6.0 || ^7.0"
 	},
 	"require-dev": {
-		"craue/translations-tests": "^1.1",
 		"doctrine/collections": "^1.8 || ^2.1",
-		"doctrine/common": "^2.9 || ^3.0",
-		"doctrine/dbal": "^2.10 || ^3.0",
-		"doctrine/doctrine-bundle": "^1.10 || ^2.0",
+		"doctrine/dbal": "^3.1",
+		"doctrine/doctrine-bundle": "^2.0",
 		"phpstan/extension-installer": "^1.1",
-		"phpstan/phpstan": "^1.10",
+		"phpstan/phpstan": "^1.12",
 		"phpstan/phpstan-deprecation-rules": "^1.0",
 		"phpstan/phpstan-strict-rules": "^1.1",
-		"phpstan/phpstan-symfony": "^1.1",
+		"phpstan/phpstan-symfony": "^1.4",
 		"phpunit/phpunit": "^9.5",
 		"symfony/browser-kit": "^6.0 || ^7.0",
 		"symfony/css-selector": "^6.0 || ^7.0",
@@ -58,17 +56,11 @@
 		"symfony/security-bundle": "^6.0 || ^7.0",
 		"symfony/twig-bundle": "^6.0 || ^7.0"
 	},
-	"conflict": {
-		"doctrine/dbal": "<2.10"
-	},
 	"minimum-stability": "stable",
 	"autoload": {
 		"psr-4": {
 			"Asmitta\\FormFlowBundle\\": "src/"
-		},
-		"exclude-from-classmap": [
-			"/Tests/"
-		]
+		}
 	},
 	"config": {
 		"allow-plugins": {

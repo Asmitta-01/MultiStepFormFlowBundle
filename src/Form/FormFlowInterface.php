@@ -11,7 +11,9 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * @author Christian Raue <christian.raue@gmail.com>
+ * @author Brayan Tiwa <tiwabrayan@gmail.com>
  * @copyright 2011-2024 Christian Raue
+ * @copyright 2025 Brayan Tiwa
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 interface FormFlowInterface
@@ -25,17 +27,17 @@ interface FormFlowInterface
 	/**
 	 * @param FormFactoryInterface $formFactory
 	 */
-	function setFormFactory(FormFactoryInterface $formFactory);
+	function setFormFactory(FormFactoryInterface $formFactory): void;
 
 	/**
 	 * @param RequestStack $requestStack
 	 */
-	function setRequestStack(RequestStack $requestStack);
+	function setRequestStack(RequestStack $requestStack): void;
 
 	/**
 	 * @param DataManagerInterface $dataManager
 	 */
-	function setDataManager(DataManagerInterface $dataManager);
+	function setDataManager(DataManagerInterface $dataManager): void;
 
 	/**
 	 * @return DataManagerInterface
@@ -45,7 +47,7 @@ interface FormFlowInterface
 	/**
 	 * @param EventDispatcherInterface $eventDispatcher
 	 */
-	function setEventDispatcher(EventDispatcherInterface $eventDispatcher);
+	function setEventDispatcher(EventDispatcherInterface $eventDispatcher): void;
 
 	/**
 	 * @return bool
@@ -86,7 +88,7 @@ interface FormFlowInterface
 	 * Restores previously saved form data of all steps and determines the current step.
 	 * @param mixed $formData
 	 */
-	function bind($formData);
+	function bind($formData): void;
 
 	/**
 	 * @return mixed
@@ -121,7 +123,7 @@ interface FormFlowInterface
 	 * Saves the form data of the current step.
 	 * @param FormInterface $form
 	 */
-	function saveCurrentStepData(FormInterface $form);
+	function saveCurrentStepData(FormInterface $form): void;
 
 	/**
 	 * Proceeds to the next step.
@@ -132,7 +134,7 @@ interface FormFlowInterface
 	/**
 	 * Resets the flow and clears its underlying storage.
 	 */
-	function reset();
+	function reset(): void;
 
 	/**
 	 * @return int First visible step, which may be greater than 1 if steps are skipped.

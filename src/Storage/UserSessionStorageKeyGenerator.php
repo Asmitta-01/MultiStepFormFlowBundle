@@ -4,8 +4,6 @@ namespace Asmitta\FormFlowBundle\Storage;
 
 use Asmitta\FormFlowBundle\Exception\InvalidTypeException;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
@@ -15,6 +13,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
  * @author Christian Raue <christian.raue@gmail.com>
  * @author Brayan Tiwa <tiwabrayan@gmail.com>
  * @copyright 2011-2024 Christian Raue
+ * @copyright 2025 Brayan Tiwa
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 class UserSessionStorageKeyGenerator implements StorageKeyGeneratorInterface
@@ -53,10 +52,9 @@ class UserSessionStorageKeyGenerator implements StorageKeyGeneratorInterface
 
 		$token = $this->tokenStorage->getToken();
 
-		// TODO remove checks for AnonymousToken as soon as Symfony >= 6.0 is required
-		if ($token instanceof TokenInterface && (!\class_exists(AnonymousToken::class) || !$token instanceof AnonymousToken)) {
+		if ($token instanceof TokenInterface) {
 			$userIdentifier = $token->getUserIdentifier();
-			if (is_string($userIdentifier) && $userIdentifier !== '') {
+			if ($userIdentifier !== '') {
 				return sprintf('user_%s_%s', $userIdentifier, $key);
 			}
 		}

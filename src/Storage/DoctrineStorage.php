@@ -13,7 +13,9 @@ use Doctrine\DBAL\Types\Types;
  * Stores data in a Doctrine-managed database.
  *
  * @author Christian Raue <christian.raue@gmail.com>
+ * @author Brayan Tiwa <tiwabrayan@gmail.com>
  * @copyright 2011-2024 Christian Raue
+ * @copyright 2025 Brayan Tiwa
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 class DoctrineStorage implements StorageInterface
@@ -52,8 +54,7 @@ class DoctrineStorage implements StorageInterface
 	{
 		$this->conn = $conn;
 		$this->storageKeyGenerator = $storageKeyGenerator;
-		// TODO just call `createSchemaManager()` as soon as DBAL >= 3.1 is required
-		$this->schemaManager = \method_exists($this->conn, 'createSchemaManager') ? $this->conn->createSchemaManager() : $this->conn->getSchemaManager();
+		$this->schemaManager = $this->conn->createSchemaManager();
 		$this->keyColumn = $this->conn->quoteIdentifier(self::KEY_COLUMN);
 		$this->valueColumn = $this->conn->quoteIdentifier(self::VALUE_COLUMN);
 	}
@@ -140,13 +141,7 @@ class DoctrineStorage implements StorageInterface
 			->where($this->keyColumn . ' = :key')
 			->setParameter('key', $this->generateKey($key));
 
-		// TODO just call `executeQuery()` as soon as DBAL >= 2.13.1 is required
-		$result = \method_exists($qb, 'executeQuery') ? $qb->executeQuery() : $qb->execute();
-
-		// TODO remove as soon as Doctrine DBAL >= 3.0 is required
-		if (!\method_exists($result, 'fetchOne')) {
-			return $result->fetchColumn();
-		}
+		$result = $qb->executeQuery();
 
 		return $result->fetchOne();
 	}

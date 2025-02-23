@@ -44,9 +44,6 @@ class FormFlowExtension extends AbstractExtension
 		return [
 			new TwigFilter('asmitta_addDynamicStepNavigationParameters', [$this, 'addDynamicStepNavigationParameters']),
 			new TwigFilter('asmitta_removeDynamicStepNavigationParameters', [$this, 'removeDynamicStepNavigationParameters']),
-			// methods for BC with third-party templates (e.g. MopaBootstrapBundle)
-			new TwigFilter('asmitta_addDynamicStepNavigationParameter', [$this, 'addDynamicStepNavigationParameter']),
-			new TwigFilter('asmitta_removeDynamicStepNavigationParameter', [$this, 'removeDynamicStepNavigationParameter']),
 		];
 	}
 
@@ -114,19 +111,5 @@ class FormFlowExtension extends AbstractExtension
 		}
 
 		return false;
-	}
-
-	// methods for BC with third-party templates (e.g. MopaBootstrapBundle)
-
-	public function addDynamicStepNavigationParameter(array $parameters, FormFlow $flow, $stepNumber)
-	{
-		@trigger_error('Twig filter asmitta_addDynamicStepNavigationParameter is deprecated since AsmittaFormFlowBundle 3.0. Use filter asmitta_addDynamicStepNavigationParameters instead.', E_USER_DEPRECATED);
-		return $this->addDynamicStepNavigationParameters($parameters, $flow, $stepNumber);
-	}
-
-	public function removeDynamicStepNavigationParameter(array $parameters, FormFlow $flow)
-	{
-		@trigger_error('Twig filter asmitta_removeDynamicStepNavigationParameter is deprecated since AsmittaFormFlowBundle 3.0. Use filter asmitta_removeDynamicStepNavigationParameters instead.', E_USER_DEPRECATED);
-		return $this->removeDynamicStepNavigationParameters($parameters, $flow);
 	}
 }

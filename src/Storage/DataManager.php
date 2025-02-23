@@ -46,7 +46,7 @@ class DataManager implements ExtendedDataManagerInterface
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getStorage()
+	public function getStorage(): StorageInterface
 	{
 		return $this->storage;
 	}
@@ -85,7 +85,7 @@ class DataManager implements ExtendedDataManagerInterface
 	/**
 	 * {@inheritDoc}
 	 */
-	public function load(FormFlowInterface $flow)
+	public function load(FormFlowInterface $flow): array
 	{
 		$data = [];
 
@@ -111,7 +111,7 @@ class DataManager implements ExtendedDataManagerInterface
 	/**
 	 * {@inheritDoc}
 	 */
-	public function exists(FormFlowInterface $flow)
+	public function exists(FormFlowInterface $flow): bool
 	{
 		$savedFlows = $this->storage->get(DataManagerInterface::STORAGE_ROOT, []);
 		return isset($savedFlows[$flow->getName()][$flow->getInstanceId()][self::DATA_KEY]);
@@ -120,7 +120,7 @@ class DataManager implements ExtendedDataManagerInterface
 	/**
 	 * {@inheritDoc}
 	 */
-	public function drop(FormFlowInterface $flow)
+	public function drop(FormFlowInterface $flow): void
 	{
 		$savedFlows = $this->storage->get(DataManagerInterface::STORAGE_ROOT, []);
 
@@ -141,7 +141,7 @@ class DataManager implements ExtendedDataManagerInterface
 	/**
 	 * {@inheritDoc}
 	 */
-	public function listInstances($name)
+	public function listInstances($name): array
 	{
 		$savedFlows = $this->storage->get(DataManagerInterface::STORAGE_ROOT, []);
 
@@ -155,7 +155,7 @@ class DataManager implements ExtendedDataManagerInterface
 	/**
 	 * {@inheritDoc}
 	 */
-	public function dropAll()
+	public function dropAll(): void
 	{
 		$this->storage->remove(DataManagerInterface::STORAGE_ROOT);
 	}

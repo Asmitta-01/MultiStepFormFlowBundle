@@ -28,9 +28,9 @@ interface StepInterface
 	function getFormType();
 
 	/**
-	 * @return array
+	 * @return mixed[]
 	 */
-	function getFormOptions();
+	function getFormOptions(): array;
 
 	/**
 	 * @return bool
@@ -41,5 +41,5 @@ interface StepInterface
 	 * @param int $estimatedCurrentStepNumber
 	 * @param FormFlowInterface $flow
 	 */
-	function evaluateSkipping(int $estimatedCurrentStepNumber, FormFlowInterface $flow);
+	function evaluateSkipping(int $estimatedCurrentStepNumber, FormFlowInterface $flow): void;
 }

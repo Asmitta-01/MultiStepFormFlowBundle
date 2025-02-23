@@ -26,7 +26,7 @@ class StepLabel
 	/**
 	 * @param string|null $value
 	 */
-	public static function createStringLabel($value)
+	public static function createStringLabel($value): static
 	{
 		return new static($value);
 	}
@@ -34,7 +34,7 @@ class StepLabel
 	/**
 	 * @param callable $value
 	 */
-	public static function createCallableLabel($value)
+	public static function createCallableLabel($value): static
 	{
 		return new static($value, true);
 	}
@@ -70,7 +70,7 @@ class StepLabel
 	 * @param string|callable|null $value
 	 * @param bool $callable
 	 */
-	private function setValue($value, $callable = false)
+	private function setValue($value, $callable = false): void
 	{
 		if ($callable) {
 			if (!is_callable($value)) {
