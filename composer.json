@@ -62,6 +62,11 @@
 			"Asmitta\\FormFlowBundle\\": "src/"
 		}
 	},
+	"autoload-dev": {
+		"psr-4": {
+			"Asmitta\\FormFlowBundle\\Tests\\": "tests/"
+		}
+	},
 	"config": {
 		"allow-plugins": {
 			"phpstan/extension-installer": true,

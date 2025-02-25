@@ -1,38 +1,23 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<phpunit
-		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
-		backupGlobals="false"
-		bootstrap="Tests/bootstrap.php"
-		cacheResult="false"
-		colors="true"
-		failOnRisky="true"
-		failOnWarning="true">
-	<testsuites>
-		<testsuite name="AsmittaFormFlowBundle">
-			<directory suffix="Test.php">Tests</directory>
-		</testsuite>
-	</testsuites>
-	<coverage>
-		<include>
-			<directory suffix=".php">.</directory>
-		</include>
-		<exclude>
-			<directory>Tests</directory>
-			<directory>var</directory>
-			<directory>vendor</directory>
-		</exclude>
-	</coverage>
-	<!--
-	<php>
-		<env name="CACHE_DIR" value="/path/to/your/cache/" />
-		<env name="LOG_DIR" value="/path/to/your/log/" />
-		<env name="DB_DSN_MYSQL" value="mysql://test:test@127.0.0.1/craue_form_flow_tests" />
-		<env name="DB_DSN_POSTGRESQL" value="pgsql://test:test@127.0.0.1/craue_form_flow_tests" />
-		<env name="DB_DSN_SQLITE" value="sqlite:///tmp/sqlite.db" />
-	</php>
-	-->
-	<listeners>
-		<listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
-	</listeners>
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+         beStrictAboutTestsThatDoNotTestAnything="true"
+         beStrictAboutOutputDuringTests="true"
+         beStrictAboutTodoAnnotatedTests="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         stopOnFailure="false">
+
+    <testsuites>
+        <testsuite name="Project Test Suite">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <php>
+        <ini name="error_reporting" value="-1"/>
+        <server name="APP_ENV" value="test"/>
+    </php>
 </phpunit>
